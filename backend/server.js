@@ -9,15 +9,22 @@ const { cloudinary } = require("./config/cloudinary");
 
 const app = express();
 
+// Handle OPTIONS preflight requests
+app.options('*', cors());
+
 // Security middleware
-app.use(helmet());
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" },
+  crossOriginOpenerPolicy: { policy: "same-origin-allow-popups" }
+}));
 
 // CORS configuration
 app.use(cors({
-  origin: ['https://ecell-2025-26.onrender.com', 'http://localhost:5173'],
+  origin: true, // Allow all origins in development
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'Accept', 'X-Requested-With'],
+  exposedHeaders: ['Content-Range', 'X-Content-Range']
 }));
 
 // Rate limiting
@@ -90,6 +97,19 @@ app.get("/health", (req, res) => {
 });
 
 // Error handling middleware
+// CORS error handler
+app.use((err, req, res, next) => {
+  if (err.name === 'CORSError') {
+    console.error('CORS Error:', err.message);
+    return res.status(403).json({
+      message: 'CORS error',
+      error: process.env.NODE_ENV === 'development' ? err.message : 'Not allowed by CORS'
+    });
+  }
+  next(err);
+});
+
+// General error handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({
