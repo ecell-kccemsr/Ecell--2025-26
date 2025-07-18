@@ -1,0 +1,30 @@
+services:
+  # Backend API service
+  - type: web
+    name: ecell-2025-26-api
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    rootDir: backend
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: FRONTEND_URL
+        value: https://ecell-2025-26.onrender.com
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+
+  # Frontend service
+  - type: web
+    name: ecell-2025-26
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm run preview
+    rootDir: frontend
+    envVars:
+      - key: VITE_API_URL
+        value: https://ecell-2025-26-api.onrender.com
