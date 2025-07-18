@@ -68,11 +68,8 @@ const LoginPage = () => {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:5001/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const { api } = await import('../utils/api');
+      const responseData = await api.auth.login({
         body: JSON.stringify(formData),
       });
 

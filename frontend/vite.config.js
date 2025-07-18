@@ -8,6 +8,14 @@ export default defineConfig({
     host: '0.0.0.0',
     port: process.env.PORT || 10000,
     strictPort: true,
+    proxy: {
+      '/api': {
+        target: 'https://ecell-2025-26-api.onrender.com',
+        changeOrigin: true,
+        secure: true
+      }
+    },
+    cors: true,
     allowedHosts: [
       'ecell-2025-26.onrender.com',
       '.onrender.com'
