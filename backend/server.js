@@ -63,6 +63,16 @@ app.use(
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
+// Request logging middleware
+app.use((req, res, next) => {
+  const start = Date.now();
+  res.on('finish', () => {
+    const duration = Date.now() - start;
+    console.log(`📨 ${req.method} ${req.originalUrl} - ${res.statusCode} - ${duration}ms`);
+  });
+  next();
+});
+
 // Database connection
 mongoose
   .connect(process.env.MONGODB_URI || "mongodb://localhost:27017/ecell_db", {
@@ -143,9 +153,39 @@ app.use("*", (req, res) => {
   res.status(404).json({ message: "Route not found" });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV || "development"}`);
+// Enhanced server startup with detailed logging
+const server = app.listen(PORT, () => {
+  console.log(`==================================================`);
+  console.log(`🚀 E-Cell Backend Server Started`);
+  console.log(`==================================================`);
+  console.log(`📋 Server Details:`);
+  console.log(`  - Port: ${PORT}`);
+  console.log(`  - Environment: ${process.env.NODE_ENV || "development"}`);
+  console.log(`  - MongoDB URI: ${process.env.MONGODB_URI ? "Configured ✅" : "Missing ⚠️"}`);
+  console.log(`  - Frontend URL: ${process.env.FRONTEND_URL || "Not configured"}`);
+  console.log(`==================================================`);
+  console.log(`🔒 CORS Configuration:`);
+  console.log(`  - Origins: Configured to accept specific origins`);
+  console.log(`  - Credentials: Enabled`);
+  console.log(`==================================================`);
+});
+
+// Handle server errors
+server.on('error', (err) => {
+  console.error('❌ Server Error:', err.message);
+  if (err.code === 'EADDRINUSE') {
+    console.error(`❌ Port ${PORT} is already in use. Please choose a different port.`);
+  }
+  process.exit(1);
+});
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('❌ Unhandled Promise Rejection:', reason);
+  // Don't exit the process in production
+  if (process.env.NODE_ENV !== 'production') {
+    process.exit(1);
+  }
 });
