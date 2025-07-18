@@ -2,21 +2,21 @@ export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:50
 
 export const API_ENDPOINTS = {
   auth: {
-    login: '/api/auth/login',
-    forgotPassword: '/api/auth/forgot-password',
-    resetPassword: '/api/auth/reset-password',
-    verifyEmail: '/api/auth/verify-email',
-    me: '/api/auth/me',
-    users: '/api/auth/admin/users',
-    createUser: '/api/auth/admin/create-user'
+    login: `${API_BASE_URL}/api/auth/login`,
+    forgotPassword: `${API_BASE_URL}/api/auth/forgot-password`,
+    resetPassword: `${API_BASE_URL}/api/auth/reset-password`,
+    verifyEmail: `${API_BASE_URL}/api/auth/verify-email`,
+    me: `${API_BASE_URL}/api/auth/me`,
+    users: `${API_BASE_URL}/api/auth/admin/users`,
+    createUser: `${API_BASE_URL}/api/auth/admin/create-user`
   },
   events: {
-    list: '/api/events',
-    upcoming: '/api/events?upcoming=true&status=published',
-    create: '/api/events',
-    updateStatus: (id) => `/api/events/${id}/status`,
-    delete: (id) => `/api/events/${id}`,
-    uploadImage: '/api/events/upload-image'
+    list: `${API_BASE_URL}/api/events`,
+    upcoming: `${API_BASE_URL}/api/events?upcoming=true&status=published`,
+    create: `${API_BASE_URL}/api/events`,
+    updateStatus: (id) => `${API_BASE_URL}/api/events/${id}/status`,
+    delete: (id) => `${API_BASE_URL}/api/events/${id}`,
+    uploadImage: `${API_BASE_URL}/api/events/upload-image`
   },
-  contact: '/api/contact'
+  contact: `${API_BASE_URL}/api/contact`
 };
