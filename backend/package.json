@@ -4,7 +4,7 @@
   "description": "Backend for E-Cell website",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node server.js --prefix backend",
     "dev": "nodemon server.js",
     "test": "jest",
     "render-build": "echo 'No build step for backend'"
