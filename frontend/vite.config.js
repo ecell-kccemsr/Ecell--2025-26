@@ -10,3 +10,4 @@ export default defineConfig({
     strictPort: true,
     allowedHosts: ['ecell-2025-26.onrender.com']
   }
+})
