@@ -12,6 +12,14 @@ const app = express();
 // Security middleware
 app.use(helmet());
 
+// CORS configuration
+app.use(cors({
+  origin: ['https://ecell-2025-26.onrender.com', 'http://localhost:5173'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 // Rate limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
