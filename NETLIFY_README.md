@@ -22,11 +22,13 @@ This project is configured to be fully deployed on Netlify, with the frontend se
 ## How It Works
 
 1. The `setup-netlify-functions.js` script:
+
    - Copies essential backend code to the `netlify/` directory
    - Creates the main API function in `netlify/functions/api.js`
    - Sets up the package.json for Netlify Functions
 
 2. The API is served as a single Netlify Function at `/.netlify/functions/api`
+
    - All routes are prefixed with this path
 
 3. The frontend makes API calls to `/.netlify/functions/api`

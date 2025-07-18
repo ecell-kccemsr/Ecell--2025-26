@@ -5,8 +5,9 @@
   "scripts": {
     "start": "cd frontend && npm run preview",
     "start:frontend": "cd frontend && npm run preview",
-    "build": "npm run build:functions && npm run build:frontend",
+    "build": "npm run build:functions && npm run install:functions && npm run build:frontend",
     "build:functions": "mkdir -p netlify/functions && node setup-netlify-functions.js",
+    "install:functions": "cd netlify/functions && npm install",
     "build:frontend": "cd frontend && npm install && npm run build",
     "dev": "netlify dev",
     "dev:backend": "cd backend && npm run dev",

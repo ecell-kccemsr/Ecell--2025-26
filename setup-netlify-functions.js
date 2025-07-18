@@ -1,21 +1,21 @@
 // setup-netlify-functions.js
-const fs = require('fs-extra');
-const path = require('path');
+const fs = require("fs-extra");
+const path = require("path");
 
 // Paths
-const backendDir = path.join(__dirname, 'backend');
-const netlifyFunctionsDir = path.join(__dirname, 'netlify', 'functions');
+const backendDir = path.join(__dirname, "backend");
+const netlifyFunctionsDir = path.join(__dirname, "netlify", "functions");
 
 // Create netlify/functions directory if it doesn't exist
 fs.ensureDirSync(netlifyFunctionsDir);
 
 // Copy shared backend code
-const sharedDirs = ['config', 'models', 'middleware', 'services', 'utils'];
+const sharedDirs = ["config", "models", "middleware", "services", "utils", "routes"];
 for (const dir of sharedDirs) {
   if (fs.existsSync(path.join(backendDir, dir))) {
     fs.copySync(
       path.join(backendDir, dir),
-      path.join(__dirname, 'netlify', dir)
+      path.join(__dirname, "netlify", dir)
     );
     console.log(`✅ Copied ${dir} directory to netlify/`);
   }
@@ -60,14 +60,14 @@ const connectToMongo = async () => {
 };
 
 // Routes
-app.use('/auth', require('../../routes/auth'));
-app.use('/users', require('../../routes/users'));
-app.use('/events', require('../../routes/events'));
-app.use('/todos', require('../../routes/todos'));
-app.use('/meetings', require('../../routes/meetings'));
-app.use('/notifications', require('../../routes/notifications'));
-app.use('/calendar', require('../../routes/calendar'));
-app.use('/contact', require('../../routes/contact'));
+app.use('/auth', require('../routes/auth'));
+app.use('/users', require('../routes/users'));
+app.use('/events', require('../routes/events'));
+app.use('/todos', require('../routes/todos'));
+app.use('/meetings', require('../routes/meetings'));
+app.use('/notifications', require('../routes/notifications'));
+app.use('/calendar', require('../routes/calendar'));
+app.use('/contact', require('../routes/contact'));
 
 // Health check endpoint
 app.get('/', async (req, res) => {
@@ -75,7 +75,7 @@ app.get('/', async (req, res) => {
   
   let cloudinaryStatus = 'Not initialized';
   try {
-    const { cloudinary } = require('../../config/cloudinary');
+    const { cloudinary } = require('../config/cloudinary');
     cloudinaryStatus = cloudinary.config().cloud_name ? 'Configured' : 'Not configured';
   } catch (error) {
     cloudinaryStatus = \`Error: \${error.message}\`;
@@ -108,37 +108,34 @@ exports.handler = serverless(app, {
 `;
 
 // Write the API function
-fs.writeFileSync(
-  path.join(netlifyFunctionsDir, 'api.js'),
-  apiFunction
-);
-console.log('✅ Created API function at netlify/functions/api.js');
+fs.writeFileSync(path.join(netlifyFunctionsDir, "api.js"), apiFunction);
+console.log("✅ Created API function at netlify/functions/api.js");
 
 // Create individual endpoint functions for specific routes
 // Create package.json for functions
 const functionsPackageJson = {
-  "name": "ecell-netlify-functions",
-  "version": "1.0.0",
-  "description": "E-Cell API as Netlify Functions",
-  "dependencies": {
-    "express": "^4.18.2",
-    "mongoose": "^7.5.0",
-    "cors": "^2.8.5",
-    "helmet": "^7.0.0",
-    "dotenv": "^16.3.1",
-    "jsonwebtoken": "^9.0.2",
-    "bcryptjs": "^2.4.3",
-    "cloudinary": "^1.41.3",
-    "multer": "^1.4.5-lts.1",
+  name: "ecell-netlify-functions",
+  version: "1.0.0",
+  description: "E-Cell API as Netlify Functions",
+  dependencies: {
+    express: "^4.18.2",
+    mongoose: "^7.5.0",
+    cors: "^2.8.5",
+    helmet: "^7.0.0",
+    dotenv: "^16.3.1",
+    jsonwebtoken: "^9.0.2",
+    bcryptjs: "^2.4.3",
+    cloudinary: "^1.41.3",
+    multer: "^1.4.5-lts.1",
     "multer-storage-cloudinary": "^4.0.0",
-    "serverless-http": "^3.2.0"
-  }
+    "serverless-http": "^3.2.0",
+  },
 };
 
 fs.writeFileSync(
-  path.join(netlifyFunctionsDir, 'package.json'),
+  path.join(netlifyFunctionsDir, "package.json"),
   JSON.stringify(functionsPackageJson, null, 2)
 );
-console.log('✅ Created package.json for functions');
+console.log("✅ Created package.json for functions");
 
-console.log('✅ Netlify Functions setup complete!');
+console.log("✅ Netlify Functions setup complete!");
