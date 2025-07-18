@@ -13,10 +13,10 @@ const app = express();
 const corsOptions = {
   origin: function (origin, callback) {
     const allowedOrigins = [
-      'https://ecell-2025-26.onrender.com',
-      'http://localhost:5173',
-      'http://localhost:3000',
-      undefined // Allow requests with no origin (like mobile apps, curl, etc)
+      "https://ecell-2025-26.onrender.com",
+      "http://localhost:5173",
+      "http://localhost:3000",
+      undefined, // Allow requests with no origin (like mobile apps, curl, etc)
     ];
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
       callback(null, true);
@@ -26,23 +26,31 @@ const corsOptions = {
     }
   },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'Accept', 'X-Requested-With'],
-  exposedHeaders: ['Content-Range', 'X-Content-Range'],
-  maxAge: 86400 // Cache preflight request for 1 day
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+    "Origin",
+    "Accept",
+    "X-Requested-With",
+  ],
+  exposedHeaders: ["Content-Range", "X-Content-Range"],
+  maxAge: 86400, // Cache preflight request for 1 day
 };
 
 // Apply CORS to all routes
 app.use(cors(corsOptions));
 
 // Handle OPTIONS preflight requests separately
-app.options('*', cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 // Security middleware - must come after CORS
-app.use(helmet({
-  crossOriginResourcePolicy: { policy: "cross-origin" },
-  crossOriginOpenerPolicy: { policy: "same-origin-allow-popups" }
-}));
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+    crossOriginOpenerPolicy: { policy: "same-origin-allow-popups" },
+  })
+);
 
 // Rate limiting
 const limiter = rateLimit({
@@ -51,24 +59,18 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-// CORS configuration
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL || "https://ecell-2025-26.onrender.com",
-    credentials: true,
-  })
-);
-
-// Body parsing middleware
-app.use(express.json({ limit: "10mb" }));
-app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+// Body parsing middleware - reduced chunk size to avoid warnings
+app.use(express.json({ limit: "5mb" }));
+app.use(express.urlencoded({ extended: true, limit: "5mb" }));
 
 // Request logging middleware
 app.use((req, res, next) => {
   const start = Date.now();
-  res.on('finish', () => {
+  res.on("finish", () => {
     const duration = Date.now() - start;
-    console.log(`📨 ${req.method} ${req.originalUrl} - ${res.statusCode} - ${duration}ms`);
+    console.log(
+      `📨 ${req.method} ${req.originalUrl} - ${res.statusCode} - ${duration}ms`
+    );
   });
   next();
 });
@@ -114,7 +116,7 @@ app.use("/api/notifications", require("./routes/notifications"));
 app.use("/api/calendar", require("./routes/calendar"));
 app.use("/api/contact", require("./routes/contact"));
 
-// Health check endpoint
+// Health check endpoints
 app.get("/health", (req, res) => {
   res.status(200).json({
     message: "Server is running",
@@ -123,14 +125,28 @@ app.get("/health", (req, res) => {
   });
 });
 
+// Root endpoint for quick testing
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "E-Cell API is running",
+    timestamp: new Date().toISOString(),
+    server: "Express",
+    version: require('./package.json').version,
+    endpoints: ["/health", "/api/auth", "/api/users", "/api/events"]
+  });
+});
+
 // Error handling middleware
 // CORS error handler
 app.use((err, req, res, next) => {
-  if (err.name === 'CORSError') {
-    console.error('CORS Error:', err.message);
+  if (err.name === "CORSError") {
+    console.error("CORS Error:", err.message);
     return res.status(403).json({
-      message: 'CORS error',
-      error: process.env.NODE_ENV === 'development' ? err.message : 'Not allowed by CORS'
+      message: "CORS error",
+      error:
+        process.env.NODE_ENV === "development"
+          ? err.message
+          : "Not allowed by CORS",
     });
   }
   next(err);
@@ -158,34 +174,56 @@ const PORT = process.env.PORT || 5001;
 // Enhanced server startup with detailed logging
 const server = app.listen(PORT, () => {
   console.log(`==================================================`);
-  console.log(`🚀 E-Cell Backend Server Started`);
+  console.log(`🚀 E-Cell Backend Server Started at ${new Date().toISOString()}`);
   console.log(`==================================================`);
   console.log(`📋 Server Details:`);
   console.log(`  - Port: ${PORT}`);
   console.log(`  - Environment: ${process.env.NODE_ENV || "development"}`);
-  console.log(`  - MongoDB URI: ${process.env.MONGODB_URI ? "Configured ✅" : "Missing ⚠️"}`);
-  console.log(`  - Frontend URL: ${process.env.FRONTEND_URL || "Not configured"}`);
+  console.log(`  - Process ID: ${process.pid}`);
+  console.log(`  - Memory Usage: ${JSON.stringify(process.memoryUsage())}`);
+  console.log(
+    `  - MongoDB URI: ${
+      process.env.MONGODB_URI ? "Configured ✅" : "Missing ⚠️"
+    }`
+  );
+  console.log(
+    `  - Frontend URL: ${process.env.FRONTEND_URL || "https://ecell-2025-26.onrender.com"}`
+  );
   console.log(`==================================================`);
   console.log(`🔒 CORS Configuration:`);
-  console.log(`  - Origins: Configured to accept specific origins`);
+  console.log(`  - Origins: ${JSON.stringify(corsOptions.origin)}`);
   console.log(`  - Credentials: Enabled`);
+  console.log(`  - Methods: ${corsOptions.methods.join(", ")}`);
+  console.log(`==================================================`);
+  
+  // Log all environment variables (excluding sensitive ones)
+  console.log(`🔧 Environment Variables:`);
+  Object.keys(process.env).forEach(key => {
+    if (!key.includes('KEY') && !key.includes('SECRET') && !key.includes('PASSWORD') && !key.includes('TOKEN')) {
+      console.log(`  - ${key}: ${process.env[key]}`);
+    } else {
+      console.log(`  - ${key}: [REDACTED]`);
+    }
+  });
   console.log(`==================================================`);
 });
 
 // Handle server errors
-server.on('error', (err) => {
-  console.error('❌ Server Error:', err.message);
-  if (err.code === 'EADDRINUSE') {
-    console.error(`❌ Port ${PORT} is already in use. Please choose a different port.`);
+server.on("error", (err) => {
+  console.error("❌ Server Error:", err.message);
+  if (err.code === "EADDRINUSE") {
+    console.error(
+      `❌ Port ${PORT} is already in use. Please choose a different port.`
+    );
   }
   process.exit(1);
 });
 
 // Handle unhandled promise rejections
-process.on('unhandledRejection', (reason, promise) => {
-  console.error('❌ Unhandled Promise Rejection:', reason);
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("❌ Unhandled Promise Rejection:", reason);
   // Don't exit the process in production
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== "production") {
     process.exit(1);
   }
 });
