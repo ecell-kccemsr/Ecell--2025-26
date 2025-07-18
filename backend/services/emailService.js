@@ -99,25 +99,36 @@ class EmailService {
       <head>
         <meta charset="utf-8">
         <style>
-          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-          .header { background: #667eea; color: white; padding: 20px; text-align: center; }
-          .content { padding: 20px; background: #f9f9f9; }
-          .button { display: inline-block; padding: 12px 24px; background: #667eea; color: white; text-decoration: none; border-radius: 4px; margin: 20px 0; }
-          .footer { padding: 20px; text-align: center; font-size: 12px; color: #666; }
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #e6e6e6; background: #10101a; }
+          .container { max-width: 600px; margin: 0 auto; background: #181828; border-radius: 16px; box-shadow: 0 2px 24px rgba(0,0,0,0.45); overflow: hidden; }
+          .logo { text-align: center; padding: 32px 0 0 0; }
+          .logo img { width: 90px; height: 90px; border-radius: 16px; box-shadow: 0 2px 8px rgba(102,126,234,0.10); background: #222; }
+          .header { background: #181828; color: #00ff9d; padding: 8px 20px 0 20px; text-align: center; }
+          .header h1 { margin: 12px 0 0 0; font-size: 2rem; font-weight: 700; letter-spacing: 1px; }
+          .content { padding: 32px 32px 24px 32px; background: #13131e; }
+          .content h2 { color: #fff; font-size: 1.2rem; margin-top: 0; }
+          .button { display: inline-block; padding: 14px 32px; background: linear-gradient(90deg,#00ff9d,#00b8ff); color: #181828; text-decoration: none; border-radius: 6px; font-weight: 700; font-size: 1rem; margin: 24px 0; box-shadow: 0 2px 8px rgba(0,255,157,0.10); transition: background 0.2s; border: none; }
+          .button:hover { background: linear-gradient(90deg,#00b8ff,#00ff9d); color: #10101a; }
+          .footer { padding: 24px 20px; text-align: center; font-size: 12px; color: #888; background: #181828; border-top: 1px solid #23233a; }
         </style>
       </head>
       <body>
         <div class="container">
+          <div class="logo">
+            <img src="${
+              process.env.FRONTEND_URL
+                ? process.env.FRONTEND_URL + "/img1.png"
+                : "https://yourdomain.com/img1.png"
+            }" alt="E-Cell Logo" />
+          </div>
           <div class="header">
             <h1>Welcome to E-Cell!</h1>
           </div>
           <div class="content">
             <h2>Hello ${name},</h2>
-            <p>Thank you for joining E-Cell! To complete your registration, please verify your email address by clicking the button below:</p>
+            <p>Thank you for joining <b style='color:#00ff9d;'>E-Cell</b>! To complete your registration, please verify your email address by clicking the button below:</p>
             <a href="${verificationLink}" class="button">Verify Email Address</a>
-            <p>If you didn't create an account with us, please ignore this email.</p>
-            <p>This verification link will expire in 24 hours.</p>
+            <p style="margin-top:24px; color:#aaa; font-size:0.97rem;">If you didn't create an account with us, please ignore this email.<br>This verification link will expire in 24 hours.</p>
           </div>
           <div class="footer">
             <p>&copy; 2025 E-Cell. All rights reserved.</p>
