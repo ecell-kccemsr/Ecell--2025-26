@@ -1,0 +1,27 @@
+[build]
+  # Directory with the frontend build output
+  publish = "frontend/dist"
+  # Build command for the frontend and setup functions
+  command = "npm run build"
+  # Directory with Netlify Functions
+  functions = "netlify/functions"
+
+# Redirects for React Router (SPA)
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Environment variable configuration
+[context.production.environment]
+  VITE_API_URL = "/.netlify/functions"
+
+[functions]
+  # Configure serverless functions
+  node_bundler = "esbuild"
+  external_node_modules = ["express", "mongoose"]
