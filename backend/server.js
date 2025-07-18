@@ -9,22 +9,39 @@ const { cloudinary } = require("./config/cloudinary");
 
 const app = express();
 
-// Handle OPTIONS preflight requests
-app.options('*', cors());
-
-// Security middleware
-app.use(helmet({
-  crossOriginResourcePolicy: { policy: "cross-origin" },
-  crossOriginOpenerPolicy: { policy: "same-origin-allow-popups" }
-}));
-
-// CORS configuration
-app.use(cors({
-  origin: true, // Allow all origins in development
+// CORS configuration - must come before other middleware
+const corsOptions = {
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      'https://ecell-2025-26.onrender.com',
+      'http://localhost:5173',
+      'http://localhost:3000',
+      undefined // Allow requests with no origin (like mobile apps, curl, etc)
+    ];
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      console.log("Blocked by CORS:", origin);
+      callback(null, false);
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'Accept', 'X-Requested-With'],
-  exposedHeaders: ['Content-Range', 'X-Content-Range']
+  exposedHeaders: ['Content-Range', 'X-Content-Range'],
+  maxAge: 86400 // Cache preflight request for 1 day
+};
+
+// Apply CORS to all routes
+app.use(cors(corsOptions));
+
+// Handle OPTIONS preflight requests separately
+app.options('*', cors(corsOptions));
+
+// Security middleware - must come after CORS
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" },
+  crossOriginOpenerPolicy: { policy: "same-origin-allow-popups" }
 }));
 
 // Rate limiting

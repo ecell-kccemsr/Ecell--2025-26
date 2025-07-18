@@ -68,12 +68,23 @@ const LoginPage = () => {
     setError("");
 
     try {
-      const { api } = await import('../utils/api');
-      const responseData = await api.auth.login({
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+      
+      console.log(`Attempting login to: ${API_URL}/api/auth/login`);
+      
+      const response = await fetch(`${API_URL}/api/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        mode: "cors",
         body: JSON.stringify(formData),
       });
 
       const data = await response.json();
+      
+      console.log("Login response:", response.status, data);
 
       if (response.ok) {
         localStorage.setItem("token", data.token);

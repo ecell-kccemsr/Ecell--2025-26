@@ -30,13 +30,22 @@ class ApiService {
 
   async fetch(endpoint, options = {}) {
     try {
-      const response = await fetch(`${this.baseURL}${endpoint}`, {
+      const url = `${this.baseURL}${endpoint}`;
+      console.log(`API Request to: ${url}`);
+      
+      const response = await fetch(url, {
         ...options,
         headers: {
           ...this.getHeaders(),
           ...options.headers,
         },
+        mode: 'cors',
+        credentials: 'include'
       });
+      
+      if (response.status === 204) {
+        return {}; // No content
+      }
       
       return await this.handleResponse(response);
     } catch (error) {

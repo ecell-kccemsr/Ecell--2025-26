@@ -12,7 +12,19 @@ export default defineConfig({
       '/api': {
         target: 'https://ecell-2025-26-api.onrender.com',
         changeOrigin: true,
-        secure: true
+        secure: true,
+        rewrite: (path) => path.replace(/^\/api/, '/api'),
+        configure: (proxy, _options) => {
+          proxy.on('error', (err, _req, _res) => {
+            console.log('proxy error', err);
+          });
+          proxy.on('proxyReq', (proxyReq, req, _res) => {
+            console.log('Sending Request to:', req.url);
+          });
+          proxy.on('proxyRes', (proxyRes, req, _res) => {
+            console.log('Received Response from:', req.url, 'Status:', proxyRes.statusCode);
+          });
+        }
       }
     },
     cors: true,
