@@ -36,14 +36,14 @@ const connectToMongo = async () => {
 };
 
 // Routes
-app.use('/auth', require('../../routes/auth'));
-app.use('/users', require('../../routes/users'));
-app.use('/events', require('../../routes/events'));
-app.use('/todos', require('../../routes/todos'));
-app.use('/meetings', require('../../routes/meetings'));
-app.use('/notifications', require('../../routes/notifications'));
-app.use('/calendar', require('../../routes/calendar'));
-app.use('/contact', require('../../routes/contact'));
+app.use('/auth', require('../routes/auth'));
+app.use('/users', require('../routes/users'));
+app.use('/events', require('../routes/events'));
+app.use('/todos', require('../routes/todos'));
+app.use('/meetings', require('../routes/meetings'));
+app.use('/notifications', require('../routes/notifications'));
+app.use('/calendar', require('../routes/calendar'));
+app.use('/contact', require('../routes/contact'));
 
 // Health check endpoint
 app.get('/', async (req, res) => {
@@ -51,7 +51,7 @@ app.get('/', async (req, res) => {
   
   let cloudinaryStatus = 'Not initialized';
   try {
-    const { cloudinary } = require('../../config/cloudinary');
+    const { cloudinary } = require('../config/cloudinary');
     cloudinaryStatus = cloudinary.config().cloud_name ? 'Configured' : 'Not configured';
   } catch (error) {
     cloudinaryStatus = `Error: ${error.message}`;

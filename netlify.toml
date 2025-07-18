@@ -24,4 +24,4 @@
 [functions]
   # Configure serverless functions
   node_bundler = "esbuild"
-  external_node_modules = ["express", "mongoose"]
+  external_node_modules = ["express", "mongoose", "cors", "helmet", "dotenv", "jsonwebtoken", "bcryptjs", "cloudinary", "multer", "multer-storage-cloudinary", "node-cron", "nodemailer"]
