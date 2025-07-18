@@ -3,13 +3,12 @@
   "version": "1.0.0",
   "description": "E-Cell website monorepo",
   "scripts": {
-    "start": "cd backend && node server.js",
+    "start": "cd frontend && npm run preview",
     "start:frontend": "cd frontend && npm run preview",
-    "start:backend": "cd backend && node server.js",
-    "build": "npm run build:backend && npm run build:frontend",
-    "build:backend": "cd backend && npm install",
+    "build": "npm run build:functions && npm run build:frontend",
+    "build:functions": "mkdir -p netlify/functions && node setup-netlify-functions.js",
     "build:frontend": "cd frontend && npm install && npm run build",
-    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev": "netlify dev",
     "dev:backend": "cd backend && npm run dev",
     "dev:frontend": "cd frontend && npm run dev"
   },
@@ -20,6 +19,11 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "fs-extra": "^11.3.0",
+    "netlify-cli": "^17.15.7"
+  },
+  "dependencies": {
+    "serverless-http": "^3.2.0"
   }
 }
