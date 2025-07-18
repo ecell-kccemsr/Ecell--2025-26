@@ -7,7 +7,7 @@
     "dev": "vite",
     "prebuild": "npm install",
     "build": "vite build",
-    "start": "vite preview --host --port ${PORT:-3000}",
+    "start": "vite preview",
     "lint": "eslint .",
     "preview": "vite preview"
   },
