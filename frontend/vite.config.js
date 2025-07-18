@@ -6,12 +6,22 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: true,
-    port: 3000
+    port: 3000,
+    cors: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000', // assuming your backend runs on port 5000
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
   },
   preview: {
-    host: true,
+    host: '0.0.0.0',
     port: 3000,
-    strictPort: true
+    strictPort: true,
+    cors: true,
   },
   build: {
     outDir: 'dist',
