@@ -2,7 +2,37 @@ require("dotenv").config();
 
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors");
+const// Root endpoint for quick testing
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "E-Cell API is running",
+    timestamp: new Date().toISOString(),
+    server: "Express",
+    version: require('./package.json').version,
+    routes: ["/health", "/api/auth", "/api/users", "/api/events"]
+  });
+});
+
+// Routes
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/users", require("./routes/users"));
+app.use("/api/events", require("./routes/events"));
+app.use("/api/todos", require("./routes/todos"));
+app.use("/api/meetings", require("./routes/meetings"));
+app.use("/api/notifications", require("./routes/notifications"));
+app.use("/api/calendar", require("./routes/calendar"));
+app.use("/api/contact", require("./routes/contact"));
+
+// Health check endpoint
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    message: "Server is running",
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV,
+    processUptime: process.uptime() + " seconds",
+    memoryUsage: process.memoryUsage(),
+  });
+});ors");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const { cloudinary } = require("./config/cloudinary");
@@ -106,6 +136,17 @@ const testCloudinaryConnection = async () => {
 // Test connections
 testCloudinaryConnection();
 
+// Root endpoint for quick testing
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "E-Cell API is running",
+    timestamp: new Date().toISOString(),
+    server: "Express",
+    version: require('./package.json').version,
+    routes: ["/health", "/api/auth", "/api/users", "/api/events"]
+  });
+});
+
 // Routes
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/users", require("./routes/users"));
@@ -116,12 +157,14 @@ app.use("/api/notifications", require("./routes/notifications"));
 app.use("/api/calendar", require("./routes/calendar"));
 app.use("/api/contact", require("./routes/contact"));
 
-// Health check endpoints
+// Health check endpoint
 app.get("/health", (req, res) => {
   res.status(200).json({
     message: "Server is running",
     timestamp: new Date().toISOString(),
     environment: process.env.NODE_ENV,
+    processUptime: process.uptime() + " seconds",
+    memoryUsage: process.memoryUsage(),
   });
 });
 

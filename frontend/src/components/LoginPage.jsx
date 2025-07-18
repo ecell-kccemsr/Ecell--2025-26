@@ -68,10 +68,10 @@ const LoginPage = () => {
     setError("");
 
     try {
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
-      
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
+
       console.log(`Attempting login to: ${API_URL}/api/auth/login`);
-      
+
       const response = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: {
@@ -83,7 +83,7 @@ const LoginPage = () => {
       });
 
       const data = await response.json();
-      
+
       console.log("Login response:", response.status, data);
 
       if (response.ok) {
