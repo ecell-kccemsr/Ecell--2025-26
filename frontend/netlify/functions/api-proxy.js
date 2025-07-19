@@ -5,6 +5,8 @@ const axios = require('axios');
 const BACKEND_URL = process.env.BACKEND_API_URL || 'https://kcecell-backend-api.onrender.com';
 
 exports.handler = async function(event, context) {
+  console.log('API Proxy Handler Invoked: ', event.path, event.httpMethod);
+  
   // Get the path and HTTP method from the incoming request
   const path = event.path.replace('/.netlify/functions/api-proxy', '');
   const method = event.httpMethod.toLowerCase();
@@ -29,8 +31,11 @@ exports.handler = async function(event, context) {
   
   try {
     // Forward the request to the backend API
-    // Keep the /api prefix since backend routes are defined with it
-    const url = `${BACKEND_URL}${path}`;
+    // The backend expects paths with /api prefix, so we need to ensure it's included
+    // But we need to avoid duplicating it if it's already in the path
+    const url = path.startsWith('/api') 
+      ? `${BACKEND_URL}${path}` 
+      : `${BACKEND_URL}/api${path}`;
     
     // Add debug logging
     console.log(`API Proxy: Forwarding request from path "${path}" to URL "${url}"`);
