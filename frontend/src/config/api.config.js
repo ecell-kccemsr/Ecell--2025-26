@@ -1,7 +1,7 @@
-// We now use the api.js service for the base URL configuration
-export const API_BASE_URL =
-  import.meta.env.VITE_API_URL ||
-  "http://localhost:5001";
+// Simple API configuration pointing to the backend API
+// In development: Points to local server (http://localhost:5001)
+// In production: Points to Render backend (https://kcecell-backend-api.onrender.com)
+export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 
 export const API_ENDPOINTS = {
   auth: {

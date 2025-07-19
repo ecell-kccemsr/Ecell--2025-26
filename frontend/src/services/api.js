@@ -1,14 +1,15 @@
 // src/services/api.js
 import axios from 'axios';
-
-const API_URL = import.meta.env.VITE_API_URL;
+import { API_BASE_URL } from '../config/api.config';
 
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: true,
+  // Set to false when dealing with different domains (Netlify frontend + Render backend)
+  // This avoids CORS preflight issues with credentials
+  withCredentials: false,
 });
 
 // Add interceptors for authorization tokens and error handling
@@ -31,6 +32,12 @@ api.interceptors.response.use(
       localStorage.removeItem('token');
       window.location.href = '/login';
     }
+    
+    // Network errors (likely CORS issues)
+    if (error.message === 'Network Error') {
+      console.error('Network error - possible CORS issue or backend not available');
+    }
+    
     return Promise.reject(error);
   }
 );

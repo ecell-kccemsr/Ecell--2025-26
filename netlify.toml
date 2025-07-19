@@ -1,8 +1,16 @@
 [build]
   # Directory with the frontend build output
   publish = "frontend/dist"
-  # Build command for the frontend
-  command = "cd frontend && npm install && npm run build"
+  # Build command for the frontend only
+  command = "cd frontend && npm install && npm run build && cd netlify/functions && npm install"
+  # Directory with Netlify Functions for API proxying
+  functions = "frontend/netlify/functions"
+
+# API proxy redirects
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api-proxy/:splat"
+  status = 200
 
 # Redirects for React Router (SPA)
 [[redirects]]
