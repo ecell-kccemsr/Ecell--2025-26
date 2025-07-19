@@ -31,14 +31,12 @@ exports.handler = async function(event, context) {
   
   try {
     // Forward the request to the backend API
-    // The backend expects paths with /api prefix, so we need to ensure it's included
-    // But we need to avoid duplicating it if it's already in the path
-    const url = path.startsWith('/api') 
-      ? `${BACKEND_URL}${path}` 
-      : `${BACKEND_URL}/api${path}`;
+    // We need to remove the /api prefix from the path since the backend routes already include it
+    const adjustedPath = path.replace(/^\/api/, '');
+    const url = `${BACKEND_URL}/api${adjustedPath}`;
     
     // Add debug logging
-    console.log(`API Proxy: Forwarding request from path "${path}" to URL "${url}"`);
+    console.log(`API Proxy: Original path "${path}", adjusted to "${adjustedPath}", forwarding to URL "${url}"`);
     
     // Filter out headers that might cause issues
     const filteredHeaders = { ...headers };
