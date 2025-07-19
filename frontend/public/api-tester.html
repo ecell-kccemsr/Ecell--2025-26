@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Tester</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            color: #2196F3;
+        }
+        .card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        button {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background-color: #0d8bf2;
+        }
+        .result {
+            background-color: #f5f5f5;
+            border-radius: 4px;
+            padding: 10px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            margin-top: 10px;
+            max-height: 300px;
+            overflow: auto;
+        }
+        .error {
+            color: #f44336;
+        }
+        .success {
+            color: #4CAF50;
+        }
+        .endpoints {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>E-Cell API Tester</h1>
+    
+    <div class="card">
+        <h2>Environment</h2>
+        <p>Current API URL: <span id="currentApiUrl">Loading...</span></p>
+        <div>
+            <button id="toggleEnv">Toggle Environment</button>
+            <span id="currentEnv">Local</span>
+        </div>
+    </div>
+    
+    <div class="card">
+        <h2>Test Endpoints</h2>
+        <div class="endpoints">
+            <button onclick="testEndpoint('/health')">Test Health</button>
+            <button onclick="testEndpoint('/auth/login', 'POST', { email: 'admin@example.com', password: 'password123' })">Test Login</button>
+            <button onclick="testEndpoint('/events')">Test Events</button>
+            <button onclick="testEndpoint('/api/auth/login', 'POST', { email: 'admin@example.com', password: 'password123' })">Test Login with /api prefix</button>
+        </div>
+        <div id="endpointResult" class="result">Results will appear here...</div>
+    </div>
+    
+    <div class="card">
+        <h2>Debug CORS</h2>
+        <p>Test direct calls to backend to check if CORS is configured properly:</p>
+        <div>
+            <input type="text" id="backendUrl" placeholder="Backend URL (e.g., https://kcecell-backend-api.onrender.com)" style="width: 100%; padding: 8px; margin-bottom: 10px;">
+            <button onclick="testCORS()">Test CORS</button>
+        </div>
+        <div id="corsResult" class="result">Enter backend URL and click Test CORS...</div>
+    </div>
+    
+    <div class="card">
+        <h2>Run All Tests</h2>
+        <button onclick="runAllTests()">Run All Tests</button>
+        <div id="allTestsResult" class="result">Click to run all tests...</div>
+    </div>
+
+    <script>
+        // Current environment state
+        let isLocal = true;
+        const localBaseUrl = 'http://localhost:5001';
+        const prodBaseUrl = '/api'; // This will use the Netlify function
+        
+        document.getElementById('currentApiUrl').textContent = localBaseUrl;
+        
+        // Toggle between local and production environments
+        document.getElementById('toggleEnv').addEventListener('click', () => {
+            isLocal = !isLocal;
+            const baseUrl = isLocal ? localBaseUrl : prodBaseUrl;
+            document.getElementById('currentApiUrl').textContent = baseUrl;
+            document.getElementById('currentEnv').textContent = isLocal ? 'Local' : 'Production (Netlify Proxy)';
+        });
+        
+        // Test individual endpoint
+        async function testEndpoint(endpoint, method = 'GET', data = null) {
+            const resultEl = document.getElementById('endpointResult');
+            resultEl.innerHTML = 'Testing...';
+            
+            const baseUrl = isLocal ? localBaseUrl : prodBaseUrl;
+            const url = `${baseUrl}${endpoint}`;
+            
+            try {
+                const options = {
+                    method,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                };
+                
+                if (data && (method === 'POST' || method === 'PUT' || method === 'PATCH')) {
+                    options.body = JSON.stringify(data);
+                }
+                
+                resultEl.innerHTML = `Sending ${method} request to ${url}...`;
+                
+                const response = await fetch(url, options);
+                const responseData = await response.json();
+                
+                resultEl.innerHTML = `<span class="success">✅ Success (${response.status})</span>
+<pre>${JSON.stringify(responseData, null, 2)}</pre>`;
+            } catch (error) {
+                resultEl.innerHTML = `<span class="error">❌ Error</span>
+<pre>${error.message}</pre>`;
+                console.error('API test error:', error);
+            }
+        }
+        
+        // Test CORS configuration
+        async function testCORS() {
+            const resultEl = document.getElementById('corsResult');
+            const backendUrl = document.getElementById('backendUrl').value.trim();
+            
+            if (!backendUrl) {
+                resultEl.innerHTML = '<span class="error">Please enter a backend URL</span>';
+                return;
+            }
+            
+            resultEl.innerHTML = `Testing CORS with ${backendUrl}...`;
+            
+            try {
+                // Test with the /health endpoint
+                const url = `${backendUrl}/health`;
+                
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const data = await response.json();
+                
+                resultEl.innerHTML = `<span class="success">✅ CORS is working! (${response.status})</span>
+<pre>${JSON.stringify(data, null, 2)}</pre>`;
+            } catch (error) {
+                resultEl.innerHTML = `<span class="error">❌ CORS Error</span>
+<pre>${error.message}</pre>
+<p>This could indicate that CORS is not properly configured on the backend.</p>`;
+                console.error('CORS test error:', error);
+            }
+        }
+        
+        // Run all tests
+        async function runAllTests() {
+            const resultEl = document.getElementById('allTestsResult');
+            resultEl.innerHTML = 'Running all tests...';
+            
+            const endpoints = [
+                { path: '/health', method: 'GET' },
+                { path: '/auth/login', method: 'POST', data: { email: 'admin@example.com', password: 'password123' } },
+                { path: '/events', method: 'GET' }
+            ];
+            
+            const results = {
+                local: [],
+                production: []
+            };
+            
+            // Test local endpoints
+            for (const endpoint of endpoints) {
+                try {
+                    const url = `${localBaseUrl}${endpoint.path}`;
+                    const options = {
+                        method: endpoint.method,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    };
+                    
+                    if (endpoint.data) {
+                        options.body = JSON.stringify(endpoint.data);
+                    }
+                    
+                    const response = await fetch(url, options);
+                    const responseData = await response.json();
+                    
+                    results.local.push({
+                        endpoint: endpoint.path,
+                        status: response.status,
+                        success: true,
+                        data: responseData
+                    });
+                } catch (error) {
+                    results.local.push({
+                        endpoint: endpoint.path,
+                        success: false,
+                        error: error.message
+                    });
+                }
+            }
+            
+            // Test production (Netlify proxy) endpoints
+            for (const endpoint of endpoints) {
+                try {
+                    const url = `${prodBaseUrl}${endpoint.path}`;
+                    const options = {
+                        method: endpoint.method,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    };
+                    
+                    if (endpoint.data) {
+                        options.body = JSON.stringify(endpoint.data);
+                    }
+                    
+                    const response = await fetch(url, options);
+                    const responseData = await response.json();
+                    
+                    results.production.push({
+                        endpoint: endpoint.path,
+                        status: response.status,
+                        success: true,
+                        data: responseData
+                    });
+                } catch (error) {
+                    results.production.push({
+                        endpoint: endpoint.path,
+                        success: false,
+                        error: error.message
+                    });
+                }
+            }
+            
+            // Format and display results
+            let resultsHtml = `<h3>Test Results</h3>
+<h4>Local (${localBaseUrl})</h4>
+<ul>`;
+
+            results.local.forEach(result => {
+                resultsHtml += `<li>${result.endpoint}: ${result.success 
+                    ? `<span class="success">✅ Success (${result.status})</span>` 
+                    : `<span class="error">❌ Failed - ${result.error}</span>`}</li>`;
+            });
+
+            resultsHtml += `</ul>
+<h4>Production (${prodBaseUrl})</h4>
+<ul>`;
+
+            results.production.forEach(result => {
+                resultsHtml += `<li>${result.endpoint}: ${result.success 
+                    ? `<span class="success">✅ Success (${result.status})</span>` 
+                    : `<span class="error">❌ Failed - ${result.error}</span>`}</li>`;
+            });
+
+            resultsHtml += `</ul>
+<details>
+    <summary>Detailed Results</summary>
+    <pre>${JSON.stringify(results, null, 2)}</pre>
+</details>`;
+
+            resultEl.innerHTML = resultsHtml;
+        }
+    </script>
+</body>
+</html>

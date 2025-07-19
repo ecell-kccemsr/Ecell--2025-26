@@ -8,16 +8,30 @@
   # Directory with Netlify Functions for API proxying (relative to base)
   functions = "netlify/functions"
 
-# API proxy redirects
+# API proxy redirects - using force=true to ensure the redirects take precedence
 [[redirects]]
   from = "/api/auth/login"
   to = "/.netlify/functions/auth-login"
   status = 200
+  force = true
+
+[[redirects]]
+  from = "/auth/login"
+  to = "/.netlify/functions/auth-login"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/test"
+  to = "/.netlify/functions/test-endpoint"
+  status = 200
+  force = true
 
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/api-proxy/:splat"
   status = 200
+  force = true
 
 # Redirects for React Router (SPA)
 [[redirects]]

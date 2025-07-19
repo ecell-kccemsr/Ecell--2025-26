@@ -34,18 +34,28 @@ exports.handler = async function(event, context) {
     // Special case handling for different path patterns
     let url;
     
-    // Check auth endpoints - try different path patterns
-    if (path.includes('/auth/login') || path.includes('/api/auth/login')) {
-      // Test different path patterns for auth login
-      if (path.includes('/api/auth/login')) {
-        url = `${BACKEND_URL}/auth-test`;
-      } else {
-        url = `${BACKEND_URL}/health-api`;
-      }
-    } else {
-      // Normal case - adjust path
+    // For auth endpoints
+    if (path.includes('/auth')) {
+      url = `${BACKEND_URL}/api${path}`;
+      console.log(`Forwarding auth request to: ${url}`);
+    } 
+    // For events endpoints
+    else if (path.includes('/events')) {
       const adjustedPath = path.replace(/^\/api/, '');
       url = `${BACKEND_URL}/api${adjustedPath}`;
+      console.log(`Forwarding events request to: ${url}`);
+    }
+    // For contact form
+    else if (path.includes('/contact')) {
+      const adjustedPath = path.replace(/^\/api/, '');
+      url = `${BACKEND_URL}/api${adjustedPath}`;
+      console.log(`Forwarding contact request to: ${url}`);
+    }
+    // Default case for other endpoints
+    else {
+      const adjustedPath = path.replace(/^\/api/, '');
+      url = `${BACKEND_URL}/api${adjustedPath}`;
+      console.log(`Forwarding general request to: ${url}`);
     }
     
     // Add more detailed debug logging

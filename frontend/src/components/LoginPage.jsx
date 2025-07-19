@@ -69,8 +69,13 @@ const LoginPage = () => {
 
     try {
       const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
-
+      
+      // Add debugging info
+      console.log(`VITE_API_URL:`, import.meta.env.VITE_API_URL);
+      console.log(`Using API_URL:`, API_URL);
       console.log(`Attempting login to: ${API_URL}/auth/login`);
+      console.log(`Full URL:`, window.location.origin + `${API_URL}/auth/login`);
+      console.log(`Login data:`, formData);
 
       const response = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
