@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../middleware/auth");
+const { body, validationResult } = require("express-validator");
+const { auth } = require("../middleware/auth");
 
 // Calendar functionality removed - simplified placeholder
 

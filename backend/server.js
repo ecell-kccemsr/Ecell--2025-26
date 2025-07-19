@@ -14,6 +14,7 @@ const corsOptions = {
   origin: function (origin, callback) {
     const allowedOrigins = [
       "https://ecell-2025-26.onrender.com",
+      "https://kcecell25.netlify.app",  // Your Netlify frontend domain
       "http://localhost:5173",
       "http://localhost:3000",
       undefined, // Allow requests with no origin (like mobile apps, curl, etc)
@@ -170,21 +171,33 @@ const initializeServices = async () => {
     // Continue without MongoDB if it fails
   }
 
-  // Initialize routes
-  try {
-    // Routes
-    app.use("/api/auth", require("./routes/auth"));
-    app.use("/api/users", require("./routes/users"));
-    app.use("/api/events", require("./routes/events"));
-    app.use("/api/todos", require("./routes/todos"));
-    app.use("/api/meetings", require("./routes/meetings"));
-    app.use("/api/notifications", require("./routes/notifications"));
-    // Calendar route removed - Google and Microsoft Calendar functionality removed
-    app.use("/api/contact", require("./routes/contact"));
-
-    console.log("✅ API routes loaded successfully");
-  } catch (error) {
-    console.error("❌ Failed to load API routes:", error.message);
+  // Initialize routes with better error handling
+  const routes = [
+    { path: "/api/auth", module: "./routes/auth" },
+    { path: "/api/users", module: "./routes/users" },
+    { path: "/api/events", module: "./routes/events" },
+    { path: "/api/todos", module: "./routes/todos" },
+    { path: "/api/meetings", module: "./routes/meetings" },
+    { path: "/api/notifications", module: "./routes/notifications" },
+    { path: "/api/contact", module: "./routes/contact" }
+  ];
+  
+  // Load each route individually for better error isolation
+  let successCount = 0;
+  for (const route of routes) {
+    try {
+      const routeModule = require(route.module);
+      app.use(route.path, routeModule);
+      console.log(`✅ Route loaded: ${route.path}`);
+      successCount++;
+    } catch (error) {
+      console.error(`❌ Failed to load route ${route.path}:`, error.message);
+    }
+  }
+  
+  console.log(`${successCount}/${routes.length} API routes loaded successfully`);
+  if (successCount < routes.length) {
+    console.warn("⚠️ Some API routes failed to load. Check errors above.");
   }
 };
 

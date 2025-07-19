@@ -10,7 +10,7 @@ export default defineConfig({
     strictPort: true,
     proxy: {
       "/api": {
-        target: "https://ecell-2025-26-api.onrender.com",
+        target: "https://kcecell-backend-api.onrender.com",
         changeOrigin: true,
         secure: true,
         rewrite: (path) => path.replace(/^\/api/, "/api"),

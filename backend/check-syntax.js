@@ -19,12 +19,15 @@ function checkFileSyntax(filePath) {
   });
 }
 
-// Function to recursively find all .js files
+// Function to recursively find all .js files (excluding node_modules)
 function findJsFiles(dir) {
   let results = [];
   const items = fs.readdirSync(dir);
 
   for (const item of items) {
+    // Skip node_modules
+    if (item === "node_modules") continue;
+
     const fullPath = path.join(dir, item);
     const stat = fs.statSync(fullPath);
 

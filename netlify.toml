@@ -1,31 +1,19 @@
 [build]
   # Directory with the frontend build output
   publish = "frontend/dist"
-  # Build command for the frontend and setup functions
-  command = "npm run build"
-  # Directory with Netlify Functions
-  functions = "netlify/functions"
+  # Build command for the frontend only
+  command = "cd frontend && npm install && npm run build && cd netlify/functions && npm install"
+  # Directory with Netlify Functions for API proxying
+  functions = "frontend/netlify/functions"
 
-# Redirects for React Router (SPA)
+# API proxy redirects
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/:splat"
+  to = "/.netlify/functions/api-proxy/:splat"
   status = 200
 
+# Redirects for React Router (SPA)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-# Environment variable configuration
-[context.production.environment]
-  VITE_API_URL = "/.netlify/functions"
-
-# Custom plugins
-[[plugins]]
-  package = "@netlify/plugin-functions-install-core"
-
-[functions]
-  # Configure serverless functions
-  node_bundler = "esbuild"
-  external_node_modules = ["express", "mongoose", "cors", "helmet", "dotenv", "jsonwebtoken", "bcryptjs", "cloudinary", "multer", "multer-storage-cloudinary", "node-cron", "nodemailer", "express-validator", "express-rate-limit", "googleapis", "axios"]
