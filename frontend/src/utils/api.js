@@ -1,10 +1,15 @@
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
+const API_URL = import.meta.env.VITE_API_URL || "/api";
 
 export const api = {
   baseUrl: API_URL,
 
   async fetch(endpoint, options = {}) {
-    const url = `${API_URL}${endpoint}`;
+    // Remove any duplicate /api prefixes
+    const cleanEndpoint = endpoint.startsWith('/api') ? 
+      endpoint : 
+      endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+      
+    const url = `${API_URL}${cleanEndpoint}`;
     const response = await fetch(url, {
       ...options,
       headers: {
@@ -24,27 +29,27 @@ export const api = {
   // Auth endpoints
   auth: {
     login: (data) =>
-      api.fetch("/api/auth/login", {
+      api.fetch("/auth/login", {
         method: "POST",
         body: JSON.stringify(data),
       }),
     forgotPassword: (data) =>
-      api.fetch("/api/auth/forgot-password", {
+      api.fetch("/auth/forgot-password", {
         method: "POST",
         body: JSON.stringify(data),
       }),
     resetPassword: (data) =>
-      api.fetch("/api/auth/reset-password", {
+      api.fetch("/auth/reset-password", {
         method: "POST",
         body: JSON.stringify(data),
       }),
     verifyEmail: (data) =>
-      api.fetch("/api/auth/verify-email", {
+      api.fetch("/auth/verify-email", {
         method: "POST",
         body: JSON.stringify(data),
       }),
     me: () =>
-      api.fetch("/api/auth/me", {
+      api.fetch("/auth/me", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -53,10 +58,10 @@ export const api = {
 
   // Events endpoints
   events: {
-    getUpcoming: () => api.fetch("/api/events?upcoming=true&status=published"),
-    getAll: () => api.fetch("/api/events"),
+    getUpcoming: () => api.fetch("/events?upcoming=true&status=published"),
+    getAll: () => api.fetch("/events"),
     create: (data) =>
-      api.fetch("/api/events", {
+      api.fetch("/events", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
@@ -64,7 +69,7 @@ export const api = {
         },
       }),
     updateStatus: (eventId, status) =>
-      api.fetch(`/api/events/${eventId}/status`, {
+      api.fetch(`/events/${eventId}/status`, {
         method: "PATCH",
         body: JSON.stringify({ status }),
         headers: {
@@ -72,14 +77,14 @@ export const api = {
         },
       }),
     delete: (eventId) =>
-      api.fetch(`/api/events/${eventId}`, {
+      api.fetch(`/events/${eventId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }),
     uploadImage: (formData) =>
-      fetch(`${API_URL}/api/events/upload-image`, {
+      fetch(`${API_URL}/events/upload-image`, {
         method: "POST",
         body: formData,
         headers: {
@@ -91,13 +96,13 @@ export const api = {
   // Admin endpoints
   admin: {
     getUsers: () =>
-      api.fetch("/api/auth/admin/users", {
+      api.fetch("/auth/admin/users", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }),
     createUser: (data) =>
-      api.fetch("/api/auth/admin/create-user", {
+      api.fetch("/auth/admin/create-user", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
@@ -105,7 +110,7 @@ export const api = {
         },
       }),
     deleteUser: (userId) =>
-      api.fetch(`/api/auth/admin/users/${userId}`, {
+      api.fetch(`/auth/admin/users/${userId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -116,7 +121,7 @@ export const api = {
   // Contact endpoints
   contact: {
     send: (data) =>
-      api.fetch("/api/contact", {
+      api.fetch("/contact", {
         method: "POST",
         body: JSON.stringify(data),
       }),

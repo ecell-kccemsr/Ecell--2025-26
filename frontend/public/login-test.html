@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      background-color: #f9f9f9;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>Login Test</h1>
+  
+  <div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" value="admin@ecell.com">
+    </div>
+    
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" value="adminpass">
+    </div>
+    
+    <button id="loginButton">Login</button>
+    <button id="testButton">Test Endpoint</button>
+    <button id="clearButton">Clear Results</button>
+  </div>
+  
+  <div class="result" id="result">Results will appear here</div>
+  
+  <script>
+    const resultDiv = document.getElementById('result');
+    
+    // Helper function to log results
+    function log(message) {
+      const timestamp = new Date().toISOString().split('T')[1].split('.')[0];
+      resultDiv.textContent += `[${timestamp}] ${message}\n`;
+      resultDiv.scrollTop = resultDiv.scrollHeight;
+    }
+    
+    // Login with the Netlify function
+    document.getElementById('loginButton').addEventListener('click', async () => {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      log(`Attempting login with ${email}...`);
+      
+      try {
+        const response = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email, password })
+        });
+        
+        log(`Response status: ${response.status}`);
+        
+        const data = await response.json();
+        log(`Response data: ${JSON.stringify(data, null, 2)}`);
+        
+        if (response.ok) {
+          log('Login successful!');
+        } else {
+          log('Login failed.');
+        }
+      } catch (error) {
+        log(`Error: ${error.message}`);
+      }
+    });
+    
+    // Test the test endpoint
+    document.getElementById('testButton').addEventListener('click', async () => {
+      log('Testing endpoint...');
+      
+      try {
+        const response = await fetch('/api/test');
+        log(`Response status: ${response.status}`);
+        
+        const data = await response.json();
+        log(`Response data: ${JSON.stringify(data, null, 2)}`);
+      } catch (error) {
+        log(`Error: ${error.message}`);
+      }
+    });
+    
+    // Clear results
+    document.getElementById('clearButton').addEventListener('click', () => {
+      resultDiv.textContent = '';
+    });
+  </script>
+</body>
+</html>
