@@ -39,8 +39,7 @@ class ApiService {
           ...this.getHeaders(),
           ...options.headers,
         },
-        mode: "cors",
-        credentials: "include",
+        mode: "cors"
       });
 
       if (response.status === 204) {

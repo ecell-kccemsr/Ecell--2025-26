@@ -40,8 +40,49 @@ module.exports.handler = async (event, context) => {
 
     // Verify token
     const decoded = jwt.verify(token, JWT_SECRET);
+    
+    // If this is a test user token
+    if (decoded.userId && decoded.userId.startsWith('user-')) {
+      const email = decoded.userId.replace('user-', '') + '@ecell.com';
+      
+      // Find matching test user
+      const testUsers = [
+        {
+          email: "admin@ecell.com",
+          role: "admin",
+          name: "Admin User",
+        },
+        {
+          email: "student@ecell.com",
+          role: "student",
+          name: "Student User",
+        },
+        {
+          email: "test@example.com",
+          role: "user",
+          name: "Test User",
+        },
+      ];
+      
+      const testUser = testUsers.find(user => user.email === email);
+      if (testUser) {
+        return {
+          statusCode: 200,
+          headers: {
+            ...corsHeaders,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            user: {
+              id: decoded.userId,
+              ...testUser
+            }
+          })
+        };
+      }
+    }
 
-    // Get user from database
+    // Get user from database for non-test users
     const result = await db.query(
       'SELECT id, email, role, name FROM users WHERE id = $1',
       [decoded.userId]

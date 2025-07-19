@@ -151,20 +151,28 @@ module.exports.handler = async (event, context) => {
 
     if (matchedUser) {
       console.log(`Test user found: ${matchedUser.name} (${matchedUser.role})`);
-      return {
-        statusCode: 200,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: "Login successful",
-          token: `temp-token-${Date.now()}-${matchedUser.role}`,
-          user: {
-            id: `user-${matchedUser.email.split("@")[0]}`,
-            email: matchedUser.email,
-            name: matchedUser.name,
-            role: matchedUser.role,
-          },
-        }),
-      };
+      // Generate a proper JWT token for test users
+        const userId = `user-${matchedUser.email.split("@")[0]}`;
+        const token = jwt.sign(
+          { userId: userId },
+          JWT_SECRET,
+          { expiresIn: '24h' }
+        );
+
+        return {
+          statusCode: 200,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          body: JSON.stringify({
+            message: "Login successful",
+            token: token,
+            user: {
+              id: userId,
+              email: matchedUser.email,
+              name: matchedUser.name,
+              role: matchedUser.role,
+            },
+          }),
+        };
     }
 
     // If no matching test user, return authentication error
