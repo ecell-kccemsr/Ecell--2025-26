@@ -91,8 +91,7 @@ const AdminDashboard = () => {
   const fetchEvents = async () => {
     try {
       setLoading(true);
-      const API_URL = "/.netlify/functions/events";
-      const response = await fetch(API_URL, {
+      const response = await fetch('/api/events', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -295,7 +294,7 @@ const AdminDashboard = () => {
       const formData = new FormData();
       formData.append("image", file);
 
-      const response = await fetch("/.netlify/functions/events-upload-image", {
+      const response = await fetch("/api/events/upload-image", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -343,8 +342,7 @@ const AdminDashboard = () => {
         },
       };
 
-      const API_URL = "/.netlify/functions/events";
-      const response = await fetch(API_URL, {
+      const response = await fetch("/api/events", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -431,7 +429,7 @@ const AdminDashboard = () => {
   const updateEventStatus = async (eventId, newStatus) => {
     try {
       const response = await fetch(
-        `/.netlify/functions/events-status/${eventId}`,
+        `/api/events/${eventId}/status`,
         {
           method: "PUT",
           headers: {
@@ -463,7 +461,7 @@ const AdminDashboard = () => {
     if (!confirm("Are you sure you want to delete this event?")) return;
 
     try {
-      const response = await fetch(`/.netlify/functions/events/${eventId}`, {
+      const response = await fetch(`/api/events/${eventId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

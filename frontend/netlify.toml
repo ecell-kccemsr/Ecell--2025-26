@@ -18,6 +18,18 @@
   force = true
 
 [[redirects]]
+  from = "/api/events/upload-image"
+  to = "/.netlify/functions/events-upload-image"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/events/*/status"
+  to = "/.netlify/functions/events-status/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/api/events/*"
   to = "/.netlify/functions/events/:splat"
   status = 200

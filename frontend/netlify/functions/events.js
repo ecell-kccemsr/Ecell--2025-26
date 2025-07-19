@@ -15,9 +15,10 @@ const verifyToken = (authHeader) => {
 
 module.exports.handler = async (event, context) => {
   const corsHeaders = {
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": process.env.FRONTEND_URL || "*",
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
-    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+    "Access-Control-Allow-Credentials": "true"
   };
 
   if (event.httpMethod === "OPTIONS") {
