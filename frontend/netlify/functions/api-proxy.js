@@ -29,7 +29,11 @@ exports.handler = async function(event, context) {
   
   try {
     // Forward the request to the backend API
+    // Keep the /api prefix since backend routes are defined with it
     const url = `${BACKEND_URL}${path}`;
+    
+    // Add debug logging
+    console.log(`API Proxy: Forwarding request from path "${path}" to URL "${url}"`);
     
     // Filter out headers that might cause issues
     const filteredHeaders = { ...headers };
@@ -72,6 +76,7 @@ exports.handler = async function(event, context) {
     };
   } catch (error) {
     console.error('Error proxying to backend:', error);
+    console.error(`Request details: ${method.toUpperCase()} ${path} to ${BACKEND_URL}${path}`);
     
     // Return the error response from the backend if available
     if (error.response) {
