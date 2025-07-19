@@ -9,6 +9,11 @@ const { cloudinary } = require("./config/cloudinary");
 
 const app = express();
 
+// Simple test route to verify routing
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'API test route is working' });
+});
+
 // CORS configuration - must come before other middleware
 const corsOptions = {
   origin: function (origin, callback) {

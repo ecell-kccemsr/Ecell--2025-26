@@ -31,12 +31,23 @@ exports.handler = async function(event, context) {
   
   try {
     // Forward the request to the backend API
-    // We need to remove the /api prefix from the path since the backend routes already include it
-    const adjustedPath = path.replace(/^\/api/, '');
-    const url = `${BACKEND_URL}/api${adjustedPath}`;
+    // Special case for health check - use a known working endpoint
+    let url;
+    if (path === '/auth/health' || path === '/api/auth/health') {
+      url = `${BACKEND_URL}/health`;
+    } else {
+      const adjustedPath = path.replace(/^\/api/, '');
+      url = `${BACKEND_URL}/api${adjustedPath}`;
+    }
     
-    // Add debug logging
-    console.log(`API Proxy: Original path "${path}", adjusted to "${adjustedPath}", forwarding to URL "${url}"`);
+    // Add more detailed debug logging
+    console.log(`API Proxy Debug:
+      Original path: "${path}"
+      Adjusted path: "${adjustedPath}"
+      Backend URL: "${BACKEND_URL}"
+      Full URL: "${url}"
+      HTTP Method: "${method.toUpperCase()}"
+    `);
     
     // Filter out headers that might cause issues
     const filteredHeaders = { ...headers };
@@ -79,7 +90,16 @@ exports.handler = async function(event, context) {
     };
   } catch (error) {
     console.error('Error proxying to backend:', error);
-    console.error(`Request details: ${method.toUpperCase()} ${path} to ${BACKEND_URL}${path}`);
+    console.error(`Request details: ${method.toUpperCase()} ${path} to ${BACKEND_URL}/api${path.replace(/^\/api/, '')}`);
+    
+    // Add more detailed error logging
+    console.error(`Error Details:
+      Status: ${error.response?.status || 'No status'}
+      Message: ${error.message}
+      URL: ${url}
+      Request Headers: ${JSON.stringify(filteredHeaders)}
+      Request Body: ${event.body ? event.body : 'No body'}
+    `);
     
     // Return the error response from the backend if available
     if (error.response) {

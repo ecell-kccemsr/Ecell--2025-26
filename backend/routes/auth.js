@@ -12,6 +12,13 @@ const {
 const { sendEmail } = require("../services/emailService");
 const router = express.Router();
 
+// @route   GET /api/auth/health
+// @desc    Health check for auth routes
+// @access  Public
+router.get("/health", (req, res) => {
+  res.json({ message: "Auth routes are working" });
+});
+
 // @route   POST /api/auth/register
 // @desc    Public registration disabled - Admin only user creation
 // @access  Disabled
