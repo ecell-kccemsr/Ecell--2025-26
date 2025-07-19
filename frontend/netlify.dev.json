@@ -1,0 +1,7 @@
+{
+  "dev": {
+    "framework": "vite",
+    "autoLaunch": true,
+    "port": 8888
+  }
+}

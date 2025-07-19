@@ -1,14 +1,16 @@
-const API_URL = import.meta.env.VITE_API_URL || "/api";
+const API_URL = import.meta.env.VITE_API_URL || "/.netlify/functions";
 
 export const api = {
   baseUrl: API_URL,
 
   async fetch(endpoint, options = {}) {
     // Remove any duplicate /api prefixes
-    const cleanEndpoint = endpoint.startsWith('/api') ? 
-      endpoint : 
-      endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
-      
+    const cleanEndpoint = endpoint.startsWith("/api")
+      ? endpoint
+      : endpoint.startsWith("/")
+      ? endpoint
+      : `/${endpoint}`;
+
     const url = `${API_URL}${cleanEndpoint}`;
     const response = await fetch(url, {
       ...options,

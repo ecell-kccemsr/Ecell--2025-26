@@ -42,9 +42,8 @@ const ResetPasswordPage = () => {
     }
 
     try {
-      const response = await fetch(
-        "http://localhost:5001/api/auth/reset-password",
-        {
+      const API_URL = "/.netlify/functions/auth-reset-password";
+      const response = await fetch(API_URL, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

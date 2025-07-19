@@ -81,8 +81,8 @@ const AdminDashboard = () => {
   const fetchEvents = async () => {
     try {
       setLoading(true);
-      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
-      const response = await fetch(`${API_URL}/events`, {
+      const API_URL = "/.netlify/functions/events";
+      const response = await fetch(API_URL, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -99,14 +99,11 @@ const AdminDashboard = () => {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const response = await fetch(
-        "http://localhost:5001/api/auth/admin/users",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      const response = await fetch("/.netlify/functions/auth-admin-users", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       const data = await response.json();
       setUsers(data.users || []);
     } catch (error) {
@@ -130,7 +127,7 @@ const AdminDashboard = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5001/api/auth/admin/create-user",
+        "/.netlify/functions/auth-admin-create-user",
         {
           method: "POST",
           headers: {
@@ -178,7 +175,7 @@ const AdminDashboard = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5001/api/auth/admin/users/${userId}`,
+        `/.netlify/functions/auth-admin-users/${userId}`,
         {
           method: "DELETE",
           headers: {
@@ -288,16 +285,13 @@ const AdminDashboard = () => {
       const formData = new FormData();
       formData.append("image", file);
 
-      const response = await fetch(
-        "http://localhost:5001/api/events/upload-image",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: formData,
-        }
-      );
+      const response = await fetch("/.netlify/functions/events-upload-image", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: formData,
+      });
 
       if (response.ok) {
         const data = await response.json();
@@ -339,8 +333,8 @@ const AdminDashboard = () => {
         },
       };
 
-      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
-      const response = await fetch(`${API_URL}/events`, {
+      const API_URL = "/.netlify/functions/events";
+      const response = await fetch(API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -427,7 +421,7 @@ const AdminDashboard = () => {
   const updateEventStatus = async (eventId, newStatus) => {
     try {
       const response = await fetch(
-        `http://localhost:5001/api/events/${eventId}/status`,
+        `/.netlify/functions/events-status/${eventId}`,
         {
           method: "PUT",
           headers: {
@@ -459,15 +453,12 @@ const AdminDashboard = () => {
     if (!confirm("Are you sure you want to delete this event?")) return;
 
     try {
-      const response = await fetch(
-        `http://localhost:5001/api/events/${eventId}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      const response = await fetch(`/.netlify/functions/events/${eventId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
 
       if (response.ok) {
         setEvents((prev) => prev.filter((event) => event._id !== eventId));

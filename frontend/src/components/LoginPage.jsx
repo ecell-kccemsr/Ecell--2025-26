@@ -68,22 +68,18 @@ const LoginPage = () => {
     setError("");
 
     try {
-      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
-      
-      // Add debugging info
-      console.log(`VITE_API_URL:`, import.meta.env.VITE_API_URL);
-      console.log(`Using API_URL:`, API_URL);
-      console.log(`Attempting login to: ${API_URL}/auth/login`);
-      console.log(`Full URL:`, window.location.origin + `${API_URL}/auth/login`);
+      // Use relative path for Netlify Functions
+      const API_URL = "/.netlify/functions/auth-login";
+
+      console.log(`Attempting login to: ${API_URL}`);
       console.log(`Login data:`, formData);
 
-      const response = await fetch(`${API_URL}/auth/login`, {
+      const response = await fetch(API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include",
-        mode: "cors",
+        // No need for CORS settings when calling Netlify Functions
         body: JSON.stringify(formData),
       });
 
@@ -92,21 +88,35 @@ const LoginPage = () => {
       console.log("Login response:", response.status, data);
 
       if (response.ok) {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
+        if (data.token && data.user) {
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("user", JSON.stringify(data.user));
 
-        // Redirect to admin dashboard if user is admin, otherwise to home
-        if (data.user.role === "admin") {
-          navigate("/admin");
+          // Redirect to admin dashboard if user is admin, otherwise to home
+          if (data.user.role === "admin") {
+            navigate("/admin");
+          } else {
+            navigate("/");
+          }
         } else {
-          navigate("/");
+          setError("Invalid response from server. Please try again.");
         }
       } else {
-        setError(data.message || "Login failed");
+        if (response.status === 401) {
+          setError("Invalid email or password");
+        } else if (response.status === 404) {
+          setError("Account not found");
+        } else {
+          setError(data.message || "Login failed");
+        }
       }
     } catch (error) {
       console.error("Login error:", error);
-      setError("Network error. Please try again.");
+      if (!navigator.onLine) {
+        setError("No internet connection. Please check your network.");
+      } else {
+        setError("Network error. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
@@ -119,32 +129,46 @@ const LoginPage = () => {
     setMessage("");
 
     try {
-      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
-      const response = await fetch(
-        `${API_URL}/auth/forgot-password`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email: forgotPasswordEmail }),
-        }
-      );
+      const API_URL = "/.netlify/functions/auth-forgot-password";
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: forgotPasswordEmail }),
+      });
 
       const data = await response.json();
 
       if (response.ok) {
-        setMessage(
-          "If an account with that email exists, a password reset link has been sent."
-        );
+        // Check if this is a test account response
+        if (data.testAccount) {
+          setMessage(
+            `This is a test account. Use these credentials:\nEmail: ${data.testAccount.email}\nPassword: ${data.testAccount.password}\n\n${data.note}`
+          );
+        } else {
+          setMessage(
+            data.message || "Password reset instructions sent to your email"
+          );
+        }
         setShowForgotPassword(false);
         setForgotPasswordEmail("");
       } else {
-        setError(data.message || "Failed to send reset email");
+        if (response.status === 404) {
+          setError("Email address not found");
+        } else if (response.status === 429) {
+          setError("Too many reset attempts. Please try again later.");
+        } else {
+          setError(data.message || "Failed to send reset email");
+        }
       }
     } catch (error) {
       console.error("Forgot password error:", error);
-      setError("Network error. Please try again.");
+      if (!navigator.onLine) {
+        setError("No internet connection. Please check your network.");
+      } else {
+        setError("Network error. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
@@ -221,12 +245,13 @@ const LoginPage = () => {
               className="success-message"
               style={{
                 color: "#00ff9d",
-                textAlign: "center",
+                textAlign: "left",
                 marginBottom: "1rem",
-                padding: "0.5rem",
+                padding: "1rem",
                 backgroundColor: "rgba(0, 255, 157, 0.1)",
                 borderRadius: "5px",
                 border: "1px solid rgba(0, 255, 157, 0.3)",
+                whiteSpace: "pre-line",
               }}
             >
               {message}
@@ -278,7 +303,11 @@ const LoginPage = () => {
               <div className="login-options">
                 <button
                   type="button"
-                  onClick={() => setShowForgotPassword(false)}
+                  onClick={() => {
+                    setShowForgotPassword(false);
+                    setError("");
+                    setMessage("");
+                  }}
                   className="forgot-password"
                   style={{
                     background: "none",
@@ -344,7 +373,11 @@ const LoginPage = () => {
               <div className="login-options">
                 <button
                   type="button"
-                  onClick={() => setShowForgotPassword(true)}
+                  onClick={() => {
+                    setShowForgotPassword(true);
+                    setError("");
+                    setMessage("");
+                  }}
                   className="forgot-password"
                   style={{
                     background: "none",

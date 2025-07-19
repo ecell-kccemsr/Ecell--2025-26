@@ -2,8 +2,10 @@
   "name": "ecell-netlify-functions",
   "version": "1.0.0",
   "description": "Netlify Functions for E-Cell",
-  "main": "api-proxy.js",
+  "main": "api.js",
   "dependencies": {
-    "axios": "^1.6.2"
+    "axios": "^1.10.0",
+    "jsonwebtoken": "^9.0.2",
+    "uuid": "^9.0.1"
   }
 }

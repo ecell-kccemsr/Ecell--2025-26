@@ -3,16 +3,40 @@
   publish = "dist"
   functions = "netlify/functions"
 
-# API proxy redirects
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = ["axios", "pg", "nodemailer"]
+
+# Scheduled function for email processing
+[[plugins]]
+package = "@netlify/plugin-functions-schedule"
+
+[[scheduled]]
+  function = "email-service"
+  schedule = "@hourly"
+  query = "?action=process"
+
 [[redirects]]
-  from = "/api/auth/login"
-  to = "/.netlify/functions/auth-login"
+  from = "/api/auth/*"
+  to = "/.netlify/functions/auth-:splat"
   status = 200
   force = true
 
 [[redirects]]
-  from = "/auth/login"
-  to = "/.netlify/functions/auth-login"
+  from = "/api/events/*"
+  to = "/.netlify/functions/events/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/todos/*"
+  to = "/.netlify/functions/todos/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/email/*"
+  to = "/.netlify/functions/email-service/:splat"
   status = 200
   force = true
 
@@ -22,8 +46,37 @@
   status = 200
   force = true
 
-# SPA fallback
+[dev]
+  command = "npm run dev"
+  port = 3000
+  targetPort = 5001
+  publish = "dist"
+
+[[redirects]]
+  from = "/api/test"
+  to = "/.netlify/functions/test-endpoint"
+  status = 200
+  force = true
+
+# Health check endpoint
+[[redirects]]
+  from = "/api/health"
+  to = "/.netlify/functions/api/health"
+  status = 200
+  force = true
+
+# API tester tool
+[[redirects]]
+  from = "/api-tester"
+  to = "/api-tester.html"
+  status = 200
+  force = true
+
+# SPA fallback - must be last!
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
+[build.environment]
+  NODE_VERSION = "18"

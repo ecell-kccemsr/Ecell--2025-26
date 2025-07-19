@@ -1,8 +1,8 @@
-// Simple API configuration pointing to the backend API
-// In development: Points to local server (http://localhost:5001)
-// In production: Points to Netlify Functions proxy ('/api')
-// The Netlify Functions will forward requests to the Render backend
-export const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
+// Simple API configuration pointing to our Netlify Functions API
+// In development: Points to local server (http://localhost:8888/.netlify/functions/api)
+// In production: Points to Netlify Functions directly
+// All API functionality is now handled by Netlify Functions
+export const API_BASE_URL = import.meta.env.VITE_API_URL || "/.netlify/functions";
 
 export const API_ENDPOINTS = {
   auth: {

@@ -37,8 +37,8 @@ const ContactPage = () => {
     setSuccess(false);
 
     try {
-      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
-      const response = await fetch(`${API_URL}/contact`, {
+      const API_URL = "/.netlify/functions/contact-form";
+      const response = await fetch(API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

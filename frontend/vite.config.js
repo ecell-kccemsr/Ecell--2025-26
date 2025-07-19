@@ -6,13 +6,13 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: "0.0.0.0",
-    port: process.env.PORT || 10000,
-    strictPort: true,
+    port: process.env.PORT || 5173, // Use default Vite port
+    strictPort: false, // Allow fallback to another port if this one is taken
     proxy: {
       "/api": {
-        target: "https://kcecell-backend-api.onrender.com",
+        target: "http://localhost:8888/.netlify/functions/api",
         changeOrigin: true,
-        secure: true,
+        secure: false,
         rewrite: (path) => path.replace(/^\/api/, ""),
         configure: (proxy, _options) => {
           proxy.on("error", (err, _req, _res) => {

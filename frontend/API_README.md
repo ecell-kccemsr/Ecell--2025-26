@@ -39,6 +39,7 @@ API paths are structured to work in both development and production:
 ## Authentication
 
 Authentication is handled by:
+
 1. Sending credentials to `/api/auth/login`
 2. Storing the JWT token in localStorage
 3. Including the token in the Authorization header for subsequent requests
@@ -46,6 +47,7 @@ Authentication is handled by:
 ## Temporary Login Function
 
 During development, you can use these test credentials with the temporary login function:
+
 - Admin: admin@ecell.com / adminpass
 - Student: student@ecell.com / studentpass
 - Test: test@example.com / testpass
@@ -53,6 +55,7 @@ During development, you can use these test credentials with the temporary login 
 ## Troubleshooting
 
 If API calls fail:
+
 1. Check the browser console for errors
 2. Verify the correct API URL is being used
 3. Check for CORS issues
