@@ -25,9 +25,12 @@ exports.handler = async function(event, context) {
     // Test different endpoints
     const testEndpoints = [
       { path: '/health', name: 'Health Check' },
+      { path: '/health-api', name: 'Health API' },
+      { path: '/auth-test', name: 'Auth Test' },
       { path: '/api/auth/login', name: 'Auth Login' },
-      { path: '/api/users', name: 'Users' },
-      { path: '/api/events', name: 'Events' }
+      { path: '/api/auth', name: 'Auth Root' },
+      { path: '/auth', name: 'Auth No Prefix' },
+      { path: '/api', name: 'API Root' }
     ];
     
     // Run tests in parallel

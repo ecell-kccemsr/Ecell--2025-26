@@ -31,11 +31,19 @@ exports.handler = async function(event, context) {
   
   try {
     // Forward the request to the backend API
-    // Special case for health check - use a known working endpoint
+    // Special case handling for different path patterns
     let url;
-    if (path === '/auth/health' || path === '/api/auth/health') {
-      url = `${BACKEND_URL}/health`;
+    
+    // Check auth endpoints - try different path patterns
+    if (path.includes('/auth/login') || path.includes('/api/auth/login')) {
+      // Test different path patterns for auth login
+      if (path.includes('/api/auth/login')) {
+        url = `${BACKEND_URL}/auth-test`;
+      } else {
+        url = `${BACKEND_URL}/health-api`;
+      }
     } else {
+      // Normal case - adjust path
       const adjustedPath = path.replace(/^\/api/, '');
       url = `${BACKEND_URL}/api${adjustedPath}`;
     }
