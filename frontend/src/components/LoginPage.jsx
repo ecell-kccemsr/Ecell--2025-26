@@ -70,9 +70,9 @@ const LoginPage = () => {
     try {
       const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
 
-      console.log(`Attempting login to: ${API_URL}/api/auth/login`);
+      console.log(`Attempting login to: ${API_URL}/auth/login`);
 
-      const response = await fetch(`${API_URL}/api/auth/login`, {
+      const response = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -114,8 +114,9 @@ const LoginPage = () => {
     setMessage("");
 
     try {
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
       const response = await fetch(
-        "http://localhost:5001/api/auth/forgot-password",
+        `${API_URL}/auth/forgot-password`,
         {
           method: "POST",
           headers: {

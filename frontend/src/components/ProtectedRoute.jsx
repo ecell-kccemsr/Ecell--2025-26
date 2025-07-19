@@ -19,7 +19,8 @@ const ProtectedRoute = ({ children, requireAdmin = false }) => {
       }
 
       // Verify token with backend
-      const response = await fetch("http://localhost:5001/api/auth/me", {
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
+      const response = await fetch(`${API_URL}/auth/me`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
