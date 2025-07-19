@@ -11,7 +11,7 @@ router.get("/status", auth, async (req, res) => {
   try {
     res.json({
       message: "Calendar functionality has been disabled",
-      status: "disabled"
+      status: "disabled",
     });
   } catch (error) {
     console.error("Calendar status error:", error);
@@ -530,7 +530,7 @@ async function syncMeetingToOutlookCalendar(user, meeting) {
 router.all("*", auth, (req, res) => {
   res.status(200).json({
     message: "Calendar integration functionality has been removed",
-    status: "disabled"
+    status: "disabled",
   });
 });
 
