@@ -1,10 +1,12 @@
 [build]
-  # Directory with the frontend build output
-  publish = "frontend/dist"
+  # Base directory
+  base = "frontend"
+  # Directory with the frontend build output (relative to base)
+  publish = "dist"
   # Build command for the frontend only
-  command = "cd frontend && npm install && npm run build && cd netlify/functions && npm install"
-  # Directory with Netlify Functions for API proxying
-  functions = "frontend/netlify/functions"
+  command = "npm install && npm run build && cd netlify/functions && npm install"
+  # Directory with Netlify Functions for API proxying (relative to base)
+  functions = "netlify/functions"
 
 # API proxy redirects
 [[redirects]]
