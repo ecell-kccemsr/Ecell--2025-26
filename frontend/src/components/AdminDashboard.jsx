@@ -11,7 +11,11 @@ import {
   FaTimes,
   FaFlag,
   FaClock,
+  FaEnvelope,
+  FaInbox,
 } from "react-icons/fa";
+import SubmissionsManager from "./admin/SubmissionsManager";
+import BulkEmailSender from "./admin/BulkEmailSender";
 import Header from "./Header";
 
 const AdminDashboard = () => {
@@ -20,6 +24,12 @@ const AdminDashboard = () => {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [showCreateUserForm, setShowCreateUserForm] = useState(false);
   const [activeTab, setActiveTab] = useState("events");
+  const menuItems = [
+    { id: "events", label: "Events", icon: FaFlag },
+    { id: "users", label: "Users", icon: FaUsers },
+    { id: "submissions", label: "Submissions", icon: FaInbox },
+    { id: "bulk-email", label: "Bulk Email", icon: FaEnvelope },
+  ];
   const [loading, setLoading] = useState(false);
   const [imageUploading, setImageUploading] = useState(false);
   const [userFormData, setUserFormData] = useState({
@@ -486,18 +496,15 @@ const AdminDashboard = () => {
       <div className="dashboard-content">
         {/* Dashboard Tabs */}
         <div className="dashboard-tabs">
-          <button
-            className={`tab ${activeTab === "events" ? "active" : ""}`}
-            onClick={() => setActiveTab("events")}
-          >
-            📅 Events Management
-          </button>
-          <button
-            className={`tab ${activeTab === "users" ? "active" : ""}`}
-            onClick={() => setActiveTab("users")}
-          >
-            <FaUsers /> Users Management
-          </button>
+          {menuItems.map((item) => (
+            <button
+              key={item.id}
+              className={`tab ${activeTab === item.id ? "active" : ""}`}
+              onClick={() => setActiveTab(item.id)}
+            >
+              <item.icon /> {item.label}
+            </button>
+          ))}
         </div>
 
         {/* Events Management Tab */}
@@ -984,6 +991,22 @@ const AdminDashboard = () => {
                 ))}
               </div>
             )}
+          </div>
+        )}
+
+        {/* Submissions Management */}
+        {activeTab === "submissions" && (
+          <div className="submissions-container">
+            <h3>Contact Form Submissions</h3>
+            <SubmissionsManager />
+          </div>
+        )}
+
+        {/* Bulk Email */}
+        {activeTab === "bulk-email" && (
+          <div className="bulk-email-container">
+            <h3>Send Bulk Emails</h3>
+            <BulkEmailSender />
           </div>
         )}
 

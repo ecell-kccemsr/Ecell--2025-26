@@ -92,10 +92,10 @@ module.exports.handler = async (event, context) => {
     console.log(`Login attempt for email: ${email}`);
 
     try {
-      console.log("Forwarding request to backend:", `${BACKEND_URL}/api/auth/login`);
+      console.log("Forwarding request to backend:", `${BACKEND_URL}/.netlify/functions/auth-login`);
       
       // Forward the login request to the backend
-      const response = await axios.post(`${BACKEND_URL}/api/auth/login`, {
+      const response = await axios.post(`${BACKEND_URL}/.netlify/functions/auth-login`, {
         email,
         password
       });

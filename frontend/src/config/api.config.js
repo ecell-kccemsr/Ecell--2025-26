@@ -6,13 +6,13 @@ export const API_BASE_URL = import.meta.env.VITE_API_URL || "/.netlify/functions
 
 export const API_ENDPOINTS = {
   auth: {
-    login: `${API_BASE_URL}/auth/login`,
-    forgotPassword: `${API_BASE_URL}/auth/forgot-password`,
-    resetPassword: `${API_BASE_URL}/auth/reset-password`,
-    verifyEmail: `${API_BASE_URL}/auth/verify-email`,
-    me: `${API_BASE_URL}/auth/me`,
-    users: `${API_BASE_URL}/auth/admin/users`,
-    createUser: `${API_BASE_URL}/auth/admin/create-user`,
+    login: `${API_BASE_URL}/auth-login`,
+    forgotPassword: `${API_BASE_URL}/auth-forgot-password`,
+    resetPassword: `${API_BASE_URL}/auth-reset-password`,
+    verifyEmail: `${API_BASE_URL}/auth-verify-email`,
+    me: `${API_BASE_URL}/auth-me`,
+    users: `${API_BASE_URL}/admin-users`,
+    createUser: `${API_BASE_URL}/admin-create-user`,
   },
   events: {
     list: `${API_BASE_URL}/events`,

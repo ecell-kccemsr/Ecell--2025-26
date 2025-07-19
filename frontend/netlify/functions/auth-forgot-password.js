@@ -118,8 +118,8 @@ exports.handler = async (event, context) => {
     }
 
     try {
-      console.log("Forwarding request to backend:", `${BACKEND_URL}/api/auth/forgot-password`);
-      const response = await axios.post(`${BACKEND_URL}/api/auth/forgot-password`, { email });
+      console.log("Forwarding request to backend:", `${BACKEND_URL}/.netlify/functions/auth-forgot-password`);
+      const response = await axios.post(`${BACKEND_URL}/.netlify/functions/auth-forgot-password`, { email });
       console.log("Backend response:", response.status);
       
       return {

@@ -31,22 +31,22 @@ export const api = {
   // Auth endpoints
   auth: {
     login: (data) =>
-      api.fetch("/auth/login", {
+      api.fetch("/auth-login", {
         method: "POST",
         body: JSON.stringify(data),
       }),
     forgotPassword: (data) =>
-      api.fetch("/auth/forgot-password", {
+      api.fetch("/auth-forgot-password", {
         method: "POST",
         body: JSON.stringify(data),
       }),
     resetPassword: (data) =>
-      api.fetch("/auth/reset-password", {
+      api.fetch("/auth-reset-password", {
         method: "POST",
         body: JSON.stringify(data),
       }),
     verifyEmail: (data) =>
-      api.fetch("/auth/verify-email", {
+      api.fetch("/auth-verify-email", {
         method: "POST",
         body: JSON.stringify(data),
       }),

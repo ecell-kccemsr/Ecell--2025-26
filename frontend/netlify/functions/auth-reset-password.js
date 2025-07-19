@@ -73,10 +73,10 @@ exports.handler = async (event, context) => {
     }
 
     try {
-      console.log("Forwarding request to backend:", `${BACKEND_URL}/api/auth/reset-password`);
+      console.log("Forwarding request to backend:", `${BACKEND_URL}/.netlify/functions/auth-reset-password`);
       
       // Forward the reset password request to the backend
-      const response = await axios.post(`${BACKEND_URL}/api/auth/reset-password`, {
+      const response = await axios.post(`${BACKEND_URL}/.netlify/functions/auth-reset-password`, {
         token,
         password
       });
