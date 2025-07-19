@@ -4,13 +4,16 @@ const nodemailer = require('nodemailer');
 
 // Create mail transporter
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT,
-  secure: true,
+  host: process.env.SMTP_HOST || 'smtp.gmail.com',
+  port: process.env.SMTP_PORT || 587,
+  secure: false, // true for 465, false for other ports
   auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
+    user: process.env.SMTP_USER, // your Gmail address
+    pass: process.env.SMTP_PASS, // your Gmail app password
   },
+  tls: {
+    rejectUnauthorized: false
+  }
 });
 
 // Process email queue
@@ -77,6 +80,18 @@ const queueEmail = async (to, subject, body) => {
   }
 };
 
+// Test email configuration
+const testEmailConfig = async () => {
+  try {
+    const testResult = await transporter.verify();
+    console.log('SMTP connection test successful:', testResult);
+    return true;
+  } catch (error) {
+    console.error('SMTP connection test failed:', error);
+    return false;
+  }
+};
+
 module.exports.handler = async (event, context) => {
   const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
@@ -90,6 +105,31 @@ module.exports.handler = async (event, context) => {
       headers: corsHeaders,
       body: JSON.stringify({ message: "CORS preflight successful" }),
     };
+  }
+
+  // Test configuration endpoint
+  if (event.queryStringParameters?.action === 'test-config') {
+    try {
+      const isConfigValid = await testEmailConfig();
+      return {
+        statusCode: isConfigValid ? 200 : 500,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          success: isConfigValid,
+          message: isConfigValid ? 'SMTP configuration is valid' : 'SMTP configuration test failed'
+        })
+      };
+    } catch (error) {
+      return {
+        statusCode: 500,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          success: false,
+          message: 'SMTP configuration test failed',
+          error: error.message
+        })
+      };
+    }
   }
 
   if (event.httpMethod !== "POST") {
