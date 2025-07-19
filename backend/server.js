@@ -15,6 +15,7 @@ const corsOptions = {
     const allowedOrigins = [
       "https://ecell-2025-26.onrender.com",
       "https://kcecell25.netlify.app",  // Your Netlify frontend domain
+      "https://kcecell001.netlify.app", // New Netlify frontend domain
       "http://localhost:5173",
       "http://localhost:3000",
       undefined, // Allow requests with no origin (like mobile apps, curl, etc)
