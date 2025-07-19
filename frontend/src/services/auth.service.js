@@ -1,9 +1,9 @@
 const handleAuth = async (endpoint, data) => {
   try {
     const response = await fetch(`/api/auth/${endpoint}`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
@@ -11,7 +11,7 @@ const handleAuth = async (endpoint, data) => {
     const responseData = await response.json();
 
     if (!response.ok) {
-      throw new Error(responseData.message || 'Authentication failed');
+      throw new Error(responseData.message || "Authentication failed");
     }
 
     return responseData;
@@ -22,8 +22,9 @@ const handleAuth = async (endpoint, data) => {
 };
 
 export const authService = {
-  login: (credentials) => handleAuth('login', credentials),
-  forgotPassword: (email) => handleAuth('forgot-password', { email }),
-  resetPassword: (token, password) => handleAuth('reset-password', { token, password }),
-  verifyEmail: (token) => handleAuth('verify-email', { token }),
+  login: (credentials) => handleAuth("login", credentials),
+  forgotPassword: (email) => handleAuth("forgot-password", { email }),
+  resetPassword: (token, password) =>
+    handleAuth("reset-password", { token, password }),
+  verifyEmail: (token) => handleAuth("verify-email", { token }),
 };

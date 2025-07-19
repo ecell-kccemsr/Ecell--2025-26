@@ -1,4 +1,6 @@
-export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8888/.netlify/functions/api';
+export const API_BASE_URL =
+  import.meta.env.VITE_API_URL ||
+  "http://localhost:8888/.netlify/functions/api";
 
 export const API_ENDPOINTS = {
   auth: {
@@ -8,7 +10,7 @@ export const API_ENDPOINTS = {
     verifyEmail: `${API_BASE_URL}/auth/verify-email`,
     me: `${API_BASE_URL}/auth/me`,
     users: `${API_BASE_URL}/auth/admin/users`,
-    createUser: `${API_BASE_URL}/auth/admin/create-user`
+    createUser: `${API_BASE_URL}/auth/admin/create-user`,
   },
   events: {
     list: `${API_BASE_URL}/events`,
@@ -16,7 +18,7 @@ export const API_ENDPOINTS = {
     create: `${API_BASE_URL}/events`,
     updateStatus: (id) => `${API_BASE_URL}/events/${id}/status`,
     delete: (id) => `${API_BASE_URL}/events/${id}`,
-    uploadImage: `${API_BASE_URL}/events/upload-image`
+    uploadImage: `${API_BASE_URL}/events/upload-image`,
   },
-  contact: `${API_BASE_URL}/contact`
+  contact: `${API_BASE_URL}/contact`,
 };

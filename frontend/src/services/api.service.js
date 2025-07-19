@@ -1,4 +1,4 @@
-import { API_BASE_URL, API_ENDPOINTS } from '../config/api.config';
+import { API_BASE_URL, API_ENDPOINTS } from "../config/api.config";
 
 class ApiService {
   constructor(baseURL) {
@@ -7,12 +7,12 @@ class ApiService {
 
   getHeaders() {
     const headers = {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     };
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token) {
-      headers['Authorization'] = `Bearer ${token}`;
+      headers["Authorization"] = `Bearer ${token}`;
     }
 
     return headers;
@@ -20,11 +20,11 @@ class ApiService {
 
   async handleResponse(response) {
     const data = await response.json();
-    
+
     if (!response.ok) {
-      throw new Error(data.message || 'An error occurred');
+      throw new Error(data.message || "An error occurred");
     }
-    
+
     return data;
   }
 
@@ -32,21 +32,21 @@ class ApiService {
     try {
       const url = `${this.baseURL}${endpoint}`;
       console.log(`API Request to: ${url}`);
-      
+
       const response = await fetch(url, {
         ...options,
         headers: {
           ...this.getHeaders(),
           ...options.headers,
         },
-        mode: 'cors',
-        credentials: 'include'
+        mode: "cors",
+        credentials: "include",
       });
-      
+
       if (response.status === 204) {
         return {}; // No content
       }
-      
+
       return await this.handleResponse(response);
     } catch (error) {
       console.error(`API Error: ${error.message}`);
@@ -57,28 +57,28 @@ class ApiService {
   // Auth Methods
   async login(credentials) {
     return this.fetch(API_ENDPOINTS.auth.login, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(credentials),
     });
   }
 
   async forgotPassword(email) {
     return this.fetch(API_ENDPOINTS.auth.forgotPassword, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify({ email }),
     });
   }
 
   async resetPassword(token, password) {
     return this.fetch(API_ENDPOINTS.auth.resetPassword, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify({ token, password }),
     });
   }
 
   async verifyEmail(token) {
     return this.fetch(API_ENDPOINTS.auth.verifyEmail, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify({ token }),
     });
   }
@@ -98,30 +98,30 @@ class ApiService {
 
   async createEvent(eventData) {
     return this.fetch(API_ENDPOINTS.events.create, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(eventData),
     });
   }
 
   async updateEventStatus(eventId, status) {
     return this.fetch(API_ENDPOINTS.events.updateStatus(eventId), {
-      method: 'PATCH',
+      method: "PATCH",
       body: JSON.stringify({ status }),
     });
   }
 
   async deleteEvent(eventId) {
     return this.fetch(API_ENDPOINTS.events.delete(eventId), {
-      method: 'DELETE',
+      method: "DELETE",
     });
   }
 
   async uploadEventImage(formData) {
     return this.fetch(API_ENDPOINTS.events.uploadImage, {
-      method: 'POST',
+      method: "POST",
       headers: {
         // Don't set Content-Type here, let the browser set it with the boundary
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: formData,
     });
@@ -134,7 +134,7 @@ class ApiService {
 
   async createUser(userData) {
     return this.fetch(API_ENDPOINTS.auth.createUser, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(userData),
     });
   }
@@ -142,7 +142,7 @@ class ApiService {
   // Contact Methods
   async submitContact(contactData) {
     return this.fetch(API_ENDPOINTS.contact, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(contactData),
     });
   }

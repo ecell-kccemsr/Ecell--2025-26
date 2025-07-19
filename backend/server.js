@@ -89,19 +89,22 @@ app.get("/", (req, res) => {
     message: "E-Cell API is running",
     timestamp: new Date().toISOString(),
     server: "Express",
-    version: require('./package.json').version,
-    routes: ["/health", "/api/auth", "/api/users", "/api/events"]
+    version: require("./package.json").version,
+    routes: ["/health", "/api/auth", "/api/users", "/api/events"],
   });
 });
 
 // Health check endpoint - available before database connection
 app.get("/health", (req, res) => {
-  const mongoStatus = mongoose.connection.readyState === 1 ? "Connected" : "Disconnected";
+  const mongoStatus =
+    mongoose.connection.readyState === 1 ? "Connected" : "Disconnected";
   let cloudinaryStatus = "Not initialized";
-  
+
   try {
     const { cloudinary } = require("./config/cloudinary");
-    cloudinaryStatus = cloudinary.config().cloud_name ? "Configured" : "Not configured";
+    cloudinaryStatus = cloudinary.config().cloud_name
+      ? "Configured"
+      : "Not configured";
   } catch (error) {
     cloudinaryStatus = `Error: ${error.message}`;
   }
@@ -123,13 +126,16 @@ const initializeServices = async () => {
   try {
     const { cloudinary } = require("./config/cloudinary");
     console.log("✅ Cloudinary module loaded");
-    
+
     try {
       await cloudinary.api.ping();
       console.log("✅ Cloudinary connected successfully");
       console.log(`☁️  Cloud Name: ${cloudinary.config().cloud_name}`);
     } catch (error) {
-      console.error("⚠️ Cloudinary ping failed, but continuing:", error.message);
+      console.error(
+        "⚠️ Cloudinary ping failed, but continuing:",
+        error.message
+      );
       // Continue even if ping fails
     }
   } catch (error) {
@@ -139,11 +145,14 @@ const initializeServices = async () => {
 
   // Connect to MongoDB
   try {
-    await mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/ecell_db", {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    
+    await mongoose.connect(
+      process.env.MONGODB_URI || "mongodb://localhost:27017/ecell_db",
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      }
+    );
+
     console.log("✅ MongoDB connected successfully");
     console.log(`📁 Database: ${mongoose.connection.name}`);
 
@@ -172,7 +181,7 @@ const initializeServices = async () => {
     app.use("/api/notifications", require("./routes/notifications"));
     // Calendar route removed - Google and Microsoft Calendar functionality removed
     app.use("/api/contact", require("./routes/contact"));
-    
+
     console.log("✅ API routes loaded successfully");
   } catch (error) {
     console.error("❌ Failed to load API routes:", error.message);
@@ -219,11 +228,13 @@ const startServer = async () => {
   try {
     // Initialize services before starting the server
     await initializeServices();
-    
+
     // Start the server
     const server = app.listen(PORT, () => {
       console.log(`==================================================`);
-      console.log(`🚀 E-Cell Backend Server Started at ${new Date().toISOString()}`);
+      console.log(
+        `🚀 E-Cell Backend Server Started at ${new Date().toISOString()}`
+      );
       console.log(`==================================================`);
       console.log(`📋 Server Details:`);
       console.log(`  - Port: ${PORT}`);
@@ -236,7 +247,9 @@ const startServer = async () => {
         }`
       );
       console.log(
-        `  - Frontend URL: ${process.env.FRONTEND_URL || "https://ecell-2025-26.onrender.com"}`
+        `  - Frontend URL: ${
+          process.env.FRONTEND_URL || "https://ecell-2025-26.onrender.com"
+        }`
       );
       console.log(`==================================================`);
       console.log(`🔒 CORS Configuration:`);
@@ -244,19 +257,27 @@ const startServer = async () => {
       console.log(`  - Credentials: Enabled`);
       console.log(`  - Methods: ${corsOptions.methods.join(", ")}`);
       console.log(`==================================================`);
-      
+
       // Log environment variables
       try {
         console.log(`🔧 Environment Variables:`);
-        Object.keys(process.env).forEach(key => {
-          if (!key.includes('KEY') && !key.includes('SECRET') && !key.includes('PASSWORD') && !key.includes('TOKEN')) {
+        Object.keys(process.env).forEach((key) => {
+          if (
+            !key.includes("KEY") &&
+            !key.includes("SECRET") &&
+            !key.includes("PASSWORD") &&
+            !key.includes("TOKEN")
+          ) {
             console.log(`  - ${key}: ${process.env[key]}`);
           } else {
             console.log(`  - ${key}: [REDACTED]`);
           }
         });
       } catch (error) {
-        console.error("⚠️ Error printing environment variables:", error.message);
+        console.error(
+          "⚠️ Error printing environment variables:",
+          error.message
+        );
       }
       console.log(`==================================================`);
     });
@@ -270,7 +291,6 @@ const startServer = async () => {
         );
       }
     });
-
   } catch (error) {
     console.error("❌ Failed to start server:", error);
   }
