@@ -30,12 +30,19 @@ const ProtectedRoute = ({ children, requireAdmin = false }) => {
         const userData = await response.json();
         setIsAuthenticated(true);
         setIsAdmin(userData.user?.role === "admin");
-      } else {
+      } else if (response.status === 401) {
+        // Only remove token if it's actually invalid
         localStorage.removeItem("token");
+      } else {
+        // For other errors (like 500), keep the token but log the error
+        console.error("Auth check failed with status:", response.status);
       }
     } catch (error) {
+      // Only remove token for specific errors
+      if (error.message.includes('invalid token') || error.message.includes('jwt')) {
+        localStorage.removeItem("token");
+      }
       console.error("Auth check failed:", error);
-      localStorage.removeItem("token");
     } finally {
       setLoading(false);
     }

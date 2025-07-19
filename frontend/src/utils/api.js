@@ -12,10 +12,13 @@ export const api = {
       : `/${endpoint}`;
 
     const url = `${API_URL}${cleanEndpoint}`;
+    const token = localStorage.getItem('token');
+    
     const response = await fetch(url, {
       ...options,
       headers: {
         "Content-Type": "application/json",
+        ...(token && { Authorization: `Bearer ${token}` }),
         ...options.headers,
       },
     });

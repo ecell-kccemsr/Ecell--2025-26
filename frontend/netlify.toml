@@ -7,14 +7,9 @@
   node_bundler = "esbuild"
   external_node_modules = ["axios", "pg", "nodemailer"]
 
-# Scheduled function for email processing
-[[plugins]]
-package = "@netlify/plugin-functions-schedule"
-
-[[scheduled]]
-  function = "email-service"
+# Email service configuration
+[functions.email-service]
   schedule = "@hourly"
-  query = "?action=process"
 
 [[redirects]]
   from = "/api/auth/*"
