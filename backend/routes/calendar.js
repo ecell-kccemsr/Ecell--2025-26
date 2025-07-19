@@ -1,13 +1,23 @@
 const express = require("express");
-const { body, validationResult } = require("express-validator");
-const { auth } = require("../middleware/auth");
-const { google } = require("googleapis");
-const axios = require("axios");
 const router = express.Router();
+const auth = require("../middleware/auth");
 
-// @route   POST /api/calendar/google/connect
-// @desc    Connect Google Calendar
+// Calendar functionality removed - simplified placeholder
+
+// @route   GET /api/calendar/status
+// @desc    Get calendar integration status
 // @access  Private
+router.get("/status", auth, async (req, res) => {
+  try {
+    res.json({
+      message: "Calendar functionality has been disabled",
+      status: "disabled"
+    });
+  } catch (error) {
+    console.error("Calendar status error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 router.post(
   "/google/connect",
   [auth, body("code").notEmpty().withMessage("Authorization code is required")],
@@ -513,5 +523,15 @@ async function syncMeetingToOutlookCalendar(user, meeting) {
 
   return response.data.id;
 }
+
+// @route   ANY /api/calendar/*
+// @desc    Catch-all for any calendar requests
+// @access  Private
+router.all("*", auth, (req, res) => {
+  res.status(200).json({
+    message: "Calendar integration functionality has been removed",
+    status: "disabled"
+  });
+});
 
 module.exports = router;

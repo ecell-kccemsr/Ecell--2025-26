@@ -114,22 +114,27 @@ console.log("✅ Created API function at netlify/functions/api.js");
 // Create individual endpoint functions for specific routes
 // Create package.json for functions
 const functionsPackageJson = {
-  name: "ecell-netlify-functions",
-  version: "1.0.0",
-  description: "E-Cell API as Netlify Functions",
-  dependencies: {
-    express: "^4.18.2",
-    mongoose: "^7.5.0",
-    cors: "^2.8.5",
-    helmet: "^7.0.0",
-    dotenv: "^16.3.1",
-    jsonwebtoken: "^9.0.2",
-    bcryptjs: "^2.4.3",
-    cloudinary: "^1.41.3",
-    multer: "^1.4.5-lts.1",
+  "name": "ecell-netlify-functions",
+  "version": "1.0.0",
+  "description": "E-Cell API as Netlify Functions",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.5.0",
+    "cors": "^2.8.5",
+    "helmet": "^7.0.0",
+    "dotenv": "^16.3.1",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.41.3",
+    "multer": "^1.4.5-lts.1",
     "multer-storage-cloudinary": "^4.0.0",
     "serverless-http": "^3.2.0",
-  },
+    "express-validator": "^7.0.1",
+    "express-rate-limit": "^6.8.1",
+    "axios": "^1.5.0",
+    "node-cron": "^3.0.2",
+    "nodemailer": "^6.9.4"
+  }
 };
 
 fs.writeFileSync(

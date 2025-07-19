@@ -21,7 +21,11 @@
 [context.production.environment]
   VITE_API_URL = "/.netlify/functions"
 
+# Custom plugins
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"
+
 [functions]
   # Configure serverless functions
   node_bundler = "esbuild"
-  external_node_modules = ["express", "mongoose", "cors", "helmet", "dotenv", "jsonwebtoken", "bcryptjs", "cloudinary", "multer", "multer-storage-cloudinary", "node-cron", "nodemailer"]
+  external_node_modules = ["express", "mongoose", "cors", "helmet", "dotenv", "jsonwebtoken", "bcryptjs", "cloudinary", "multer", "multer-storage-cloudinary", "node-cron", "nodemailer", "express-validator", "express-rate-limit", "googleapis", "axios"]

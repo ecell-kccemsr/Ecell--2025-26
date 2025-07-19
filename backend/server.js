@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
+const { cloudinary } = require("./config/cloudinary");
+
 const app = express();
 
 // CORS configuration - must come before other middleware
@@ -57,9 +59,17 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-// Body parsing middleware - reduced chunk size to avoid warnings
-app.use(express.json({ limit: "5mb" }));
-app.use(express.urlencoded({ extended: true, limit: "5mb" }));
+// CORS configuration
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || "https://ecell-2025-26.onrender.com",
+    credentials: true,
+  })
+);
+
+// Body parsing middleware
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
 // Request logging middleware
 app.use((req, res, next) => {
@@ -160,7 +170,7 @@ const initializeServices = async () => {
     app.use("/api/todos", require("./routes/todos"));
     app.use("/api/meetings", require("./routes/meetings"));
     app.use("/api/notifications", require("./routes/notifications"));
-    app.use("/api/calendar", require("./routes/calendar"));
+    // Calendar route removed - Google and Microsoft Calendar functionality removed
     app.use("/api/contact", require("./routes/contact"));
     
     console.log("✅ API routes loaded successfully");
