@@ -43,7 +43,8 @@ const Header = () => {
     };
   }, [isMobileMenuOpen, isMobile]);
 
-  const toggleMobileMenu = () => {
+  const toggleMobileMenu = (e) => {
+    e.stopPropagation();
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
@@ -169,13 +170,6 @@ const Header = () => {
                     />
                     <span className="mobile-brand-text">E-CELL</span>
                   </div>
-                  <button
-                    className="mobile-menu-close"
-                    onClick={closeMobileMenu}
-                    aria-label="Close menu"
-                  >
-                    ×
-                  </button>
                 </motion.div>
 
                 <div className="mobile-menu-links">

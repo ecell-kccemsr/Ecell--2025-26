@@ -8,19 +8,40 @@
   # Directory with Netlify Functions for API proxying (relative to base)
   functions = "netlify/functions"
 
-# API proxy redirects - using force=true to ensure the redirects take precedence
+# API routes for events
 [[redirects]]
-  from = "/api/auth/login"
-  to = "/.netlify/functions/auth-login"
+  from = "/api/events"
+  to = "/.netlify/functions/events"
   status = 200
   force = true
 
+[[redirects]]
+  from = "/api/events/*"
+  to = "/.netlify/functions/events/:splat"
+  status = 200
+  force = true
+
+# Other API routes handled by api.js
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+  force = true
+
+# Auth endpoints
 [[redirects]]
   from = "/auth/login"
   to = "/.netlify/functions/auth-login"
   status = 200
   force = true
 
+[[redirects]]
+  from = "/auth/me"
+  to = "/.netlify/functions/auth-me"
+  status = 200
+  force = true
+
+# Test endpoints
 [[redirects]]
   from = "/api/test"
   to = "/.netlify/functions/test-endpoint"

@@ -18,7 +18,8 @@ module.exports.handler = async (event, context) => {
     "Access-Control-Allow-Origin": process.env.FRONTEND_URL || "*",
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-    "Access-Control-Allow-Credentials": "true"
+    "Access-Control-Allow-Credentials": "true",
+    "Content-Type": "application/json"
   };
 
   if (event.httpMethod === "OPTIONS") {
@@ -171,10 +172,36 @@ module.exports.handler = async (event, context) => {
     }
   } catch (error) {
     console.error('Events error:', error);
+    
+    // Check for database connection errors
+    if (error.code === 'ECONNREFUSED' || error.code === 'ENOTFOUND') {
+      return {
+        statusCode: 500,
+        headers: corsHeaders,
+        body: JSON.stringify({ 
+          message: 'Database connection failed',
+          error: process.env.NODE_ENV === 'development' ? error.message : undefined
+        })
+      };
+    }
+
+    // Authentication errors
+    if (error.message === 'No token provided' || error.message === 'jwt expired' || error.message === 'invalid token') {
+      return {
+        statusCode: 401,
+        headers: corsHeaders,
+        body: JSON.stringify({ message: 'Authentication failed' })
+      };
+    }
+
+    // Generic error response
     return {
-      statusCode: error.message === 'No token provided' ? 401 : 500,
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: error.message || 'Internal server error' })
+      statusCode: 500,
+      headers: corsHeaders,
+      body: JSON.stringify({ 
+        message: 'Internal server error',
+        error: process.env.NODE_ENV === 'development' ? error.message : undefined
+      })
     };
   }
 };

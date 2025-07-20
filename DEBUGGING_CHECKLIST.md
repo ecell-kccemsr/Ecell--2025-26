@@ -27,30 +27,33 @@ This checklist is designed to help you systematically diagnose and fix common is
 Paths can be a common source of issues. Verify the following:
 
 - [ ] Backend routes are correctly defined with proper prefixes:
+
   ```javascript
   // Should be defined as:
-  router.post('/login', authController.login);
+  router.post("/login", authController.login);
   // And mounted as:
-  app.use('/api/auth', authRouter);
+  app.use("/api/auth", authRouter);
   ```
 
 - [ ] Frontend API config uses correct paths:
+
   ```javascript
   const API_BASE_URL = import.meta.env.VITE_API_URL;
   export const API_ENDPOINTS = {
     auth: {
       login: `${API_BASE_URL}/auth/login`,
-    }
+    },
   };
   ```
 
 - [ ] Netlify function properly handles paths:
+
   ```javascript
   // Check path handling in api-proxy.js
-  if (path.includes('/auth')) {
+  if (path.includes("/auth")) {
     url = `${BACKEND_URL}/api${path}`;
   } else {
-    const adjustedPath = path.replace(/^\/api/, '');
+    const adjustedPath = path.replace(/^\/api/, "");
     url = `${BACKEND_URL}/api${adjustedPath}`;
   }
   ```
@@ -66,10 +69,12 @@ Paths can be a common source of issues. Verify the following:
 ## Step 4: Verify Environment Variables
 
 - [ ] Frontend environment variables:
+
   - `VITE_API_URL` set to `/api` in production
   - `VITE_API_URL` set to `http://localhost:5001` in development
 
 - [ ] Netlify environment variables:
+
   - `BACKEND_API_URL` set to `https://kcecell-backend-api.onrender.com`
 
 - [ ] Backend environment variables:
@@ -82,21 +87,25 @@ Paths can be a common source of issues. Verify the following:
 ## Step 5: Check CORS Configuration
 
 - [ ] Backend CORS config allows requests from the frontend:
+
   ```javascript
-  app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-  }));
+  app.use(
+    cors({
+      origin: process.env.FRONTEND_URL || "http://localhost:3000",
+      credentials: true,
+      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      allowedHeaders: ["Content-Type", "Authorization"],
+    })
+  );
   ```
 
 - [ ] Netlify function includes CORS headers:
+
   ```javascript
   const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
   };
   ```
 

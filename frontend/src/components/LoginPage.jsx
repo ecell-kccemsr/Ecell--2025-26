@@ -68,8 +68,8 @@ const LoginPage = () => {
     setError("");
 
     try {
-      // Use relative path for Netlify Functions
-      const API_URL = "/.netlify/functions/auth-login";
+      // Use the API endpoint that matches our redirect rules
+      const API_URL = "/api/auth/login";
 
       console.log(`Attempting login to: ${API_URL}`);
       console.log(`Login data:`, formData);
@@ -79,7 +79,7 @@ const LoginPage = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        // No need for CORS settings when calling Netlify Functions
+        credentials: 'include',
         body: JSON.stringify(formData),
       });
 

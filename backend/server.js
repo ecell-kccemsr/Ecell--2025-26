@@ -10,12 +10,18 @@ const { cloudinary } = require("./config/cloudinary");
 const app = express();
 
 // Simple test routes to verify routing
-app.get('/health-api', (req, res) => {
-  res.json({ message: 'API health route is working', timestamp: new Date().toISOString() });
+app.get("/health-api", (req, res) => {
+  res.json({
+    message: "API health route is working",
+    timestamp: new Date().toISOString(),
+  });
 });
 
-app.get('/auth-test', (req, res) => {
-  res.json({ message: 'Auth test route is working', timestamp: new Date().toISOString() });
+app.get("/auth-test", (req, res) => {
+  res.json({
+    message: "Auth test route is working",
+    timestamp: new Date().toISOString(),
+  });
 });
 
 // CORS configuration - must come before other middleware
@@ -23,7 +29,7 @@ const corsOptions = {
   origin: function (origin, callback) {
     const allowedOrigins = [
       "https://ecell-2025-26.onrender.com",
-      "https://kcecell25.netlify.app",  // Your Netlify frontend domain
+      "https://kcecell25.netlify.app", // Your Netlify frontend domain
       "https://kcecell001.netlify.app", // New Netlify frontend domain
       "http://localhost:5173",
       "http://localhost:3000",
@@ -189,9 +195,9 @@ const initializeServices = async () => {
     { path: "/api/todos", module: "./routes/todos" },
     { path: "/api/meetings", module: "./routes/meetings" },
     { path: "/api/notifications", module: "./routes/notifications" },
-    { path: "/api/contact", module: "./routes/contact" }
+    { path: "/api/contact", module: "./routes/contact" },
   ];
-  
+
   // Load each route individually for better error isolation
   let successCount = 0;
   for (const route of routes) {
@@ -204,8 +210,10 @@ const initializeServices = async () => {
       console.error(`❌ Failed to load route ${route.path}:`, error.message);
     }
   }
-  
-  console.log(`${successCount}/${routes.length} API routes loaded successfully`);
+
+  console.log(
+    `${successCount}/${routes.length} API routes loaded successfully`
+  );
   if (successCount < routes.length) {
     console.warn("⚠️ Some API routes failed to load. Check errors above.");
   }

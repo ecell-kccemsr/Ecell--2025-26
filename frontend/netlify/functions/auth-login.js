@@ -1,6 +1,6 @@
 // netlify/functions/auth-login.js
 const db = require('./db');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
@@ -62,16 +62,6 @@ module.exports.handler = async (event, context) => {
           error: e.message
         })
       };
-      return {
-        statusCode: 400,
-        headers: {
-          ...corsHeaders,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          message: "Invalid request body"
-        })
-      };
     }
 
     const { email, password } = body;
@@ -91,103 +81,57 @@ module.exports.handler = async (event, context) => {
 
     console.log(`Login attempt for email: ${email}`);
 
-    try {
-      console.log("Forwarding request to backend:", `${BACKEND_URL}/.netlify/functions/auth-login`);
-      
-      // Forward the login request to the backend
-      const response = await axios.post(`${BACKEND_URL}/.netlify/functions/auth-login`, {
-        email,
-        password
-      });
-      
-      console.log("Backend response:", response.status);
+    // Query user from database
+    const result = await db.query('SELECT * FROM users WHERE email = $1', [email]);
+    const user = result.rows[0];
 
-      if (response.data && response.data.token) {
-        return {
-          statusCode: 200,
-          headers: {
-            ...corsHeaders,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(response.data)
-        };
-      }
-
-      // If backend request succeeds but no token, fallback to test users
-      console.log("No token in response, falling back to test users");
-    } catch (error) {
-      console.error('Backend login error:', error.response?.data || error.message);
-      
-      // For backend errors, fallback to test users instead of returning error
-      console.log("Backend error, falling back to test users");
+    if (!user) {
+      return {
+        statusCode: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: "Authentication failed",
+          error: "Invalid email or password"
+        })
+      };
     }
 
-    // Test user credentials for development
-    const testUsers = [
-      {
-        email: "admin@ecell.com",
-        password: "adminpass",
-        role: "admin",
-        name: "Admin User",
-      },
-      {
-        email: "student@ecell.com",
-        password: "studentpass",
-        role: "student",
-        name: "Student User",
-      },
-      {
-        email: "test@example.com",
-        password: "testpass",
-        role: "user",
-        name: "Test User",
-      },
-    ];
+    const isValidPassword = await bcrypt.compare(password, user.password);
 
-    // Find matching test user
-    const matchedUser = testUsers.find(
-      (user) => user.email === email && user.password === password
+    if (!isValidPassword) {
+      return {
+        statusCode: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: "Authentication failed",
+          error: "Invalid email or password"
+        })
+      };
+    }
+
+    // Generate JWT token
+    const token = jwt.sign(
+      { userId: user.id, email: user.email, role: user.role },
+      JWT_SECRET,
+      { expiresIn: '24h' }
     );
 
-    if (matchedUser) {
-      console.log(`Test user found: ${matchedUser.name} (${matchedUser.role})`);
-      // Generate a proper JWT token for test users
-        const userId = `user-${matchedUser.email.split("@")[0]}`;
-        const token = jwt.sign(
-          { userId: userId },
-          JWT_SECRET,
-          { expiresIn: '24h' }
-        );
-
-        return {
-          statusCode: 200,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-          body: JSON.stringify({
-            message: "Login successful",
-            token: token,
-            user: {
-              id: userId,
-              email: matchedUser.email,
-              name: matchedUser.name,
-              role: matchedUser.role,
-            },
-          }),
-        };
-    }
-
-    // If no matching test user, return authentication error
-    console.log("No matching test user found");
     return {
-      statusCode: 401,
+      statusCode: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       body: JSON.stringify({
-        message: "Authentication failed",
-        error: "Invalid email or password",
-      }),
+        message: "Login successful",
+        token: token,
+        user: {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          role: user.role,
+        },
+      })
     };
   } catch (error) {
     console.error("Auth login error:", error);
-
     return {
       statusCode: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },

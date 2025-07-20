@@ -29,7 +29,7 @@ This guide provides comprehensive instructions for deploying both the frontend a
    ```
    # .env.production
    VITE_API_URL=/api
-   
+
    # .env.development
    VITE_API_URL=http://localhost:5001
    ```
@@ -108,10 +108,12 @@ This guide provides comprehensive instructions for deploying both the frontend a
    Make sure your backend has proper CORS configuration:
 
    ```javascript
-   app.use(cors({
-     origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-     credentials: true
-   }));
+   app.use(
+     cors({
+       origin: process.env.FRONTEND_URL || "http://localhost:3000",
+       credentials: true,
+     })
+   );
    ```
 
 4. **Verify the deployment:**
@@ -144,6 +146,7 @@ The frontend uses axios to make API requests. The configuration is in:
 - `src/config/api.config.js` - API endpoints configuration
 
 When making requests, ensure:
+
 1. Base URL is correctly set
 2. Authentication headers are included if needed
 3. Error handling is implemented
@@ -164,14 +167,16 @@ CORS (Cross-Origin Resource Sharing) is critical for communication between front
 ### Backend CORS Configuration
 
 ```javascript
-const cors = require('cors');
+const cors = require("cors");
 
-app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || "http://localhost:3000",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 ```
 
 ### Netlify Functions CORS
@@ -180,17 +185,17 @@ For Netlify functions, add the following headers:
 
 ```javascript
 const headers = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
 };
 
 // For OPTIONS requests
-if (event.httpMethod === 'OPTIONS') {
+if (event.httpMethod === "OPTIONS") {
   return {
     statusCode: 200,
     headers,
-    body: JSON.stringify({ message: 'Successful preflight' })
+    body: JSON.stringify({ message: "Successful preflight" }),
   };
 }
 ```
@@ -206,6 +211,7 @@ The frontend includes an API tester tool at `/api-tester.html` that allows you t
 The repository includes a backend health check script (`check-backend-health.sh`) that tests various backend endpoints and configurations.
 
 To use:
+
 ```bash
 ./check-backend-health.sh
 ```
@@ -215,20 +221,24 @@ To use:
 ### Common Issues and Solutions
 
 1. **404 Not Found for API Routes**
+
    - Check if the routes are correctly defined in the backend
    - Verify that API paths in the frontend match backend routes
    - Ensure Netlify redirects are properly configured
 
 2. **CORS Errors**
+
    - Verify CORS configuration in the backend
    - Check if the frontend URL is correctly set in the backend environment variables
    - Ensure Netlify functions have proper CORS headers
 
 3. **Authentication Issues**
+
    - Check if JWT tokens are being correctly generated and validated
    - Verify that auth headers are included in API requests
 
 4. **API Proxy Issues in Netlify Functions**
+
    - Check `api-proxy.js` for correct path handling
    - Ensure the backend URL is correctly set
    - Verify that the proxy function is correctly forwarding all headers and body

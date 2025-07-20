@@ -5,6 +5,7 @@ This document explains the architecture of API communication between the fronten
 ## Overview
 
 The E-Cell website consists of:
+
 - **Frontend**: React application hosted on Netlify
 - **Backend**: Express.js API hosted on Render
 - **API Proxy**: Netlify Functions to handle cross-origin communication
@@ -29,7 +30,7 @@ The frontend uses an axios-based API client to make requests to the backend. In 
 ### API Client Configuration (`frontend/src/services/api.js`)
 
 ```javascript
-import axios from 'axios';
+import axios from "axios";
 
 // API base URL is loaded from environment variables
 // In development: http://localhost:5001
@@ -40,24 +41,24 @@ const api = axios.create({
   baseURL: API_BASE_URL,
   withCredentials: false,
   headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
-  }
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  },
 });
 
 // Request interceptor for adding auth token
-api.interceptors.request.use(config => {
-  const token = localStorage.getItem('token');
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
   if (token) {
-    config.headers['Authorization'] = `Bearer ${token}`;
+    config.headers["Authorization"] = `Bearer ${token}`;
   }
   return config;
 });
 
 // Response interceptor for handling errors
 api.interceptors.response.use(
-  response => response,
-  error => {
+  (response) => response,
+  (error) => {
     // Handle authentication errors, etc.
     return Promise.reject(error);
   }
@@ -95,41 +96,41 @@ The Netlify Function acts as a proxy to forward requests from the frontend to th
 ### API Proxy Function (`frontend/netlify/functions/api-proxy.js`)
 
 ```javascript
-const axios = require('axios');
+const axios = require("axios");
 
 // Backend URL is loaded from environment variables
-const BACKEND_URL = process.env.BACKEND_API_URL || 'http://localhost:5001';
+const BACKEND_URL = process.env.BACKEND_API_URL || "http://localhost:5001";
 
 // CORS headers for cross-origin requests
 const headers = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
 };
 
 exports.handler = async (event, context) => {
   // Handle preflight OPTIONS requests
-  if (event.httpMethod === 'OPTIONS') {
+  if (event.httpMethod === "OPTIONS") {
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ message: 'Preflight call successful' })
+      body: JSON.stringify({ message: "Preflight call successful" }),
     };
   }
 
   try {
     // Get the request path (after /api/)
-    const path = event.path.replace('/.netlify/functions/api-proxy', '');
-    
+    const path = event.path.replace("/.netlify/functions/api-proxy", "");
+
     // Handle different path patterns for different types of requests
     let url;
-    
+
     // For auth endpoints
-    if (path.includes('/auth')) {
+    if (path.includes("/auth")) {
       url = `${BACKEND_URL}/api${path}`;
     } else {
       // Normal case - adjust path to avoid duplicate /api
-      const adjustedPath = path.replace(/^\/api/, '');
+      const adjustedPath = path.replace(/^\/api/, "");
       url = `${BACKEND_URL}/api${adjustedPath}`;
     }
 
@@ -139,9 +140,9 @@ exports.handler = async (event, context) => {
       url: url,
       headers: {
         ...event.headers,
-        host: new URL(BACKEND_URL).host // Replace the host header
+        host: new URL(BACKEND_URL).host, // Replace the host header
       },
-      data: event.body ? JSON.parse(event.body) : null
+      data: event.body ? JSON.parse(event.body) : null,
     });
 
     // Return the response from the backend API
@@ -149,20 +150,20 @@ exports.handler = async (event, context) => {
       statusCode: response.status,
       headers: {
         ...headers,
-        'Content-Type': response.headers['content-type']
+        "Content-Type": response.headers["content-type"],
       },
-      body: JSON.stringify(response.data)
+      body: JSON.stringify(response.data),
     };
   } catch (error) {
     // Handle errors
-    console.log('API Proxy Error:', error);
+    console.log("API Proxy Error:", error);
     return {
       statusCode: error.response?.status || 500,
       headers,
       body: JSON.stringify({
-        message: error.response?.data?.message || 'Internal Server Error',
-        error: error.message
-      })
+        message: error.response?.data?.message || "Internal Server Error",
+        error: error.message,
+      }),
     };
   }
 };
@@ -194,15 +195,15 @@ The backend API is structured with routes organized by feature. Routes are mount
 ### Backend API Routes (`backend/src/routes/index.js`)
 
 ```javascript
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const authRoutes = require('./auth.routes');
-const eventRoutes = require('./event.routes');
+const authRoutes = require("./auth.routes");
+const eventRoutes = require("./event.routes");
 // Other route imports...
 
 // Mount routes with prefixes
-router.use('/auth', authRoutes);
-router.use('/events', eventRoutes);
+router.use("/auth", authRoutes);
+router.use("/events", eventRoutes);
 // Other routes...
 
 module.exports = router;
@@ -211,36 +212,38 @@ module.exports = router;
 ### Server Configuration (`backend/src/server.js`)
 
 ```javascript
-const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
-const routes = require('./routes');
+const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
+const routes = require("./routes");
 
 const app = express();
 
 // CORS configuration
-app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || "http://localhost:3000",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 // Parse JSON request bodies
 app.use(express.json());
 
 // Health check endpoint
-app.get('/health', (req, res) => {
-  res.json({ status: 'ok', message: 'Server is running' });
+app.get("/health", (req, res) => {
+  res.json({ status: "ok", message: "Server is running" });
 });
 
 // Mount API routes
-app.use('/api', routes);
+app.use("/api", routes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({ message: 'Internal Server Error' });
+  res.status(500).json({ message: "Internal Server Error" });
 });
 
 // Start server
@@ -250,20 +253,23 @@ app.listen(PORT, () => {
 });
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('MongoDB connection error:', err));
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("MongoDB connection error:", err));
 ```
 
 ## Path Handling and URL Structure
 
 Understanding path handling is crucial for proper API communication:
 
-1. **Frontend API Request**: 
+1. **Frontend API Request**:
+
    - In development: `http://localhost:5001/auth/login`
    - In production: `/api/auth/login` (redirected to Netlify Function)
 
 2. **Netlify Function Path Handling**:
+
    - Receives: `/api/auth/login`
    - Forwards to backend: `https://kcecell-backend-api.onrender.com/api/auth/login`
    - Note: Path handling logic adjusts paths to avoid duplicate `/api` prefixes
@@ -278,6 +284,7 @@ Understanding path handling is crucial for proper API communication:
 The API communication includes authentication flow:
 
 1. **Login Request**:
+
    - Frontend sends credentials to `/api/auth/login`
    - Netlify Function forwards to backend
    - Backend validates and returns JWT token
@@ -294,7 +301,8 @@ Environment variables control the API communication:
 
 ### Frontend Environment Variables:
 
-- `.env.development`: 
+- `.env.development`:
+
   ```
   VITE_API_URL=http://localhost:5001
   ```
