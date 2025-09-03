@@ -2,7 +2,7 @@
 
 This project is configured to be fully deployed on Netlify, with the frontend served as a static site and the backend as Netlify Functions.
 
-## Project Structure
+## Project Structur
 
 ```
 /
