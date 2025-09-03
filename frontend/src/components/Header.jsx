@@ -112,12 +112,6 @@ const Header = () => {
           <Link to="/contact" className="nav-link">
             Contact
           </Link>
-          <Link to="/admin" className="nav-link admin-link">
-            Admin
-          </Link>
-          <Link to="/login" className="login-btn">
-            Login
-          </Link>
         </div>
 
         {/* Mobile Menu Toggle Button */}
