@@ -61,7 +61,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.2 }}
         >
-          <h3>500+</h3>
+          <h3>1000+</h3>
           <p>Students Mentored</p>
         </motion.div>
         <motion.div

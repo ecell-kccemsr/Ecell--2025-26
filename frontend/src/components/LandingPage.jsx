@@ -30,7 +30,7 @@ const LandingPage = () => {
       <Header />
       <HeroSection />
       <AboutSection />
-      <AchievementsSection />
+      <AchievementsSe       ction />
       <GoalsSection />
       <Footer />
     </div>

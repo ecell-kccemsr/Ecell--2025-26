@@ -159,7 +159,7 @@ const GoalsSection = () => {
                   <motion.div
                     className="progress-fill"
                     initial={{ width: 0 }}
-                    animate={inView ? { width: "75%" } : { width: 0 }}
+                    animate={inView ? { width: "60%" } : { width: 0 }}
                     transition={{ duration: 1.5, delay: index * 0.2 }}
                   ></motion.div>
                 </div>
