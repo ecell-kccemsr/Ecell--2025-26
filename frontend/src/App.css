@@ -139,7 +139,11 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background: #020202;
+  background: linear-gradient(
+    90deg,
+    rgba(10, 10, 10, 0.95) 60%,
+    rgba(30, 30, 40, 0.85) 100%
+  );
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border-color);
   z-index: 1000;
@@ -162,8 +166,8 @@ body {
 }
 
 .logo {
-  width: 40px;
-  height: 40px;
+  width: 72px;
+  height: 72px;
   border-radius: 8px;
   object-fit: cover;
 }
@@ -196,7 +200,7 @@ body {
 }
 
 .admin-link {
-  color: var(--accent-tertiary) !important;
+  color: var(--accent-primary) !important;
   font-weight: 600;
 }
 

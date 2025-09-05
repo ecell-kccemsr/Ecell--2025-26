@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Logo from "./Logo.jsx";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -90,27 +91,34 @@ const Header = () => {
       transition={{ duration: 0.8 }}
     >
       <nav className="navbar">
-        <div className="nav-brand">
-          <img src="/img1.png" alt="E-Cell logo" className="logo" />
-          <span className="brand-text">E-CELL</span>
-        </div>
+        <a href="/" className="brand">
+          <Logo
+            style={{ width: "64px", height: "64px", background: "transparent" }}
+          />
+          <span className="brand-text"></span>
+        </a>
 
         {/* Desktop Navigation Links */}
         <div className="nav-links desktop-nav">
-          <Link to="/" className="nav-link">
-            Home
-          </Link>
-          <Link to="/events" className="nav-link">
+          <Link to="https://events.kcecell.org/" className="nav-link">
             Events
+          </Link>
+          
+          <Link to="/mentor" className="nav-link">
+            Our Mentors
           </Link>
           <Link to="/team" className="nav-link">
             Team
           </Link>
-          <Link to="/about" className="nav-link">
-            About
+
+          <Link to="https://contact.kcecell.org/" className="nav-link">
+            Contact Us
           </Link>
-          <Link to="/contact" className="nav-link">
-            Contact
+          <Link
+            to="https://failurscafe.kcecell.org/"
+            className="nav-link admin-link"
+          >
+            Failurs's Cafe
           </Link>
         </div>
 
@@ -177,7 +185,7 @@ const Header = () => {
                     { to: "/", label: "Home" },
                     { to: "/events", label: "Events" },
                     { to: "/team", label: "Team" },
-                    { to: "/about", label: "About" },
+                    { to: "#about", label: "About", scroll: true },
                     { to: "/contact", label: "Contact" },
                     { to: "/admin", label: "Admin", className: "admin-link" },
                   ].map((link, index) => (
@@ -187,13 +195,33 @@ const Header = () => {
                       custom={index}
                       className="mobile-menu-item"
                     >
-                      <Link
-                        to={link.to}
-                        className={`mobile-nav-link ${link.className || ""}`}
-                        onClick={closeMobileMenu}
-                      >
-                        {link.label}
-                      </Link>
+                      {link.scroll ? (
+                        <a
+                          href="#about"
+                          className={`mobile-nav-link ${link.className || ""}`}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            closeMobileMenu();
+                            const aboutSection =
+                              document.getElementById("about");
+                            if (aboutSection) {
+                              aboutSection.scrollIntoView({
+                                behavior: "smooth",
+                              });
+                            }
+                          }}
+                        >
+                          {link.label}
+                        </a>
+                      ) : (
+                        <Link
+                          to={link.to}
+                          className={`mobile-nav-link ${link.className || ""}`}
+                          onClick={closeMobileMenu}
+                        >
+                          {link.label}
+                        </Link>
+                      )}
                     </motion.div>
                   ))}
 
@@ -201,15 +229,7 @@ const Header = () => {
                     variants={menuItemVariants}
                     custom={6}
                     className="mobile-menu-item login-item"
-                  >
-                    <Link
-                      to="/login"
-                      className="mobile-login-btn"
-                      onClick={closeMobileMenu}
-                    >
-                      Login
-                    </Link>
-                  </motion.div>
+                  ></motion.div>
                 </div>
 
                 <motion.div

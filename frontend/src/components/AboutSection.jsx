@@ -30,7 +30,7 @@ const AboutSection = () => {
   };
 
   return (
-    <section className="about-section" ref={ref}>
+    <section className="about-section" id="about" ref={ref}>
       <div className="container">
         <motion.div
           className="about-content"

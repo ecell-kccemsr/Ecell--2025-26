@@ -18,7 +18,57 @@ const AchievementsSection = () => {
       alt: "img10.jpg",
       year: "2017",
       category: "Award",
-    }
+    },
+    {
+      id: 2,
+      title: "Seminar on Mobile Computing and 4G/5G",
+      description:
+        "The ever-enthusiastic crowd of KCCOE witnessed a revolutionary seminar, which gave an insight into Mobile Computing and 4G/5G Network, which was organised by IQAC and KC E-cell. The featured speaker of this fantastic seminar was Dr Alhad Kuwadekar, PhD- Mobile Computing, University of Glamorgan, UK (2010). ",
+      image: "/img11.jpg",
+      alt: "img11.jpg",
+      year: "2024",
+      category: "Seminar",
+    },
+    {
+      id: 3,
+      title: "GitHub Workshop",
+      description:
+        "Conducted a workshop on GitHub, enhancing version control skills among participants",
+      image: "/img12.jpg",
+      alt: "GitHub Workshop",
+      year: "2022",
+      category: "Workshop",
+    },
+    {
+      id: 4,
+      title: "500+ Students Impacted",
+      description:
+        "Transformed the entrepreneurial journey of over 500 students through our programs",
+      image: "/img13.jpg",
+      alt: "Students participating in entrepreneurship programs",
+      year: "2024",
+      category: "Impact",
+    },
+    {
+      id: 5,
+      title: "Industry Partnership Program",
+      description:
+        "Bringing up industry parternerships to foster innovation and collaboration amongst students",
+      image: "/img14.jpg",
+      alt: "img14",
+      year: "2024",
+      category: "Partnership",
+    },
+    {
+      id: 6,
+      title: "Robotics Workshop",
+      description:
+        "The Robotics Workshop focused on hands-on learning and innovation in robotics technology.",
+      image: "/img15.jpg",
+      alt: "Robotics Workshop",
+      year: "2024",
+      category: "Innovation",
+    },
   ];
 
   const containerVariants = {
@@ -54,7 +104,7 @@ const AchievementsSection = () => {
             Our <span className="highlight">Achievements</span>
           </h2>
           <p className="section-subtitle">
-           <span className="highlight">Celebrating</span> our milestones
+           <span className="highlight">Celebrating</span> our milestones 
           </p>
         </motion.div>
 
@@ -103,8 +153,6 @@ const AchievementsSection = () => {
             </motion.div>
           ))}
         </motion.div>
-
-    
       </div>
     </section>
   );

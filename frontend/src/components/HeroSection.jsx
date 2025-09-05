@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <section className="hero-section">
+    <section className="hero-section" id="home">
       <div className="hero-content">
         <motion.div
           className="hero-text"
@@ -21,16 +21,22 @@ const HeroSection = () => {
           </p>
 
           <div className="hero-buttons">
-            <Link to="/events" className="cta-btn primary">
+            <Link to="https://events.kcecell.org/" className="cta-btn primary">
               Explore Events
             </Link>
-            <motion.button
-              className="cta-btn secondary"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Learn More
-            </motion.button>
+           <a
+                       href="#about"
+                       className="cta-btn primary"
+                       onClick={(e) => {
+                         e.preventDefault();
+                         const aboutSection = document.getElementById("about");
+                         if (aboutSection) {
+                           aboutSection.scrollIntoView({ behavior: "smooth" });
+                         }
+                       }}
+                     >
+                       Learn More
+                     </a>
           </div>
         </motion.div>
         <motion.div
