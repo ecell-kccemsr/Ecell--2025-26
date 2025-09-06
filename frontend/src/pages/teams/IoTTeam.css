@@ -1,0 +1,233 @@
+.iot-team-container {
+  padding: 2rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.circuit-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 255, 255, 0.03) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.team-intro {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 4rem;
+  position: relative;
+  z-index: 2;
+}
+
+.team-intro h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #00ffd1, #00bfff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.team-intro p {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  text-shadow: 0 0 10px rgba(0, 255, 209, 0.2);
+}
+
+.floating-chip {
+  position: absolute;
+  top: 15%;
+  right: 10%;
+  font-size: 6rem;
+  color: rgba(0, 255, 209, 0.1);
+  z-index: 1;
+}
+
+.members-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+  margin-top: 4rem;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.iot-member-card {
+  background: rgba(0, 31, 63, 0.3);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 255, 209, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 255, 209, 0.1);
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  perspective: 1000px;
+}
+
+.circuit-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(
+      circle at 50% 50%,
+      rgba(0, 255, 209, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(0, 255, 209, 0.03) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(0, 255, 209, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px, 10px 10px, 10px 10px;
+  opacity: 0.5;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.iot-member-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0, 255, 209, 0.2),
+    0 0 20px rgba(0, 255, 209, 0.1);
+  border-color: rgba(0, 255, 209, 0.3);
+}
+
+.iot-member-card .member-image {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  overflow: hidden;
+  background: linear-gradient(45deg, #001f3f, #003366);
+}
+
+.iot-member-card .member-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  filter: brightness(0.9) contrast(1.1);
+}
+
+.iot-member-card:hover .member-image img {
+  transform: scale(1.1);
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 31, 63, 0) 0%,
+    rgba(0, 255, 209, 0.2) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-link {
+  color: white;
+  font-size: 1.8rem;
+  padding: 0.8rem;
+  background: rgba(0, 31, 63, 0.8);
+  border-radius: 50%;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(0, 255, 209, 0.2);
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  background: rgba(0, 255, 209, 0.9);
+  border-color: rgba(0, 255, 209, 0.5);
+  box-shadow: 0 0 20px rgba(0, 255, 209, 0.4);
+}
+
+.social-link.linkedin:hover {
+  color: #0077b5;
+}
+
+.social-link.github:hover {
+  color: #333;
+}
+
+.member-info {
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(
+    to top,
+    rgba(0, 31, 63, 0.9),
+    rgba(0, 31, 63, 0.6),
+    transparent
+  );
+}
+
+.member-info h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #00ffd1;
+  text-shadow: 0 0 10px rgba(0, 255, 209, 0.3);
+  letter-spacing: 1px;
+}
+
+.member-role {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #00ffd1, #00bfff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@media (max-width: 768px) {
+  .members-grid {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+  }
+
+  .team-intro h2 {
+    font-size: 2rem;
+  }
+
+  .team-intro p {
+    font-size: 1.1rem;
+  }
+
+  .floating-chip {
+    font-size: 4rem;
+    top: 10%;
+    right: 5%;
+  }
+}

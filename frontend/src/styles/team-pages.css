@@ -1,0 +1,79 @@
+:root {
+  /* Base Theme Colors */
+  --lead-primary: #2a3f54;
+  --webdev-primary: #2c3e50;
+  --gamedev-primary: #8e44ad;
+  --iot-primary: #2980b9;
+  --events-primary: #e67e22;
+  --discipline-primary: #34495e;
+  --blogging-primary: #7f8c8d;
+  --social-primary: #e74c3c;
+  --pr-primary: #16a085;
+
+  /* Theme Gradients */
+  --lead-gradient: linear-gradient(135deg, #2a3f54, #34495e);
+  --webdev-gradient: linear-gradient(135deg, #2c3e50, #3498db);
+  --gamedev-gradient: linear-gradient(135deg, #8e44ad, #9b59b6);
+  --iot-gradient: linear-gradient(135deg, #2980b9, #3498db);
+  --events-gradient: linear-gradient(135deg, #e67e22, #f39c12);
+  --discipline-gradient: linear-gradient(135deg, #34495e, #2c3e50);
+  --blogging-gradient: linear-gradient(135deg, #7f8c8d, #95a5a6);
+  --social-gradient: linear-gradient(135deg, #e74c3c, #c0392b);
+  --pr-gradient: linear-gradient(135deg, #16a085, #1abc9c);
+}
+
+.team-page {
+  min-height: 100vh;
+  background: var(--primary-bg);
+  color: var(--text-primary);
+  padding-top: 80px;
+}
+
+.team-header {
+  text-align: center;
+  padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.team-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.1;
+  z-index: -1;
+  background: var(--team-gradient, var(--gradient-primary));
+}
+
+.team-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Theme-specific styles */
+.lead-theme {
+  --team-gradient: var(--lead-gradient);
+  --team-primary: var(--lead-primary);
+}
+
+.webdev-theme {
+  --team-gradient: var(--webdev-gradient);
+  --team-primary: var(--webdev-primary);
+}
+
+/* Add other theme styles similarly */
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .team-content {
+    padding: 1rem;
+  }
+
+  .team-header {
+    padding: 3rem 1rem;
+  }
+}

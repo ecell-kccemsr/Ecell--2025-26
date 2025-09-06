@@ -5,48 +5,37 @@ import Logo from "./Logo";
 const IntroSequence = ({ onComplete }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
-  const [isAnimating, setIsAnimating] = useState(false);
+
+  // Prevent scrolling during intro
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   useEffect(() => {
-    const handleWheel = (e) => {
-      if (isAnimating) return;
+    const handleScroll = () => {
+      const scrolled = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const progress = Math.min(scrolled / windowHeight, 1);
+      setScrollProgress(progress);
 
-      if (e.deltaY > 0) {
-        // Scrolling down
-        setIsAnimating(true);
+      // Auto-complete the intro if user tries to scroll
+      if (progress > 0) {
         setScrollProgress(1);
         setTimeout(() => {
           setIsVisible(false);
           if (onComplete) onComplete();
           window.scrollTo({ top: 0, behavior: "smooth" });
           document.body.style.overflow = "auto";
-        }, 1000);
+        }, 500);
       }
     };
 
-    // Hide scrollbar
-    const style = document.createElement("style");
-    style.textContent = `
-      body::-webkit-scrollbar {
-        display: none !important;
-      }
-      body {
-        -ms-overflow-style: none !important;
-        scrollbar-width: none !important;
-      }
-    `;
-    document.head.appendChild(style);
-
-    // Add wheel event listener
-    window.addEventListener("wheel", handleWheel);
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      window.removeEventListener("wheel", handleWheel);
-      document.head.removeChild(style);
-      document.body.style.overflow = "auto";
-    };
-  }, [isAnimating, onComplete]);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [onComplete]);
 
   if (!isVisible) return null;
 
@@ -67,14 +56,14 @@ const IntroSequence = ({ onComplete }) => {
       animate={{
         opacity: 1 - scrollProgress,
       }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      transition={{ duration: 0.3 }}
     >
       <motion.div
         animate={{
-          scale: 1 + scrollProgress * 1.5,
+          scale: 1 + scrollProgress * 2,
           opacity: 1 - scrollProgress,
         }}
-        transition={{ duration: 1, ease: "easeInOut" }}
+        transition={{ duration: 0.3 }}
       >
         <Logo
           style={{
