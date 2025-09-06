@@ -13,7 +13,7 @@ const AchievementsSection = () => {
       id: 1,
       title: "Runner-up at National Entrepreneurship Challenge",
       description:
-        "Runner up in the prestigious national competition among 500+ teams",
+        "The National Entrepreneurship Challenge (NEC) is a nationwide competition organized by the Entrepreneurship Cell (E-Cell) of IIT Bombay. It is a 5-6 month program designed to foster entrepreneurial spirit at the grassroots level by helping colleges establish and grow their own E-Cells. The challenge involves a series of tasks that guide student teams in building a strong entrepreneurial body on their campus, with a goal to make starting a company less intimidating. The competition has two main tracks, Basic and Advanced, to cater to colleges at different stages of E-Cell development. KC College was a runner up for the 2017 challenge.",
       image: "/img10.jpg",
       alt: "img10.jpg",
       year: "2017",
@@ -23,7 +23,7 @@ const AchievementsSection = () => {
       id: 2,
       title: "Seminar on Mobile Computing and 4G/5G",
       description:
-        "The ever-enthusiastic crowd of KCCOE witnessed a revolutionary seminar, which gave an insight into Mobile Computing and 4G/5G Network, which was organised by IQAC and KC E-cell. The featured speaker of this fantastic seminar was Dr Alhad Kuwadekar, PhD- Mobile Computing, University of Glamorgan, UK (2010). ",
+        "TA seminar at KCCOE, led by Dr. Alhad Kuwadekar, educated students and faculty on Mobile Computing and 4G/5G Network technology. The session covered the history of mobile phones, network features, and the effects of device portability. The highlight was an in-depth look at networking concepts like signal propagation and multiplexing, and a fascinating live demonstration of IoT (Internet of Things) applications, including smart home solutions. The seminar concluded with a live Android programming demonstration, inspiring new ideas and a passion for problem-solving. ",
       image: "/img11.jpg",
       alt: "img11.jpg",
       year: "2024",
@@ -31,44 +31,15 @@ const AchievementsSection = () => {
     },
     {
       id: 3,
-      title: "GitHub Workshop",
+      title: "KED Talk on Intrapreneur to Entrepreneur",
       description:
-        "Conducted a workshop on GitHub, enhancing version control skills among participants",
+        "a series of events organized by KC E-Cell, serves as a platform for experts to share knowledge. The recent KED Talk at KCCOE provided 73 students with valuable insights into intrapreneurship and entrepreneurship. The speakers, Mr. Sagar Bhosale and Mr. Ashok Karkera, discussed key differences, the importance of ideas, and practical advice on handling the journey.",
       image: "/img12.jpg",
-      alt: "GitHub Workshop",
-      year: "2022",
-      category: "Workshop",
+      alt: "KED Talk on Intrapreneur to Entrepreneur",
+      year: "2018",
+      category: "Event",
     },
-    {
-      id: 4,
-      title: "500+ Students Impacted",
-      description:
-        "Transformed the entrepreneurial journey of over 500 students through our programs",
-      image: "/img13.jpg",
-      alt: "Students participating in entrepreneurship programs",
-      year: "2024",
-      category: "Impact",
-    },
-    {
-      id: 5,
-      title: "Industry Partnership Program",
-      description:
-        "Bringing up industry parternerships to foster innovation and collaboration amongst students",
-      image: "/img14.jpg",
-      alt: "img14",
-      year: "2024",
-      category: "Partnership",
-    },
-    {
-      id: 6,
-      title: "Robotics Workshop",
-      description:
-        "The Robotics Workshop focused on hands-on learning and innovation in robotics technology.",
-      image: "/img15.jpg",
-      alt: "Robotics Workshop",
-      year: "2024",
-      category: "Innovation",
-    },
+
   ];
 
   const containerVariants = {

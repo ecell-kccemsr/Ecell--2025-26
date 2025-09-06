@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isTeamsDropdownOpen, setIsTeamsDropdownOpen] = useState(false);
 
   // Check if device is mobile
   useEffect(() => {
@@ -103,13 +104,49 @@ const Header = () => {
           <Link to="https://events.kcecell.org/" className="nav-link">
             Events
           </Link>
-          
+
           <Link to="/mentor" className="nav-link">
             Our Mentors
           </Link>
-          <Link to="/team" className="nav-link">
-            Team
-          </Link>
+
+          <div
+            className="nav-link teams-dropdown"
+            onMouseEnter={() => setIsTeamsDropdownOpen(true)}
+            onMouseLeave={() => setIsTeamsDropdownOpen(false)}
+          >
+            <span>Teams</span>
+            {isTeamsDropdownOpen && (
+              <motion.div
+                className="dropdown-content"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Link to="/teams/lead" className="dropdown-item">
+                  Leadership Team
+                </Link>
+                <Link to="/teams/web-development" className="dropdown-item">
+                  Web Development Team
+                </Link>
+                <Link to="/teams/game-development" className="dropdown-item">
+                  Game Development Team
+                </Link>
+                <Link to="/teams/iot" className="dropdown-item">
+                  IoT & Hardware Team
+                </Link>
+                <Link to="/teams/coordination" className="dropdown-item">
+                  Content & Coordination
+                </Link>
+                <Link to="/teams/events" className="dropdown-item">
+                  Events Team
+                </Link>
+                <Link to="/teams/social-media" className="dropdown-item">
+                  Social Media Team
+                </Link>
+              </motion.div>
+            )}
+          </div>
 
           <Link to="https://contact.kcecell.org/" className="nav-link">
             Contact Us
@@ -184,7 +221,24 @@ const Header = () => {
                   {[
                     { to: "/", label: "Home" },
                     { to: "/events", label: "Events" },
-                    { to: "/team", label: "Team" },
+                    {
+                      label: "Teams",
+                      submenu: [
+                        { to: "/teams/lead", label: "the lead" },
+                        { to: "/teams/web-development", label: "Web Development Team" },
+                        {
+                          to: "/teams/game-development",
+                          label: "Game Development Team",
+                        },
+                        { to: "/teams/iot", label: "IoT & Hardware Team" },
+                        {
+                          to: "/teams/coordination",
+                          label: "Content & Coordination",
+                        },
+                        { to: "/teams/events", label: "Events Team" },
+                        { to: "/teams/social", label: "Social Media Team" },
+                      ],
+                    },
                     { to: "#about", label: "About", scroll: true },
                     { to: "/contact", label: "Contact" },
                     { to: "/admin", label: "Admin", className: "admin-link" },
@@ -195,7 +249,25 @@ const Header = () => {
                       custom={index}
                       className="mobile-menu-item"
                     >
-                      {link.scroll ? (
+                      {link.submenu ? (
+                        <div className="mobile-submenu">
+                          <div className="mobile-nav-link submenu-label">
+                            {link.label}
+                          </div>
+                          <div className="submenu-items">
+                            {link.submenu.map((sublink, subIndex) => (
+                              <Link
+                                key={subIndex}
+                                to={sublink.to}
+                                className="mobile-nav-link submenu-item"
+                                onClick={closeMobileMenu}
+                              >
+                                {sublink.label}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      ) : link.scroll ? (
                         <a
                           href="#about"
                           className={`mobile-nav-link ${link.className || ""}`}

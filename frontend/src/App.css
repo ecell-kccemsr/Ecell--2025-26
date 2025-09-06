@@ -250,6 +250,54 @@ body {
   width: 100%;
 }
 
+.teams-dropdown {
+  position: relative;
+  cursor: pointer;
+  padding: 0.5rem 0;
+}
+
+.teams-dropdown span {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.teams-dropdown span::after {
+  content: "▼";
+  font-size: 0.8em;
+  margin-left: 0.3rem;
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 220px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 0.5rem;
+  box-shadow: var(--shadow-dark);
+  z-index: 1000;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 0.8rem 1.2rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background: rgba(0, 255, 157, 0.1);
+  color: var(--accent-primary);
+  transform: translateX(5px);
+}
+
 .login-btn {
   background: var(--gradient-primary);
   color: var(--primary-bg);
@@ -453,6 +501,26 @@ body {
   transform: translateX(5px);
 }
 
+.mobile-submenu {
+  margin: 0.5rem 0;
+}
+
+.mobile-submenu .submenu-label {
+  font-weight: 600;
+  color: var(--accent-primary);
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 0.5rem;
+}
+
+.submenu-items {
+  padding-left: 1rem;
+}
+
+.submenu-item {
+  font-size: 0.95rem !important;
+  padding: 0.8rem 1.2rem !important;
+}
+
 .mobile-nav-link.admin-link {
   color: var(--accent-tertiary);
 }
@@ -613,8 +681,8 @@ body {
 }
 
 .element-2 {
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 169px; /* Maintains the 16:9 aspect ratio */
   bottom: -10px;
   left: -10px;
   animation-delay: -4s;

@@ -89,7 +89,7 @@ const AboutSection = () => {
           <motion.div className="about-image" variants={itemVariants}>
             <div className="image-container">
               <img
-                src="/img8.jpg"
+                src="/img.png"
                 alt="E-Cell team collaboration and innovation"
                 className="main-image"
               />

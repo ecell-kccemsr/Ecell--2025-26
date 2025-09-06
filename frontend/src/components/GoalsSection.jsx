@@ -11,63 +11,69 @@ const GoalsSection = () => {
   const goals = [
     {
       id: 1,
-      title: "Foster Innovation Culture",
+      title: "Expand the talent pools",
       description:
-        "Create an ecosystem where creative thinking and innovative solutions flourish naturally among students",
+        "Picking the best talent from the college and nurturing them to become future leaders.",
       icon: "/img16.jpg",
       alt: "Innovation and creative thinking symbol",
-      metrics: "1000+ Ideas Generated",
+      metrics: "100+ active Members",
       color: "primary",
+      percentageCompleted: 100,
     },
     {
       id: 2,
-      title: "Build Startup Ecosystem",
+      title: "A Startup Ecosystem",
       description:
         "Establish a comprehensive support system for startups from ideation to successful market launch",
       icon: "/img17.jpg",
       alt: "Startup ecosystem development illustration",
-      metrics: "100+ Startups Supported",
+      metrics: "5+ Startups Supported",
       color: "secondary",
+      percentageCompleted: 60,
     },
     {
       id: 3,
-      title: "Industry Integration",
+      title: "Social Media Expansion",
       description:
-        "Bridge the gap between academia and industry through strategic partnerships and collaborations",
-      icon: "/img18.jpg",
-      alt: "Industry academia collaboration network",
-      metrics: "50+ Corporate Partners",
+        "Create a strong online presence to engage with a wider audience and promote entrepreneurial initiatives",
+      icon: "/img17.jpg",
+      alt: "Social media expansion illustration",
+      metrics: "5000+ across platforms",
       color: "tertiary",
+      percentageCompleted: 15,
     },
     {
       id: 4,
-      title: "Global Expansion",
+      title: "Industry Integration",
       description:
-        "Expand our reach internationally and create global opportunities for our student entrepreneurs",
-      icon: "/img19.jpg",
+        "Bridge the gap between academia and industry through strategic partnerships and collaborations",
+      icon: "/img17.jpg",
       alt: "Global entrepreneurship network expansion",
-      metrics: "10+ Countries Reached",
+      metrics: "10+ Industries Reached",
       color: "quaternary",
+      percentageCompleted: 40,
     },
     {
       id: 5,
-      title: "Sustainable Impact",
+      title: "Raise Funds",
       description:
-        "Focus on creating sustainable businesses that solve real-world problems and create lasting value",
-      icon: "/img20.jpg",
-      alt: "Sustainable business impact visualization",
-      metrics: "80% Success Rate",
+        "raise over 200k+ funds to support entrepreneurial ventures and initiatives",
+      icon: "/img17.jpg",
+      alt: "Sustainable funding illustration",
+      metrics: "INR 200k+",
       color: "primary",
+      percentageCompleted: 2.5,
     },
     {
       id: 6,
       title: "Community Development",
       description:
         "Build a strong alumni network and create a lasting community of successful entrepreneurs",
-      icon: "/img21.jpg",
+      icon: "/img17.jpg",
       alt: "Entrepreneurship community building illustration",
       metrics: "2000+ Alumni Network",
       color: "secondary",
+      percentageCompleted: 90,
     },
   ];
 
@@ -159,11 +165,17 @@ const GoalsSection = () => {
                   <motion.div
                     className="progress-fill"
                     initial={{ width: 0 }}
-                    animate={inView ? { width: "60%" } : { width: 0 }}
+                    animate={
+                      inView
+                        ? { width: `${goal.percentageCompleted}%` }
+                        : { width: 0 }
+                    }
                     transition={{ duration: 1.5, delay: index * 0.2 }}
                   ></motion.div>
                 </div>
-                <span className="progress-text">75% Progress</span>
+                <span className="progress-text">
+                  {goal.percentageCompleted}% Progress
+                </span>
               </div>
             </motion.div>
           ))}

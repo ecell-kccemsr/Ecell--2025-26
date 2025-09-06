@@ -55,7 +55,7 @@ const HeroSection = () => {
               <img src="/img3.jpg" alt="Innovation and startup culture" />
             </div>
             <div className="floating-element element-2">
-              <img src="/img4.png" alt="Business networking event" />
+              <img src="/img4.jpg" alt="Business networking event" />
             </div>
           </div>
         </motion.div>
