@@ -7,6 +7,7 @@ import ContactPage from "./components/ContactPage";
 import LoginPage from "./components/LoginPage";
 import ResetPasswordPage from "./components/ResetPasswordPage";
 import EmailVerificationPage from "./components/EmailVerificationPage";
+import MentorPage from "./pages/MentorPage";
 // Team Pages
 import LeadTeam from "./pages/teams/LeadTeam";
 import WebDevTeam from "./pages/teams/WebDevTeam";
@@ -30,6 +31,7 @@ function App() {
           <Route path="/intro" element={<IntroSequence />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="/events" element={<EventsPage />} />
+          <Route path="/mentor" element={<MentorPage />} />
 
           {/* Team Routes */}
           <Route path="/teams/lead" element={<LeadTeam />} />

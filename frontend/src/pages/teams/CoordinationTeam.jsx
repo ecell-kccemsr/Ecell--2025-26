@@ -13,10 +13,10 @@ const CoordinationTeam = () => {
       instagram_url: "https://www.instagram.com/devanshithakur",
     },
     {
-      name: "Tanushree Katwarkar",
+      name: "Tanushree Karwatkar",
       role: "Deputy Overall Coordinator",
-      linkedin_profile_url: "https://www.linkedin.com/in/tanushree-katwarkar",
-      instagram_url: "https://www.instagram.com/tanushreekatwarkar",
+      linkedin_profile_url: "https://www.linkedin.com/in/tanushree-karwatkar",
+      instagram_url: "https://www.instagram.com/tanushreekarwatkar",
     },
   ];
 
@@ -79,12 +79,12 @@ const CoordinationTeam = () => {
 
               <div className="member-image">
                 <img
-                  src={`/team/${member.name
+                  src={`/team/members/coordination/${member.name
                     .toLowerCase()
-                    .replace(" ", "-")}.jpg`}
+                    .replace(/\s+/g, "-")}.jpg`}
                   alt={member.name}
                   onError={(e) => {
-                    e.target.src = "/team/default-avatar.jpg";
+                    e.target.src = "/team/members/default-avatar.jpg";
                   }}
                 />
                 <motion.div

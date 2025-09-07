@@ -27,11 +27,11 @@ const Footer = () => {
           <div className="footer-section brand-section">
             <div className="footer-brand">
               <img
-                src="/img23.jpg"
+                src="/ecelllogo.jpg"
                 alt="E-Cell footer logo"
                 className="footer-logo"
               />
-              <span className="footer-brand-text">E-CELL</span>
+              
             </div>
             <p className="footer-description">
               Empowering the next generation of entrepreneurs through
@@ -39,7 +39,7 @@ const Footer = () => {
             </p>
             <div className="social-links">
               <a
-                href="https://linkedin.com/company/ecell"
+                href="https://www.linkedin.com/company/kcecell/"
                 className="social-link"
                 aria-label="Follow us on LinkedIn"
                 target="_blank"
@@ -47,17 +47,10 @@ const Footer = () => {
               >
                 <FaLinkedin />
               </a>
+              
+              
               <a
-                href="https://twitter.com/ecell"
-                className="social-link"
-                aria-label="Follow us on Twitter"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaTwitter />
-              </a>
-              <a
-                href="https://instagram.com/ecell"
+                href="https://instagram.com/kcecell_"
                 className="social-link"
                 aria-label="Follow us on Instagram"
                 target="_blank"
@@ -65,17 +58,9 @@ const Footer = () => {
               >
                 <FaInstagram />
               </a>
+              
               <a
-                href="https://facebook.com/ecell"
-                className="social-link"
-                aria-label="Follow us on Facebook"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaFacebook />
-              </a>
-              <a
-                href="https://youtube.com/ecell"
+                href="https://www.youtube.com/@kc-ecell"
                 className="social-link"
                 aria-label="Subscribe to our YouTube"
                 target="_blank"
@@ -92,71 +77,50 @@ const Footer = () => {
               <li>
                 <Link to="/">Home</Link>
               </li>
+              
               <li>
-                <Link to="/about">About Us</Link>
-              </li>
-              <li>
-                <Link to="/events">Events</Link>
+                <Link to="https://events.kcecell.org/">Events</Link>
               </li>
               <li>
                 <Link to="/programs">Programs</Link>
               </li>
               <li>
-                <Link to="/mentorship">Mentorship</Link>
+                <Link to="/mentor">Mentorship</Link>
               </li>
               <li>
-                <Link to="/contact">Contact</Link>
+                <Link to="mailto:kccell@kccemsr.edu.in">Contact</Link>
               </li>
             </ul>
           </div>
 
-          <div className="footer-section programs-section">
-            <h4 className="footer-title">Programs</h4>
-            <ul className="footer-links">
-              <li>
-                <a href="#">Startup Incubation</a>
-              </li>
-              <li>
-                <a href="#">Innovation Workshops</a>
-              </li>
-              <li>
-                <a href="#">Pitch Competitions</a>
-              </li>
-              <li>
-                <a href="#">Mentorship Program</a>
-              </li>
-              <li>
-                <a href="#">Industry Connect</a>
-              </li>
-              <li>
-                <a href="#">Alumni Network</a>
-              </li>
-            </ul>
+          <div>
+
           </div>
+          
 
           <div className="footer-section contact-section">
-            <h4 className="footer-title">Get In Touch</h4>
+            <h2 >Say <span className="highlight">hello!</span></h2>
+              <p className="contact-label">K.C. Ecell a team of student developers</p>
             <div className="contact-info">
               <div className="contact-item">
-                <FaMapMarkerAlt className="contact-icon" />
+                
                 <div className="contact-details">
                   <span className="contact-label">Address</span>
                   <span className="contact-value">
-                    3rd floor, Ecell Lab
-                    <br />
-                    KC college of engineering, Mithbandar road, Kopri Thane E
+                    Mith Bunder Road, Near Sadguru Garden, Kopri, Thane (E) 400603.
                   </span>
                 </div>
               </div>
+              
               <div className="contact-item">
-                <FaEnvelope className="contact-icon" />
+                
                 <div className="contact-details">
                   <span className="contact-label">Email</span>
                   <span className="contact-value">kcecell@kccemsr.edu.in</span>
                 </div>
               </div>
               <div className="contact-item">
-                <FaPhone className="contact-icon" />
+                
                 <div className="contact-details">
                   <span className="contact-label">Phone</span>
                   <span className="contact-value">+91 77100 22591</span>

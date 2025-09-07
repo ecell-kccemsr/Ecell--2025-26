@@ -51,9 +51,8 @@ const HeroSection = () => {
             className="hero-img"
           />
           <div className="floating-elements">
-            <div className="floating-element element-1">
-              <img src="/img3.jpg" alt="Innovation and startup culture" />
-            </div>
+
+
             <div className="floating-element element-2">
               <img src="/img4.jpg" alt="Business networking event" />
             </div>

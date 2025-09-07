@@ -136,7 +136,7 @@ const Header = () => {
                   IoT & Hardware Team
                 </Link>
                 <Link to="/teams/coordination" className="dropdown-item">
-                  Content & Coordination
+                  Coordination Team
                 </Link>
                 <Link to="/teams/events" className="dropdown-item">
                   Events Team
@@ -144,11 +144,14 @@ const Header = () => {
                 <Link to="/teams/social-media" className="dropdown-item">
                   Social Media Team
                 </Link>
+                <Link to="/teams/pr-finance" className="dropdown-item">
+                  PR & Finance Team
+                </Link>
               </motion.div>
             )}
           </div>
 
-          <Link to="https://contact.kcecell.org/" className="nav-link">
+          <Link to="mailto:kccell@kccemsr.edu.in" className="nav-link">
             Contact Us
           </Link>
           <Link
@@ -188,36 +191,107 @@ const Header = () => {
             {/* Mobile Menu */}
             <motion.div
               className="mobile-menu-dropdown"
-              variants={mobileMenuVariants}
+              variants={{
+                closed: {
+                  opacity: 0,
+                  x: "100%",
+                  transition: {
+                    duration: 0.3,
+                    ease: "easeInOut",
+                  },
+                },
+                open: {
+                  opacity: 1,
+                  x: "0%",
+                  transition: {
+                    duration: 0.3,
+                    ease: "easeInOut",
+                  },
+                },
+              }}
               initial="closed"
               animate="open"
               exit="closed"
+              style={{
+                position: "fixed",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                width: "100vw",
+                height: "100vh",
+                background: "rgba(0, 0, 0, 0.95)",
+                backdropFilter: "blur(10px)",
+                zIndex: 1000,
+                overflowY: "auto"
+              }}
             >
-              <div className="mobile-menu-content">
+              <div className="mobile-menu-content" style={{
+                padding: "2rem",
+                height: "100%",
+                display: "flex",
+                flexDirection: "column"
+              }}>
                 <motion.div
                   className="mobile-menu-header"
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginBottom: "3rem"
+                  }}
                 >
-                  <div className="mobile-brand">
+                  <div className="mobile-brand" style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "1rem"
+                  }}>
                     <img
                       src="/img1.jpg"
                       alt="E-Cell logo"
                       className="mobile-logo"
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        borderRadius: "10px"
+                      }}
                     />
-                    <span className="mobile-brand-text">E-CELL</span>
+                    <span className="mobile-brand-text" style={{
+                      fontSize: "1.5rem",
+                      fontWeight: "bold",
+                      color: "#00ff9d"
+                    }}>E-CELL</span>
                   </div>
                   <button
                     className="mobile-menu-close"
                     onClick={closeMobileMenu}
                     aria-label="Close menu"
+                    style={{
+                      background: "none",
+                      border: "none",
+                      color: "#fff",
+                      fontSize: "2rem",
+                      cursor: "pointer",
+                      padding: "0.5rem",
+                      transition: "transform 0.2s ease",
+                      transform: "scale(1)",
+                    }}
+                    onMouseEnter={(e) => e.target.style.transform = "scale(1.2)"}
+                    onMouseLeave={(e) => e.target.style.transform = "scale(1)"}
                   >
                     ×
                   </button>
                 </motion.div>
 
-                <div className="mobile-menu-links">
+                <div className="mobile-menu-links" style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "1.5rem",
+                    flex: 1
+                  }}>
                   {[
                     { to: "/", label: "Home" },
                     { to: "/events", label: "Events" },
@@ -233,10 +307,11 @@ const Header = () => {
                         { to: "/teams/iot", label: "IoT & Hardware Team" },
                         {
                           to: "/teams/coordination",
-                          label: "Content & Coordination",
+                          label: "Coordination Team",
                         },
                         { to: "/teams/events", label: "Events Team" },
                         { to: "/teams/social", label: "Social Media Team" },
+                        { to: "/teams/pr-finance", label: "PR & Finance Team" },
                       ],
                     },
                     { to: "#about", label: "About", scroll: true },
@@ -290,6 +365,26 @@ const Header = () => {
                           to={link.to}
                           className={`mobile-nav-link ${link.className || ""}`}
                           onClick={closeMobileMenu}
+                          style={{
+                            fontSize: "1.5rem",
+                            color: "#fff",
+                            textDecoration: "none",
+                            padding: "1rem",
+                            borderRadius: "10px",
+                            transition: "all 0.3s ease",
+                            background: "rgba(255, 255, 255, 0.05)",
+                            backdropFilter: "blur(5px)",
+                            display: "block",
+                            width: "100%"
+                          }}
+                          onMouseEnter={(e) => {
+                            e.target.style.background = "rgba(0, 255, 157, 0.1)";
+                            e.target.style.transform = "translateX(10px)";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.target.style.background = "rgba(255, 255, 255, 0.05)";
+                            e.target.style.transform = "translateX(0)";
+                          }}
                         >
                           {link.label}
                         </Link>
@@ -309,8 +404,22 @@ const Header = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
+                  style={{
+                    marginTop: "auto",
+                    textAlign: "center",
+                    padding: "2rem 0",
+                    borderTop: "1px solid rgba(255, 255, 255, 0.1)"
+                  }}
                 >
-                  <p>Empowering Entrepreneurs</p>
+                  <p style={{
+                    fontSize: "1.2rem",
+                    color: "rgba(255, 255, 255, 0.7)",
+                    marginBottom: "1rem"
+                  }}>Empowering Entrepreneurs</p>
+                  <p style={{
+                    fontSize: "0.9rem",
+                    color: "rgba(255, 255, 255, 0.5)"
+                  }}>© 2025 E-Cell KCCEMSR</p>
                 </motion.div>
               </div>
             </motion.div>

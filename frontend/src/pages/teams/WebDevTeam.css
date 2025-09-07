@@ -156,6 +156,32 @@
   font-family: "Fira Code", monospace;
 }
 
+.developer-badge {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  background: linear-gradient(135deg, #61dafb, #764abc);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(97, 218, 251, 0.3);
+  transform: rotate(10deg);
+  z-index: 10;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: rotate(10deg) translateY(0px);
+  }
+  50% {
+    transform: rotate(10deg) translateY(-5px);
+  }
+}
+
 @media (max-width: 768px) {
   .members-grid {
     grid-template-columns: 1fr;

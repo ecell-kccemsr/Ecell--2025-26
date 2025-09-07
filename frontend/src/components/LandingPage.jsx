@@ -5,7 +5,7 @@ import Header from "./Header";
 import HeroSection from "./HeroSection";
 import AboutSection from "./AboutSection";
 import AchievementsSection from "./AchievementsSection";
-import GoalsSection from "./GoalsSection";
+import GoalsSection from "./GoalsSection.jsx";
 import Footer from "./Footer";
 
 const LandingPage = () => {

@@ -8,7 +8,7 @@ const Logo = ({ style }) => (
     style={{ display: "block", ...style }}
   >
     <circle cx="32" cy="32" r="32" fill="transparent" />
-    <image href="/ecelllogo_dark.svg" x="0" y="0" height="64" width="64" />
+    <image href="/ecelllogo.jpg" x="0" y="0" height="64" width="64" />
   </svg>
 );
 

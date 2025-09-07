@@ -923,14 +923,14 @@ body {
 
 .achievement-category,
 .achievement-year {
-  background: rgba(0, 255, 157, 0.1);
+  background: black;
   backdrop-filter: blur(10px);
   padding: 5px 12px;
-  border-radius: 20px;
+  border-radius: 30px;
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--accent-primary);
-  border: 1px solid rgba(0, 255, 157, 0.2);
+  border: 1px solid var(--accent-primary);
 }
 
 .achievement-content {

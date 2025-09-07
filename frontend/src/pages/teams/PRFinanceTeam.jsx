@@ -83,12 +83,12 @@ const PRFinanceTeam = () => {
               <div className="card-accent"></div>
               <div className="member-image">
                 <img
-                  src={`/team/${member.name
+                  src={`/team/members/pr-finance/${member.name
                     .toLowerCase()
-                    .replace(" ", "-")}.jpg`}
+                    .replace(/\s+/g, "-")}.jpg`}
                   alt={member.name}
                   onError={(e) => {
-                    e.target.src = "/team/default-avatar.jpg";
+                    e.target.src = "/team/members/default-avatar.jpg";
                   }}
                 />
                 <motion.div

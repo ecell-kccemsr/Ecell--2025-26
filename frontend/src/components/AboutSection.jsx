@@ -93,15 +93,7 @@ const AboutSection = () => {
                 alt="E-Cell team collaboration and innovation"
                 className="main-image"
               />
-              <div className="overlay-elements">
-                <div className="overlay-stat">
-                  <span className="stat-number">5+</span>
-                  <span className="stat-label">Years Active</span>
-                </div>
-                <div className="overlay-image">
-                  <img src="/img9.jpg" alt="Startup success stories showcase" />
-                </div>
-              </div>
+              
             </div>
           </motion.div>
         </motion.div>

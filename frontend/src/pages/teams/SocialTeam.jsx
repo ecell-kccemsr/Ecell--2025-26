@@ -17,14 +17,14 @@ const SocialTeam = () => {
   const teamMembers = [
     {
       name: "Shubham Gupta",
-      role: "Head",
+      role: "cohead",
       linkedin_profile_url: "https://www.linkedin.com/in/shubham-gupta",
       instagram_url: "https://www.instagram.com/shubhamgupta",
       twitter_url: "https://twitter.com/shubhamgupta",
     },
     {
       name: "Om Telgade",
-      role: "Co-head",
+      role: "head",
       linkedin_profile_url: "https://www.linkedin.com/in/om-telgade",
       instagram_url: "https://www.instagram.com/omtelgade",
       twitter_url: "https://twitter.com/omtelgade",
@@ -74,39 +74,6 @@ const SocialTeam = () => {
           </p>
         </motion.div>
 
-        <div className="engagement-metrics">
-          <motion.div
-            className="metric"
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
-          >
-            <FaHeart className="metric-icon" />
-            <span>Engagement</span>
-          </motion.div>
-          <motion.div
-            className="metric"
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 100, delay: 0.4 }}
-          >
-            <FaComment className="metric-icon" />
-            <span>Interaction</span>
-          </motion.div>
-          <motion.div
-            className="metric"
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 100, delay: 0.6 }}
-          >
-            <FaShare className="metric-icon" />
-            <span>Growth</span>
-          </motion.div>
-        </div>
-
         <div className="members-grid">
           {teamMembers.map((member, index) => (
             <motion.div
@@ -120,12 +87,12 @@ const SocialTeam = () => {
             >
               <div className="member-image">
                 <img
-                  src={`/team/${member.name
+                  src={`/team/members/social/${member.name
                     .toLowerCase()
-                    .replace(" ", "-")}.jpg`}
+                    .replace(/\s+/g, "-")}.jpg`}
                   alt={member.name}
                   onError={(e) => {
-                    e.target.src = "/team/default-avatar.jpg";
+                    e.target.src = "/team/members/default-avatar.jpg";
                   }}
                 />
                 <motion.div
