@@ -8,6 +8,7 @@ import LoginPage from "./components/LoginPage";
 import ResetPasswordPage from "./components/ResetPasswordPage";
 import EmailVerificationPage from "./components/EmailVerificationPage";
 import MentorPage from "./pages/MentorPage";
+import ProjectsPage from "./pages/ProjectsPage";
 // Team Pages
 import LeadTeam from "./pages/teams/LeadTeam";
 import WebDevTeam from "./pages/teams/WebDevTeam";
@@ -32,6 +33,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/events" element={<EventsPage />} />
           <Route path="/mentor" element={<MentorPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
 
           {/* Team Routes */}
           <Route path="/teams/lead" element={<LeadTeam />} />

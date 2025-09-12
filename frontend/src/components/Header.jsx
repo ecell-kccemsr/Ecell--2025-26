@@ -105,6 +105,10 @@ const Header = () => {
             Events
           </Link>
 
+          <Link to="/projects" className="nav-link">
+            Projects
+          </Link>
+
           <Link to="/mentor" className="nav-link">
             Our Mentors
           </Link>
@@ -295,6 +299,7 @@ const Header = () => {
                   {[
                     { to: "/", label: "Home" },
                     { to: "/events", label: "Events" },
+                    { to: "/projects", label: "Projects" },
                     {
                       label: "Teams",
                       submenu: [
