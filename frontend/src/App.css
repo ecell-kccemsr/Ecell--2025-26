@@ -295,7 +295,7 @@ body {
 .dropdown-item:hover {
   background: rgba(0, 255, 157, 0.1);
   color: var(--accent-primary);
-  transform: translateX(5px);
+  
 }
 
 .login-btn {
