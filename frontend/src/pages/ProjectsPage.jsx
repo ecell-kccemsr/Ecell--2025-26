@@ -1,10 +1,13 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import "./ProjectsPage.css";
 import Header from "../components/Header";
+import SearchBar from "../components/SearchBar";
 
 const ProjectsPage = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  
   const projects = [
     {
       name: "E-Cell Website",
@@ -39,8 +42,20 @@ const ProjectsPage = () => {
         <p>Showcasing innovation through technology</p>
       </motion.div>
 
+      <SearchBar projects={projects} onSearch={setSearchTerm} />
+
       <div className="projects-grid">
-        {projects.map((project, index) => (
+        {projects
+          .filter(project => {
+            if (!searchTerm) return true;
+            const searchLower = searchTerm.toLowerCase();
+            return (
+              project.name.toLowerCase().includes(searchLower) ||
+              project.tech_stack.some(tech => tech.toLowerCase().includes(searchLower)) ||
+              project.description.toLowerCase().includes(searchLower)
+            );
+          })
+          .map((project, index) => (
           <motion.div
             key={project.name}
             className="project-card"
