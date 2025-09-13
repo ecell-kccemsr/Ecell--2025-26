@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FaSearch } from 'react-icons/fa';
-import './SearchBar.css';
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaSearch } from "react-icons/fa";
+import "./SearchBar.css";
 
 const SearchBar = ({ projects, onSearch }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchRef = useRef(null);
@@ -17,23 +17,25 @@ const SearchBar = ({ projects, onSearch }) => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   useEffect(() => {
-    if (searchTerm.trim() === '') {
+    if (searchTerm.trim() === "") {
       setSuggestions([]);
-      onSearch('');
+      onSearch("");
       return;
     }
 
     // Generate suggestions based on project names and tech stack
-    const newSuggestions = projects.filter(project => {
+    const newSuggestions = projects.filter((project) => {
       const searchLower = searchTerm.toLowerCase();
       return (
         project.name.toLowerCase().includes(searchLower) ||
-        project.tech_stack.some(tech => tech.toLowerCase().includes(searchLower)) ||
+        project.tech_stack.some((tech) =>
+          tech.toLowerCase().includes(searchLower)
+        ) ||
         project.description.toLowerCase().includes(searchLower)
       );
     });
@@ -55,7 +57,7 @@ const SearchBar = ({ projects, onSearch }) => {
 
   return (
     <div className="search-container" ref={searchRef}>
-      <motion.div 
+      <motion.div
         className="search-bar"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -71,7 +73,7 @@ const SearchBar = ({ projects, onSearch }) => {
           onFocus={() => setShowSuggestions(true)}
         />
       </motion.div>
-      
+
       <AnimatePresence>
         {showSuggestions && suggestions.length > 0 && (
           <motion.div
@@ -89,9 +91,9 @@ const SearchBar = ({ projects, onSearch }) => {
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.2, delay: index * 0.05 }}
-                whileHover={{ 
-                  backgroundColor: 'var(--tertiary-bg)',
-                  x: 5 
+                whileHover={{
+                  backgroundColor: "var(--tertiary-bg)",
+                  x: 5,
                 }}
               >
                 <div className="suggestion-content">

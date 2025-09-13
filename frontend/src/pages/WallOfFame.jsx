@@ -15,7 +15,8 @@ const WallOfFame = () => {
       members: ["John Doe", "Jane Smith", "Alex Johnson"],
       achievement: "First Place - Smart India Hackathon 2025",
       category: "hackathon",
-      description: "Developed an AI-powered solution for rural healthcare accessibility",
+      description:
+        "Developed an AI-powered solution for rural healthcare accessibility",
       image: "/achievements/sih-2025.jpg",
       year: "2025",
       prize: "₹1,00,000",
@@ -46,7 +47,10 @@ const WallOfFame = () => {
   const years = ["all", "2025", "2024", "2023"];
 
   const filteredAchievements = achievements.filter((achievement) => {
-    if (selectedCategory !== "all" && achievement.category !== selectedCategory) {
+    if (
+      selectedCategory !== "all" &&
+      achievement.category !== selectedCategory
+    ) {
       return false;
     }
     if (selectedYear !== "all" && achievement.year !== selectedYear) {
@@ -95,11 +99,13 @@ const WallOfFame = () => {
               className="year-select"
             >
               <option value="all">All Years</option>
-              {years.filter((year) => year !== "all").map((year) => (
-                <option key={year} value={year}>
-                  {year}
-                </option>
-              ))}
+              {years
+                .filter((year) => year !== "all")
+                .map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
             </select>
           </div>
         </div>
@@ -135,7 +141,7 @@ const WallOfFame = () => {
 
                 <div className="achievement-content">
                   <h3>{achievement.achievement}</h3>
-                  
+
                   {achievement.members ? (
                     <div className="team-members">
                       <h4>Team Members:</h4>
@@ -160,7 +166,9 @@ const WallOfFame = () => {
                     </div>
                     <div className="detail-item">
                       <span className="detail-label">Organization:</span>
-                      <span className="detail-value">{achievement.organization}</span>
+                      <span className="detail-value">
+                        {achievement.organization}
+                      </span>
                     </div>
                   </div>
 

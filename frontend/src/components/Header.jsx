@@ -187,7 +187,6 @@ const Header = () => {
         {isMobileMenuOpen && (
           <>
             {/* Backdrop */}
-            
 
             {/* Mobile Menu */}
             <motion.div
@@ -277,7 +276,6 @@ const Header = () => {
                       We Build !!
                     </span>
                   </div>
-                  
                 </motion.div>
 
                 <div
@@ -315,7 +313,6 @@ const Header = () => {
                         { to: "/teams/pr-finance", label: "PR & Finance Team" },
                       ],
                     },
-                    
                   ].map((link, index) => (
                     <motion.div
                       key={link.to}

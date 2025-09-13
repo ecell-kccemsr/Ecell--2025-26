@@ -17,11 +17,15 @@ const MentorPage = () => {
       achievements: [
         "Mentored 20+ successful startups",
         "Published research on blockchain innovation",
-        "Best Faculty Mentor Award 2024"
+        "Best Faculty Mentor Award 2024",
       ],
-      availableFor: ["Technical Guidance", "Startup Mentoring", "Project Development"],
+      availableFor: [
+        "Technical Guidance",
+        "Startup Mentoring",
+        "Project Development",
+      ],
       linkedin: "https://linkedin.com/in/trupti-dharmik",
-      email: "vedika.patil@kccemsr.edu.in"
+      email: "vedika.patil@kccemsr.edu.in",
     },
     // Add more mentors here
   ];
@@ -42,9 +46,7 @@ const MentorPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-          >
-    
-          </motion.div>
+          ></motion.div>
         </div>
 
         <div className="mentors-grid">
@@ -57,18 +59,15 @@ const MentorPage = () => {
               transition={{ duration: 0.8, delay: index * 0.1 }}
               whileHover={{ y: -10 }}
             >
-              <motion.div 
-                className="mentor-image-wrapper"
-                whileHover="hover"
-              >
+              <motion.div className="mentor-image-wrapper" whileHover="hover">
                 <div className="mentor-image">
-                  <motion.img 
-                    src={mentor.image} 
+                  <motion.img
+                    src={mentor.image}
                     alt={mentor.name}
                     whileHover={{ scale: 1.1 }}
                     transition={{ type: "tween" }}
                   />
-                  <motion.div 
+                  <motion.div
                     className="mentor-social"
                     initial={{ opacity: 0 }}
                     whileHover={{ opacity: 1 }}
@@ -99,7 +98,7 @@ const MentorPage = () => {
                 </div>
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 className="mentor-info"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -111,13 +110,13 @@ const MentorPage = () => {
                 </div>
                 <div className="mentor-role">{mentor.role}</div>
                 <div className="mentor-company">{mentor.company}</div>
-                
+
                 <div className="mentor-expertise">
                   <span className="expertise-label">Expertise</span>
                   <div className="expertise-tags">
                     {mentor.expertise.map((skill, idx) => (
-                      <motion.span 
-                        key={skill} 
+                      <motion.span
+                        key={skill}
                         className="expertise-tag"
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -137,11 +136,11 @@ const MentorPage = () => {
                   <span className="achievements-label">Key Achievements</span>
                   <ul>
                     {mentor.achievements.map((achievement, idx) => (
-                      <motion.li 
+                      <motion.li
                         key={idx}
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.2 + (0.1 * idx) }}
+                        transition={{ delay: 0.2 + 0.1 * idx }}
                       >
                         {achievement}
                       </motion.li>
@@ -153,12 +152,12 @@ const MentorPage = () => {
                   <span className="available-label">Available For</span>
                   <div className="available-tags">
                     {mentor.availableFor.map((item, idx) => (
-                      <motion.span 
-                        key={item} 
+                      <motion.span
+                        key={item}
                         className="available-tag"
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.3 + (0.1 * idx) }}
+                        transition={{ delay: 0.3 + 0.1 * idx }}
                       >
                         {item}
                       </motion.span>
@@ -172,7 +171,7 @@ const MentorPage = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Connect with {mentor.name.split(' ')[0]}
+                  Connect with {mentor.name.split(" ")[0]}
                 </motion.a>
               </motion.div>
             </motion.div>
