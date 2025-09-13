@@ -183,14 +183,7 @@ const Header = () => {
         {isMobileMenuOpen && (
           <>
             {/* Backdrop */}
-            <motion.div
-              className="mobile-menu-backdrop"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={closeMobileMenu}
-            />
+            
 
             {/* Mobile Menu */}
             <motion.div
@@ -260,7 +253,7 @@ const Header = () => {
                     }}
                   >
                     <img
-                      src="/img1.jpg"
+                      src="/ecelllogo.jpg"
                       alt="E-Cell logo"
                       className="mobile-logo"
                       style={{
@@ -277,32 +270,10 @@ const Header = () => {
                         color: "#00ff9d",
                       }}
                     >
-                      E-CELL
+                      We Build !!
                     </span>
                   </div>
-                  <button
-                    className="mobile-menu-close"
-                    onClick={closeMobileMenu}
-                    aria-label="Close menu"
-                    style={{
-                      background: "none",
-                      border: "none",
-                      color: "#fff",
-                      fontSize: "2rem",
-                      cursor: "pointer",
-                      padding: "0.5rem",
-                      transition: "transform 0.2s ease",
-                      transform: "scale(1)",
-                    }}
-                    onMouseEnter={(e) =>
-                      (e.target.style.transform = "scale(1.2)")
-                    }
-                    onMouseLeave={(e) =>
-                      (e.target.style.transform = "scale(1)")
-                    }
-                  >
-                    ×
-                  </button>
+                  
                 </motion.div>
 
                 <div
@@ -321,7 +292,7 @@ const Header = () => {
                     {
                       label: "Teams",
                       submenu: [
-                        { to: "/teams/lead", label: "the lead" },
+                        { to: "/teams/lead", label: "Leadership Team" },
                         {
                           to: "/teams/web-development",
                           label: "Web Development Team",
@@ -340,9 +311,7 @@ const Header = () => {
                         { to: "/teams/pr-finance", label: "PR & Finance Team" },
                       ],
                     },
-                    { to: "#about", label: "About", scroll: true },
-                    { to: "/contact", label: "Contact" },
-                    { to: "/admin", label: "Admin", className: "admin-link" },
+                    
                   ].map((link, index) => (
                     <motion.div
                       key={link.to}
