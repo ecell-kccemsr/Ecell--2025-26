@@ -11,7 +11,7 @@ const ProjectsPage = () => {
   const projects = [
     {
       name: "E-Cell Website",
-      description: "Redesigning the Ecells Website 2025-20206",
+      description: "Redesigning the Ecells Website 2025-2026",
       image: "projects/ecell-website.jpg",
       github_url: "https://github.com/ecell-kccemsr/Ecell--2025-26",
       live_url: "https://kcecell.org",

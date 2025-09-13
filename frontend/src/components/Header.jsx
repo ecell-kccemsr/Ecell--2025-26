@@ -291,6 +291,8 @@ const Header = () => {
                     { to: "/", label: "Home" },
                     { to: "/events", label: "Events" },
                     { to: "/projects", label: "Projects" },
+                    { to: "/wall-of-fame", label: "Wall of Fame" },
+                    { to: "/mentor", label: "Our Mentors" },
                     {
                       label: "Teams",
                       submenu: [
