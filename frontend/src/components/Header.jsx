@@ -109,6 +109,10 @@ const Header = () => {
             Projects
           </Link>
 
+          <Link to="/wall-of-fame" className="nav-link">
+            Wall of Fame
+          </Link>
+
           <Link to="/mentor" className="nav-link">
             Our Mentors
           </Link>
