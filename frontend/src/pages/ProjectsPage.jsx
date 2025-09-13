@@ -16,7 +16,8 @@ const ProjectsPage = () => {
     },
     {
       name: "Classroom Streamer ",
-      description: "Classroom Monitoring Platform A scalable, live video streaming platform for classroom monitoring. Manages thousands of streams with a resilient microservices architecture. Features include intelligent agents, one-command deployment, and a 30-40% increase in lecture quality.",
+      description:
+        "Classroom Monitoring Platform A scalable, live video streaming platform for classroom monitoring. Manages thousands of streams with a resilient microservices architecture. Features include intelligent agents, one-command deployment, and a 30-40% increase in lecture quality.",
       image: "/img/projects/ecell-website.jpg",
       github_url: "https://github.com/ecell-kccemsr/CMP",
 
@@ -27,7 +28,7 @@ const ProjectsPage = () => {
 
   return (
     <div className="projects-page">
-        <Header/>
+      <Header />
       <motion.div
         className="projects-header"
         initial={{ opacity: 0, y: 20 }}

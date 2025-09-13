@@ -227,15 +227,18 @@ const Header = () => {
                 background: "rgba(0, 0, 0, 0.95)",
                 backdropFilter: "blur(10px)",
                 zIndex: 1000,
-                overflowY: "auto"
+                overflowY: "auto",
               }}
             >
-              <div className="mobile-menu-content" style={{
-                padding: "2rem",
-                height: "100%",
-                display: "flex",
-                flexDirection: "column"
-              }}>
+              <div
+                className="mobile-menu-content"
+                style={{
+                  padding: "2rem",
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
                 <motion.div
                   className="mobile-menu-header"
                   initial={{ opacity: 0, y: -20 }}
@@ -245,14 +248,17 @@ const Header = () => {
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    marginBottom: "3rem"
+                    marginBottom: "3rem",
                   }}
                 >
-                  <div className="mobile-brand" style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "1rem"
-                  }}>
+                  <div
+                    className="mobile-brand"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "1rem",
+                    }}
+                  >
                     <img
                       src="/img1.jpg"
                       alt="E-Cell logo"
@@ -260,14 +266,19 @@ const Header = () => {
                       style={{
                         width: "50px",
                         height: "50px",
-                        borderRadius: "10px"
+                        borderRadius: "10px",
                       }}
                     />
-                    <span className="mobile-brand-text" style={{
-                      fontSize: "1.5rem",
-                      fontWeight: "bold",
-                      color: "#00ff9d"
-                    }}>E-CELL</span>
+                    <span
+                      className="mobile-brand-text"
+                      style={{
+                        fontSize: "1.5rem",
+                        fontWeight: "bold",
+                        color: "#00ff9d",
+                      }}
+                    >
+                      E-CELL
+                    </span>
                   </div>
                   <button
                     className="mobile-menu-close"
@@ -283,19 +294,26 @@ const Header = () => {
                       transition: "transform 0.2s ease",
                       transform: "scale(1)",
                     }}
-                    onMouseEnter={(e) => e.target.style.transform = "scale(1.2)"}
-                    onMouseLeave={(e) => e.target.style.transform = "scale(1)"}
+                    onMouseEnter={(e) =>
+                      (e.target.style.transform = "scale(1.2)")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.target.style.transform = "scale(1)")
+                    }
                   >
                     ×
                   </button>
                 </motion.div>
 
-                <div className="mobile-menu-links" style={{
+                <div
+                  className="mobile-menu-links"
+                  style={{
                     display: "flex",
                     flexDirection: "column",
                     gap: "1.5rem",
-                    flex: 1
-                  }}>
+                    flex: 1,
+                  }}
+                >
                   {[
                     { to: "/", label: "Home" },
                     { to: "/events", label: "Events" },
@@ -304,7 +322,10 @@ const Header = () => {
                       label: "Teams",
                       submenu: [
                         { to: "/teams/lead", label: "the lead" },
-                        { to: "/teams/web-development", label: "Web Development Team" },
+                        {
+                          to: "/teams/web-development",
+                          label: "Web Development Team",
+                        },
                         {
                           to: "/teams/game-development",
                           label: "Game Development Team",
@@ -380,14 +401,16 @@ const Header = () => {
                             background: "rgba(255, 255, 255, 0.05)",
                             backdropFilter: "blur(5px)",
                             display: "block",
-                            width: "100%"
+                            width: "100%",
                           }}
                           onMouseEnter={(e) => {
-                            e.target.style.background = "rgba(0, 255, 157, 0.1)";
+                            e.target.style.background =
+                              "rgba(0, 255, 157, 0.1)";
                             e.target.style.transform = "translateX(10px)";
                           }}
                           onMouseLeave={(e) => {
-                            e.target.style.background = "rgba(255, 255, 255, 0.05)";
+                            e.target.style.background =
+                              "rgba(255, 255, 255, 0.05)";
                             e.target.style.transform = "translateX(0)";
                           }}
                         >
@@ -413,18 +436,26 @@ const Header = () => {
                     marginTop: "auto",
                     textAlign: "center",
                     padding: "2rem 0",
-                    borderTop: "1px solid rgba(255, 255, 255, 0.1)"
+                    borderTop: "1px solid rgba(255, 255, 255, 0.1)",
                   }}
                 >
-                  <p style={{
-                    fontSize: "1.2rem",
-                    color: "rgba(255, 255, 255, 0.7)",
-                    marginBottom: "1rem"
-                  }}>Empowering Entrepreneurs</p>
-                  <p style={{
-                    fontSize: "0.9rem",
-                    color: "rgba(255, 255, 255, 0.5)"
-                  }}>© 2025 E-Cell KCCEMSR</p>
+                  <p
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "rgba(255, 255, 255, 0.7)",
+                      marginBottom: "1rem",
+                    }}
+                  >
+                    Empowering Entrepreneurs
+                  </p>
+                  <p
+                    style={{
+                      fontSize: "0.9rem",
+                      color: "rgba(255, 255, 255, 0.5)",
+                    }}
+                  >
+                    © 2025 E-Cell KCCEMSR
+                  </p>
                 </motion.div>
               </div>
             </motion.div>
