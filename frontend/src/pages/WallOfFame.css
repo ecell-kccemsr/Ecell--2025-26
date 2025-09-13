@@ -152,12 +152,22 @@
 .achievement-category,
 .achievement-year {
   padding: 0.4rem 1rem;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.95);
   border-radius: 20px;
   font-size: 0.8rem;
-  color: var(--accent-primary);
-  border: 1px solid var(--accent-primary);
+  color: #00FFA3;
+  font-weight: 500;
+  border: 1px solid #00FFA3;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 163, 0.1);
+}
+
+.achievement-category:hover,
+.achievement-year:hover {
+  background: rgba(0, 0, 0, 0.98);
+  box-shadow: 0 0 15px rgba(0, 255, 163, 0.2);
 }
 
 .achievement-content {
