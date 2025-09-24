@@ -155,6 +155,9 @@ const Header = () => {
                 <Link to="/teams/pr-finance" className="dropdown-item">
                   PR & Finance Team
                 </Link>
+                <Link to="/teams/blogging" className="dropdown-item">
+                  Blogging team
+                </Link>
               </motion.div>
             )}
           </div>
@@ -308,6 +311,8 @@ const Header = () => {
                         { to: "/teams/events", label: "Events Team" },
                         { to: "/teams/social", label: "Social Media Team" },
                         { to: "/teams/pr-finance", label: "PR & Finance Team" },
+                        { to: "/teams/blogging", label: "Blogging" },
+
                       ],
                     },
                   ].map((link, index) => (
