@@ -162,12 +162,7 @@ const Header = () => {
           <Link to="mailto:kccell@kccemsr.edu.in" className="nav-link">
             Contact Us
           </Link>
-          <Link
-            to="https://failurscafe.kcecell.org/"
-            className="nav-link admin-link"
-          >
-            Failurs's Cafe
-          </Link>
+        
         </div>
 
         {/* Mobile Menu Toggle Button */}
