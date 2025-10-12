@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import IntroSequence from "./components/IntroSequence";
 import LandingPage from "./components/LandingPage";
 import EventsPage from "./components/EventsPage";
@@ -25,7 +31,7 @@ function AppContent() {
   useEffect(() => {
     // Check if this is the first visit (intro not shown in this session)
     const introShown = sessionStorage.getItem("introShown");
-    
+
     // Show intro only on root path and if not shown before
     if (location.pathname === "/" && !introShown) {
       setShowIntro(true);

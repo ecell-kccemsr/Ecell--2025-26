@@ -124,7 +124,11 @@
 }
 
 .strategy-board {
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 59, 92, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.1) 0%,
+    rgba(255, 59, 92, 0.05) 100%
+  );
   border: 2px solid;
   border-image: linear-gradient(135deg, #ffd700, #ff3b5c) 1;
   padding: 1.5rem 2rem;
@@ -188,8 +192,7 @@
   position: absolute;
   width: 100px;
   height: 100px;
-  background: 
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+  background: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 20px 20px;
   opacity: 0.5;

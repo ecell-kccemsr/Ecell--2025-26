@@ -57,74 +57,74 @@ const WhyJoinSection = () => {
               x: useTransform(scrollYProgress, [0, 1], ["0%", "-66.66%"]),
             }}
           >
-          {sections.map((section, index) => (
-            <div key={section.id} className="scroll-section">
-              <div className="section-label">SECTOR {section.id}</div>
-              
-              <div className="section-content">
-                <div className="content-left">
-                  <motion.h3
-                    className="section-title"
-                    initial={{ opacity: 0, x: -50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                  >
-                    {section.title}
-                  </motion.h3>
-                  
+            {sections.map((section, index) => (
+              <div key={section.id} className="scroll-section">
+                <div className="section-label">SECTOR {section.id}</div>
+
+                <div className="section-content">
+                  <div className="content-left">
+                    <motion.h3
+                      className="section-title"
+                      initial={{ opacity: 0, x: -50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, delay: 0.2 }}
+                    >
+                      {section.title}
+                    </motion.h3>
+
+                    <motion.div
+                      className="title-underline"
+                      initial={{ width: 0 }}
+                      whileInView={{ width: "150px" }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, delay: 0.4 }}
+                    />
+
+                    <motion.p
+                      className="section-description"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, delay: 0.5 }}
+                    >
+                      {section.description}
+                    </motion.p>
+                  </div>
+
                   <motion.div
-                    className="title-underline"
-                    initial={{ width: 0 }}
-                    whileInView={{ width: "150px" }}
+                    className="content-right"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                  />
-                  
-                  <motion.p
-                    className="section-description"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.5 }}
+                    transition={{ duration: 0.8, delay: 0.3 }}
                   >
-                    {section.description}
-                  </motion.p>
+                    <div className="strategy-board">
+                      <div className="board-header">
+                        <span className="strategy-label">STRATEGY</span>
+                        <span className="board-text">BOARD</span>
+                      </div>
+                      <div className="board-content">{section.strategy}</div>
+                    </div>
+
+                    <div className="section-image">
+                      <img
+                        src={section.image}
+                        alt={section.title}
+                        onError={(e) => {
+                          e.target.style.display = "none";
+                        }}
+                      />
+                    </div>
+                  </motion.div>
                 </div>
 
-                <motion.div
-                  className="content-right"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.3 }}
-                >
-                  <div className="strategy-board">
-                    <div className="board-header">
-                      <span className="strategy-label">STRATEGY</span>
-                      <span className="board-text">BOARD</span>
-                    </div>
-                    <div className="board-content">{section.strategy}</div>
-                  </div>
-                  
-                  <div className="section-image">
-                    <img
-                      src={section.image}
-                      alt={section.title}
-                      onError={(e) => {
-                        e.target.style.display = "none";
-                      }}
-                    />
-                  </div>
-                </motion.div>
+                <div className="decorative-elements">
+                  <div className="grid-pattern grid-1"></div>
+                  <div className="grid-pattern grid-2"></div>
+                </div>
               </div>
-
-              <div className="decorative-elements">
-                <div className="grid-pattern grid-1"></div>
-                <div className="grid-pattern grid-2"></div>
-              </div>
-            </div>
-          ))}
+            ))}
           </motion.div>
         </div>
 
