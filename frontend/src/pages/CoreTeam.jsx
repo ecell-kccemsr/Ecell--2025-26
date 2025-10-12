@@ -24,10 +24,10 @@ const CoreTeam = () => {
           role: "President",
           department: "Leadership",
           linkedin_profile_url:
-            "https://www.linkedin.com/in/vivekapawar-?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+            "https://www.linkedin.com/in/vivekapawar",
           github_url: "https://github.com/GDVivekPawarr",
           instagram_url:
-            "https://www.instagram.com/vivekpawar5576?igsh=eWl6OXMyNmp4Mzl4",
+            "https://www.instagram.com/vivekpawar5576",
           imagePath: "/team/members/lead/vivek-pawar.jpg",
         },
         {
@@ -35,25 +35,95 @@ const CoreTeam = () => {
           role: "Vice President",
           department: "Leadership",
           linkedin_profile_url:
-            "https://www.linkedin.com/in/samrath-singh-hayer-4aa643318?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-          instagram_url: "https://instagram.com/samrat",
+            "https://www.linkedin.com/in/samrath-singh-hayer-4aa643318",
+          instagram_url: "https://www.instagram.com/s.samrath23/",
+          github_url: "https://github.com/shadowcodesinjava",
           imagePath: "/team/members/lead/samrath-singh.jpg",
         },
         {
           name: "Daman Randhawa",
           role: "Secretary",
           department: "Leadership",
-          linkedin_profile_url: "https://www.linkedin.com/in/daman-randhawa",
-          instagram_url: "https://instagram.com/damanrandhawa",
+          linkedin_profile_url: "https://www.linkedin.com/in/damandeep-randhawa",
+          instagram_url: "https://www.instagram.com/_damaaan_",
           imagePath: "/team/members/lead/daman-randhawa.jpg",
         },
-        // Web Development Team
+        {
+          name: "Vinay Vishwakarma",
+          role: "Finance Secretary",
+          department: "PR & Finance",
+          linkedin_profile_url: "https://www.linkedin.com/in/vinay-vishwakarma",
+          instagram_url: "https://www.instagram.com/itz_vinay_20_",
+          imagePath: "/team/members/pr-finance/vinay-vishwakarma.jpg",
+        },{
+          name: "Aryan Yadav",
+          role: "Head",
+          department: "Game Development",
+          linkedin_profile_url: "https://www.linkedin.com/in/aryan-yadav-4082ba298",
+          github_url: "https://github.com/aryanyadavpro",
+          imagePath: "/team/members/gamedev/aryan-yadav.jpg",
+        },
+        {
+          name: "Dhwani Tiwari",
+          role: "Blogger",
+          department: "Blogging",
+          linkedin_profile_url: "http://www.linkedin.com/in/dhwani-tiwari",
+          medium_url: "https://medium.com/@kcecell",
+          imagePath: "/team/members/blogging/dhwani-tiwari.jpg",
+
+        },
+        {
+          name: "Medhali Bangera",
+          role: "Head",
+          department: "Events",
+          linkedin_profile_url: "https://www.linkedin.com/in/medhali-bangera-5a8001297",
+          instagram_url: "https://www.instagram.com/_.yours_truly5",
+          imagePath: "/team/members/events/medhali-bangera.jpg",
+        },
+        {
+          name: "Aayush Kashid",
+          role: "Head",
+          department: "IoT & Hardware",
+          linkedin_profile_url: "https://www.linkedin.com/in/aayush-kashid-471790230",
+          github_url: "https://github.com/aayush-kc28",
+          instagram_url: "https://www.instagram.com/aayush_ak_77/",
+          imagePath: "/team/members/iot/aayush-kashid.jpg",
+
+        },
+        {
+          name: "Om Telgade",
+          role: "Head",
+          department: "Social Media",
+          linkedin_profile_url: "https://www.linkedin.com/in/om-telgade-1100a025b",
+          instagram_url: "https://www.instagram.com/om_telgade14",
+          github_url: "https://github.com/omtelgade14",
+          imagePath: "/team/members/social/om-telgade.jpg",
+        },
+
+        {
+          name: "Aryan Wesavkar",
+          role: "Co-head",
+          department: "Game Development",
+          linkedin_profile_url: "http://linkedin.com/in/aryan-w",
+          github_url: "https://github.com/25-THEBEaST-25",
+          imagePath: "/team/members/gamedev/aryan-wesavkar.jpg",
+        },{
+          name: "Shubham Gupta",
+          role: "Co-head",
+          department: "Social Media",
+          linkedin_profile_url: "https://www.linkedin.com/in/shubham-gupta-4b274b299",
+          instagram_url: "https://www.instagram.com/shubha.a.m",
+          twitter_url: "https://twitter.com/shubhamgupta",
+          imagePath: "/team/members/social/shubham-gupta.jpg",
+        },
+
         {
           name: "Raaj Patkar",
           role: "Head",
           department: "Web Development",
           linkedin_profile_url: "https://www.linkedin.com/in/raaj-patkar",
-          github_url: "https://github.com/raajpatkar",
+          github_url: "https://github.com/iraajp",
+          instagram_url: "https://www.instagram.com/raaj.builds",
           imagePath: "/team/members/webdev/raaj-patkar.jpg",
           badge: "Developer of this site",
         },
@@ -61,59 +131,38 @@ const CoreTeam = () => {
           name: "Krishna Mundhara",
           role: "Co-head",
           department: "Web Development",
-          linkedin_profile_url: "https://www.linkedin.com/in/krishna-mundhara",
+          linkedin_profile_url: "https://www.linkedin.com/in/krishna-mundhara-b6074933a/",
           github_url: "https://github.com/krishnamundhara",
           imagePath: "/team/members/webdev/krishna-mundhara.jpg",
         },
         // Game Development Team
+        
         {
-          name: "Aryan Yadav",
-          role: "Head",
-          department: "Game Development",
-          linkedin_profile_url: "https://www.linkedin.com/in/aryan-yadav",
-          github_url: "https://github.com/aryanyadav",
-          imagePath: "/team/members/gamedev/aryan-yadav.jpg",
+          name: "Daivik Pawar",
+          role: "PR Head",
+          department: "PR & Finance",
+          linkedin_profile_url: "https://www.linkedin.com/in/daivik-pawar-6146892a8/",
+          instagram_url: "https://www.instagram.com/sup.daivik/",
+          imagePath: "/team/members/pr-finance/daivik-pawar.jpg",
         },
-        {
-          name: "Aryan Wesavkar",
-          role: "Co-head",
-          department: "Game Development",
-          linkedin_profile_url: "https://www.linkedin.com/in/aryan-wesavkar",
-          github_url: "https://github.com/aryanwesavkar",
-          imagePath: "/team/members/gamedev/aryan-wesavkar.jpg",
-        },
-        // IoT & Hardware Team
-        {
-          name: "Aayush Kashid",
-          role: "Head",
-          department: "IoT & Hardware",
-          linkedin_profile_url: "https://www.linkedin.com/in/aayush-kashid",
-          github_url: "https://github.com/aayushkashid",
-          imagePath: "/team/members/iot/aayush-kashid.jpg",
-        },
+        
+        
         {
           name: "Prathmesh Ghude",
           role: "Co-head",
           department: "IoT & Hardware",
-          linkedin_profile_url: "https://www.linkedin.com/in/prathamesh-ghude",
-          github_url: "https://github.com/prathameshghude",
+          linkedin_profile_url: "https://www.linkedin.com/in/prathmesh-ghude-341b372b0/",
+          github_url: "https://github.com/prathmeshghude",
           imagePath: "/team/members/iot/prathmesh-ghude.jpg",
         },
-        // Events Team
-        {
-          name: "Medhali Bangera",
-          role: "Head",
-          department: "Events",
-          linkedin_profile_url: "https://www.linkedin.com/in/medhali-bangera",
-          instagram_url: "https://www.instagram.com/medhalibangera",
-          imagePath: "/team/members/events/medhali-bangera.jpg",
-        },
+    
+        
         {
           name: "Srishti Kotian",
           role: "Co-head",
           department: "Events",
-          linkedin_profile_url: "https://www.linkedin.com/in/srishti-kotian",
-          instagram_url: "https://www.instagram.com/srishtikotian",
+          linkedin_profile_url: "https://www.linkedin.com/in/srishti-kotian-3a9b9130b",
+          instagram_url: "https://www.instagram.com/_srishhhhhhh_",
           imagePath: "/team/members/events/srishti-kotian.jpg",
         },
         // Coordination Team
@@ -121,9 +170,7 @@ const CoreTeam = () => {
           name: "Devanshi Thakur",
           role: "Overall Coordinator",
           department: "Coordination",
-          linkedin_profile_url: "https://www.linkedin.com/in/devanshi-thakur",
-          instagram_url: "https://www.instagram.com/devanshithakur",
-          github_url: "https://github.com/sudobaddie",
+          
           imagePath: "/team/members/coordination/devanshi-thakur.jpg",
         },
         {
@@ -131,53 +178,17 @@ const CoreTeam = () => {
           role: "Deputy Overall Coordinator",
           department: "Coordination",
           linkedin_profile_url:
-            "https://www.linkedin.com/in/tanushree-karwatkar",
-          instagram_url: "https://www.instagram.com/tanushreekarwatkar",
+            "https://www.linkedin.com/in/tanushree-karwatkar-8341382a3",
+          instagram_url: "https://www.instagram.com/tanushreekarwatkar111",
+          github_url: "https://github.com/tanushreekarwatkar",
           imagePath: "/team/members/coordination/tanushree-karwatkar.jpg",
         },
         // Social Media Team
-        {
-          name: "Shubham Gupta",
-          role: "Co-head",
-          department: "Social Media",
-          linkedin_profile_url: "https://www.linkedin.com/in/shubham-gupta",
-          instagram_url: "https://www.instagram.com/shubhamgupta",
-          twitter_url: "https://twitter.com/shubhamgupta",
-          imagePath: "/team/members/social/shubham-gupta.jpg",
-        },
-        {
-          name: "Om Telgade",
-          role: "Head",
-          department: "Social Media",
-          linkedin_profile_url: "https://www.linkedin.com/in/om-telgade",
-          instagram_url: "https://www.instagram.com/omtelgade",
-          twitter_url: "https://twitter.com/omtelgade",
-          imagePath: "/team/members/social/om-telgade.jpg",
-        },
+        
+        
         // PR & Finance Team
-        {
-          name: "Vinay Vishwakarma",
-          role: "Finance Secretary",
-          department: "PR & Finance",
-          linkedin_profile_url: "https://www.linkedin.com/in/vinay-vishwakarma",
-          imagePath: "/team/members/pr-finance/vinay-vishwakarma.jpg",
-        },
-        {
-          name: "Daivik Pawar",
-          role: "PR Head",
-          department: "PR & Finance",
-          linkedin_profile_url: "https://www.linkedin.com/in/daivik-pawar",
-          imagePath: "/team/members/pr-finance/daivik-pawar.jpg",
-        },
-        // Blogging Team
-        {
-          name: "Dhwani Tiwari",
-          role: "Blogger",
-          department: "Blogging",
-          linkedin_profile_url: "https://www.linkedin.com/in/dhwani-tiwari",
-          medium_url: "https://medium.com/@dhwanitiwari",
-          imagePath: "/team/members/blogging/dhwani-tiwari.jpg",
-        },
+        
+        
       ],
     },
     // Add new semesters here - they will appear at the top
