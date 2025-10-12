@@ -7,6 +7,7 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isTeamsDropdownOpen, setIsTeamsDropdownOpen] = useState(false);
+  const [isMenuExpanded, setIsMenuExpanded] = useState(false);
 
   // Check if device is mobile
   useEffect(() => {
@@ -53,6 +54,10 @@ const Header = () => {
     setIsMobileMenuOpen(false);
   };
 
+  const toggleMenu = () => {
+    setIsMenuExpanded(!isMenuExpanded);
+  };
+
   const mobileMenuVariants = {
     closed: {
       opacity: 0,
@@ -91,82 +96,78 @@ const Header = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
-      <nav className="navbar">
-        <a href="/" className="brand">
+      <nav className="navbar centered-navbar">
+        {/* Left Navigation Links */}
+        <AnimatePresence>
+          {isMenuExpanded && (
+            <motion.div
+              className="nav-links left-nav"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 50 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
+              <Link to="/" className="highlighted-link">
+                Home
+              </Link>
+
+              <Link to="/about" className="nav-link">
+                About
+              </Link>
+
+              <Link to="https://events.kcecell.org/" className="nav-link">
+                Events
+              </Link>
+
+              <Link to="/projects" className="nav-link">
+                Projects
+              </Link>
+
+              <Link to="/wall-of-fame" className="nav-link">
+                Wall of Fame
+              </Link>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Center Logo */}
+        <motion.div
+          className="brand center-logo"
+          onClick={toggleMenu}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          style={{ cursor: "pointer" }}
+        >
           <Logo
             style={{ width: "64px", height: "64px", background: "transparent" }}
           />
           <span className="brand-text"></span>
-        </a>
+        </motion.div>
 
-        {/* Desktop Navigation Links */}
-        <div className="nav-links desktop-nav">
-          <Link to="https://events.kcecell.org/" className="nav-link">
-            Events
-          </Link>
+        {/* Right Navigation Links */}
+        <AnimatePresence>
+          {isMenuExpanded && (
+            <motion.div
+              className="nav-links right-nav"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
+              <Link to="/mentor" className="nav-link">
+                Our Mentors
+              </Link>
 
-          <Link to="/projects" className="nav-link">
-            Projects
-          </Link>
+              <Link to="/team" className="nav-link">
+                Team
+              </Link>
 
-          <Link to="/wall-of-fame" className="nav-link">
-            Wall of Fame
-          </Link>
-
-          <Link to="/mentor" className="nav-link">
-            Our Mentors
-          </Link>
-
-          <div
-            className="nav-link teams-dropdown"
-            onMouseEnter={() => setIsTeamsDropdownOpen(true)}
-            onMouseLeave={() => setIsTeamsDropdownOpen(false)}
-          >
-            <span>Teams</span>
-            {isTeamsDropdownOpen && (
-              <motion.div
-                className="dropdown-content"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Link to="/teams/lead" className="dropdown-item">
-                  Leadership Team
-                </Link>
-                <Link to="/teams/web-development" className="dropdown-item">
-                  Web Development Team
-                </Link>
-                <Link to="/teams/game-development" className="dropdown-item">
-                  Game Development Team
-                </Link>
-                <Link to="/teams/iot" className="dropdown-item">
-                  IoT & Hardware Team
-                </Link>
-                <Link to="/teams/coordination" className="dropdown-item">
-                  Coordination Team
-                </Link>
-                <Link to="/teams/events" className="dropdown-item">
-                  Events Team
-                </Link>
-                <Link to="/teams/social-media" className="dropdown-item">
-                  Social Media Team
-                </Link>
-                <Link to="/teams/pr-finance" className="dropdown-item">
-                  PR & Finance Team
-                </Link>
-                <Link to="/teams/blogging" className="dropdown-item">
-                  Blogging team
-                </Link>
-              </motion.div>
-            )}
-          </div>
-
-          <Link to="mailto:kccell@kccemsr.edu.in" className="nav-link">
-            Contact Us
-          </Link>
-        
-        </div>
+              <Link to="mailto:kccell@kccemsr.edu.in" className="nav-link">
+                Contact Us
+              </Link>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Mobile Menu Toggle Button */}
         <motion.div
@@ -287,34 +288,12 @@ const Header = () => {
                 >
                   {[
                     { to: "/", label: "Home" },
+                    { to: "/about", label: "About" },
                     { to: "/events", label: "Events" },
                     { to: "/projects", label: "Projects" },
                     { to: "/wall-of-fame", label: "Wall of Fame" },
                     { to: "/mentor", label: "Our Mentors" },
-                    {
-                      label: "Teams",
-                      submenu: [
-                        { to: "/teams/lead", label: "Leadership Team" },
-                        {
-                          to: "/teams/web-development",
-                          label: "Web Development Team",
-                        },
-                        {
-                          to: "/teams/game-development",
-                          label: "Game Development Team",
-                        },
-                        { to: "/teams/iot", label: "IoT & Hardware Team" },
-                        {
-                          to: "/teams/coordination",
-                          label: "Coordination Team",
-                        },
-                        { to: "/teams/events", label: "Events Team" },
-                        { to: "/teams/social", label: "Social Media Team" },
-                        { to: "/teams/pr-finance", label: "PR & Finance Team" },
-                        { to: "/teams/blogging", label: "Blogging" },
-
-                      ],
-                    },
+                    { to: "/team", label: "Team" },
                   ].map((link, index) => (
                     <motion.div
                       key={link.to}
@@ -322,73 +301,34 @@ const Header = () => {
                       custom={index}
                       className="mobile-menu-item"
                     >
-                      {link.submenu ? (
-                        <div className="mobile-submenu">
-                          <div className="mobile-nav-link submenu-label">
-                            {link.label}
-                          </div>
-                          <div className="submenu-items">
-                            {link.submenu.map((sublink, subIndex) => (
-                              <Link
-                                key={subIndex}
-                                to={sublink.to}
-                                className="mobile-nav-link submenu-item"
-                                onClick={closeMobileMenu}
-                              >
-                                {sublink.label}
-                              </Link>
-                            ))}
-                          </div>
-                        </div>
-                      ) : link.scroll ? (
-                        <a
-                          href="#about"
-                          className={`mobile-nav-link ${link.className || ""}`}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            closeMobileMenu();
-                            const aboutSection =
-                              document.getElementById("about");
-                            if (aboutSection) {
-                              aboutSection.scrollIntoView({
-                                behavior: "smooth",
-                              });
-                            }
-                          }}
-                        >
-                          {link.label}
-                        </a>
-                      ) : (
-                        <Link
-                          to={link.to}
-                          className={`mobile-nav-link ${link.className || ""}`}
-                          onClick={closeMobileMenu}
-                          style={{
-                            fontSize: "1.5rem",
-                            color: "#fff",
-                            textDecoration: "none",
-                            padding: "1rem",
-                            borderRadius: "10px",
-                            transition: "all 0.3s ease",
-                            background: "rgba(255, 255, 255, 0.05)",
-                            backdropFilter: "blur(5px)",
-                            display: "block",
-                            width: "100%",
-                          }}
-                          onMouseEnter={(e) => {
-                            e.target.style.background =
-                              "rgba(0, 255, 157, 0.1)";
-                            e.target.style.transform = "translateX(10px)";
-                          }}
-                          onMouseLeave={(e) => {
-                            e.target.style.background =
-                              "rgba(255, 255, 255, 0.05)";
-                            e.target.style.transform = "translateX(0)";
-                          }}
-                        >
-                          {link.label}
-                        </Link>
-                      )}
+                      <Link
+                        to={link.to}
+                        className={`mobile-nav-link ${link.className || ""}`}
+                        onClick={closeMobileMenu}
+                        style={{
+                          fontSize: "1.5rem",
+                          color: "#fff",
+                          textDecoration: "none",
+                          padding: "1rem",
+                          borderRadius: "10px",
+                          transition: "all 0.3s ease",
+                          background: "rgba(255, 255, 255, 0.05)",
+                          backdropFilter: "blur(5px)",
+                          display: "block",
+                          width: "100%",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.target.style.background = "rgba(0, 255, 157, 0.1)";
+                          e.target.style.transform = "translateX(10px)";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.background =
+                            "rgba(255, 255, 255, 0.05)";
+                          e.target.style.transform = "translateX(0)";
+                        }}
+                      >
+                        {link.label}
+                      </Link>
                     </motion.div>
                   ))}
 

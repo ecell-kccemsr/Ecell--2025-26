@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Header from "./Header";
 import HeroSection from "./HeroSection";
-import AboutSection from "./AboutSection";
+import WhyJoinSection from "./WhyJoinSection";
 import AchievementsSection from "./AchievementsSection";
 import GoalsSection from "./GoalsSection.jsx";
 import Footer from "./Footer";
@@ -34,7 +34,7 @@ const LandingPage = () => {
       >
         <Header />
         <HeroSection />
-        <AboutSection />
+        <WhyJoinSection />
         <AchievementsSection />
         <GoalsSection />
         <Footer />

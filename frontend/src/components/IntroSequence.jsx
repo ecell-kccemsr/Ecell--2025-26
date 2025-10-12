@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import Logo from "./Logo";
+import { motion, AnimatePresence } from "framer-motion";
+import "./IntroSequence.css";
 
 const IntroSequence = ({ onComplete }) => {
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [stage, setStage] = useState("logo"); // logo -> video -> fade
   const [isVisible, setIsVisible] = useState(true);
 
   // Prevent scrolling during intro
@@ -14,66 +14,137 @@ const IntroSequence = ({ onComplete }) => {
     };
   }, []);
 
+  // Stage progression
   useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const progress = Math.min(scrolled / windowHeight, 1);
-      setScrollProgress(progress);
+    // Logo stage (2 seconds)
+    const logoTimer = setTimeout(() => {
+      setStage("video");
+    }, 2000);
 
-      // Auto-complete the intro if user tries to scroll
-      if (progress > 0) {
-        setScrollProgress(1);
-        setTimeout(() => {
-          setIsVisible(false);
-          if (onComplete) onComplete();
-          window.scrollTo({ top: 0, behavior: "smooth" });
-          document.body.style.overflow = "auto";
-        }, 500);
+    return () => clearTimeout(logoTimer);
+  }, []);
+
+  // Handle video end
+  const handleVideoEnd = () => {
+    setStage("fade");
+    setTimeout(() => {
+      setIsVisible(false);
+      if (onComplete) onComplete();
+      document.body.style.overflow = "auto";
+    }, 800);
+  };
+
+  // Allow skip with click or key press
+  const handleSkip = () => {
+    setStage("fade");
+    setTimeout(() => {
+      setIsVisible(false);
+      if (onComplete) onComplete();
+      document.body.style.overflow = "auto";
+    }, 500);
+  };
+
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === "Enter" || e.key === "Escape" || e.key === " ") {
+        handleSkip();
       }
     };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [onComplete]);
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
+  }, []);
 
   if (!isVisible) return null;
 
   return (
-    <motion.div
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100vw",
-        height: "100vh",
-        background: "#0a0a0a",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        zIndex: 9999,
-      }}
-      animate={{
-        opacity: 1 - scrollProgress,
-      }}
-      transition={{ duration: 0.3 }}
-    >
+    <AnimatePresence>
       <motion.div
-        animate={{
-          scale: 1 + scrollProgress * 2,
-          opacity: 1 - scrollProgress,
-        }}
-        transition={{ duration: 0.3 }}
+        className="intro-sequence"
+        initial={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.8 }}
+        onClick={handleSkip}
       >
-        <Logo
-          style={{
-            width: "120px",
-            height: "120px",
-            filter: `blur(${scrollProgress * 10}px)`,
-          }}
-        />
+        {/* Skip Hint */}
+        <motion.div
+          className="skip-hint"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.7 }}
+          transition={{ delay: 1, duration: 1 }}
+        >
+          Click anywhere or press Enter to skip
+        </motion.div>
+
+        {/* Logo Stage */}
+        <AnimatePresence>
+          {stage === "logo" && (
+            <motion.div
+              className="logo-stage"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.2 }}
+              transition={{ duration: 0.8 }}
+            >
+              <motion.img
+                src="/ecelllogo.jpg"
+                alt="E-Cell Logo"
+                className="intro-logo"
+                initial={{ rotate: -10, scale: 0.9 }}
+                animate={{ rotate: 0, scale: 1 }}
+                transition={{
+                  duration: 1.5,
+                  ease: "easeOut",
+                }}
+              />
+              <motion.div
+                className="logo-glow"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: [0, 0.5, 0] }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Video Stage */}
+        <AnimatePresence>
+          {stage === "video" && (
+            <motion.div
+              className="video-stage"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <video
+                className="intro-video"
+                autoPlay
+                muted
+                playsInline
+                onEnded={handleVideoEnd}
+              >
+                <source src="/video.webm" type="video/webm" />
+                Your browser does not support the video tag.
+              </video>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Fade Stage */}
+        {stage === "fade" && (
+          <motion.div
+            className="fade-stage"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 0 }}
+            transition={{ duration: 0.8 }}
+          />
+        )}
       </motion.div>
-    </motion.div>
+    </AnimatePresence>
   );
 };
 

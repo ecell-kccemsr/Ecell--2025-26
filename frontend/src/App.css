@@ -98,6 +98,13 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+.highlight-subtitle {
+  font-size: 1.2 rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
 .cta-btn {
   padding: 16px 32px;
@@ -186,6 +193,39 @@ body {
   padding: 0 20px;
 }
 
+.centered-navbar {
+  justify-content: center;
+  position: relative;
+}
+
+.center-logo {
+  z-index: 10;
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.center-logo::after {
+  content: "Click to expand";
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.center-logo:hover::after {
+  opacity: 0.7;
+}
+
+.center-logo:hover {
+  transform: scale(1.1);
+}
+
 .nav-brand {
   display: flex;
   align-items: center;
@@ -209,6 +249,22 @@ body {
 }
 
 .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.left-nav {
+  position: absolute;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.right-nav {
+  position: absolute;
+  right: 20px;
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -295,7 +351,6 @@ body {
 .dropdown-item:hover {
   background: rgba(0, 255, 157, 0.1);
   color: var(--accent-primary);
-  
 }
 
 .login-btn {
@@ -1803,6 +1858,13 @@ body {
    RESPONSIVE DESIGN
    ================================ */
 
+/* Desktop-only menu visibility */
+@media (min-width: 1025px) {
+  .mobile-menu-toggle {
+    display: none;
+  }
+}
+
 @media (max-width: 1024px) {
   .hero-content,
   .about-content,
@@ -1818,6 +1880,11 @@ body {
   /* Show mobile menu on tablets too */
   .desktop-nav {
     display: none;
+  }
+
+  .left-nav,
+  .right-nav {
+    display: none !important;
   }
 
   .mobile-menu-toggle {
@@ -1843,12 +1910,21 @@ body {
     display: none;
   }
 
+  .left-nav,
+  .right-nav {
+    display: none !important;
+  }
+
   .mobile-menu-toggle {
     display: flex;
   }
 
   .mobile-menu-dropdown {
     width: 100%;
+  }
+
+  .center-logo {
+    position: relative;
   }
 
   .hero-title {
