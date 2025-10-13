@@ -81,28 +81,31 @@
   text-align: justify;
 }
 
-.mission-image{ 
+.mission-image{
   position: relative;
   border-radius: 25px;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 255, 157, 0.2);
-  height: 500px;
-}
-  
-}
-.vision-image {
-  position: relative;
-  border-radius: 25px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 255, 157, 0.2);
+  height: 500px;  /* Fixed height for image */
+  width: 100%;
 }
 
+.vision-image{
+  position: relative;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 255, 157, 0.2);
+
+}
 .rounded-image {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
+  object-fit: cover;
   border-radius: 20px;
   transition: transform 0.5s ease;
+  object-fit: cover;  /* Makes images cover the container without distortion */
+  object-position: center;  /* Centers the image within the container */
 }
 
 .mission-image:hover .rounded-image,
@@ -121,7 +124,7 @@
 }
 
 .vision-content {
-  display: relative;
+  display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
   align-items: center;
