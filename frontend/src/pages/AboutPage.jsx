@@ -191,7 +191,7 @@ const AboutPage = () => {
           >
             <motion.div className="vision-image" variants={itemVariants}>
               <img
-                src="/img1.png"
+                src="/img12.jpg"
                 alt="E-Cell Vision"
                 className="rounded-image"
               />
