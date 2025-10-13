@@ -15,7 +15,7 @@ const WhyJoinSection = () => {
       title: "WE IDEATE",
       description:
         "We brainstorm for new ideas and chalk up a path to implement them successfully.",
-      image: "/img1.svg",
+      image: "/img78.png",
       strategy: "Brainstorm: Cloud Sprint",
     },
     {
@@ -23,7 +23,7 @@ const WhyJoinSection = () => {
       title: "WE INNOVATE",
       description:
         "We transform ideas into reality through cutting-edge solutions and creative problem-solving.",
-      image: "/img2.svg",
+      image: "/img79.png",
       strategy: "Strategy: Open Source Drive",
     },
     {
@@ -31,24 +31,16 @@ const WhyJoinSection = () => {
       title: "WE COLLABORATE",
       description:
         "We help to hone intelligent minds and develop a dynamic environment through dialogue.",
-      image: "/img3.svg",
+      image: "/img80.png",
       strategy: "Team Radio LIVE: 'Radio check, driver?'",
     },
   ];
 
   return (
     <section className="why-join-section" ref={containerRef}>
+      
       <div className="horizontal-scroll-wrapper">
-        <div className="why-join-header">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            WHY JOIN <span className="highlight">E-CELL KCCEMSR</span>
-          </motion.h2>
-        </div>
+       
 
         <div className="horizontal-scroll-container">
           <motion.div
@@ -58,7 +50,16 @@ const WhyJoinSection = () => {
             }}
           >
             {sections.map((section, index) => (
-              <div key={section.id} className="scroll-section">
+              <div 
+                key={section.id} 
+                className="scroll-section"
+                style={{
+                  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${section.image})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  backgroundRepeat: 'no-repeat'
+                }}
+              >
                 <div className="section-label">SECTOR {section.id}</div>
 
                 <div className="section-content">
@@ -105,16 +106,6 @@ const WhyJoinSection = () => {
                         <span className="board-text">BOARD</span>
                       </div>
                       <div className="board-content">{section.strategy}</div>
-                    </div>
-
-                    <div className="section-image">
-                      <img
-                        src={section.image}
-                        alt={section.title}
-                        onError={(e) => {
-                          e.target.style.display = "none";
-                        }}
-                      />
                     </div>
                   </motion.div>
                 </div>

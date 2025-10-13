@@ -19,7 +19,7 @@ const IntroSequence = ({ onComplete }) => {
     // Logo stage (2 seconds)
     const logoTimer = setTimeout(() => {
       setStage("video");
-    }, 2000);
+    }, 20000);
 
     return () => clearTimeout(logoTimer);
   }, []);

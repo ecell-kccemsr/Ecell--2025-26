@@ -255,7 +255,7 @@ const Header = () => {
                     }}
                   >
                     <img
-                      src="/ecelllogo.jpg"
+                      src="/img2.png"
                       alt="E-Cell logo"
                       className="mobile-logo"
                       style={{

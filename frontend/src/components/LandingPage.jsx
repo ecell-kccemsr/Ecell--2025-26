@@ -2,11 +2,13 @@ import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Header from "./Header";
+
 import HeroSection from "./HeroSection";
 import WhyJoinSection from "./WhyJoinSection";
 import AchievementsSection from "./AchievementsSection";
 import GoalsSection from "./GoalsSection.jsx";
 import Footer from "./Footer";
+import WhyNot from "./whynot.jsx";
 
 const LandingPage = () => {
   const parallaxRef = useRef(null);
@@ -33,7 +35,9 @@ const LandingPage = () => {
         transition={{ duration: 0.5 }}
       >
         <Header />
+        
         <HeroSection />
+        <WhyNot />
         <WhyJoinSection />
         <AchievementsSection />
         <GoalsSection />
