@@ -81,13 +81,20 @@
   text-align: justify;
 }
 
-.mission-image,
+.mission-image{  position: relative;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 255, 157, 0.2);
+  height: 500px;
+}
+  
+}
 .vision-image {
   position: relative;
   border-radius: 25px;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 255, 157, 0.2);
-  height: 500px;
+  /* height: 500px; */
 }
 
 .rounded-image {
