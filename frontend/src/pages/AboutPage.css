@@ -84,7 +84,7 @@
 .mission-image,
 .vision-image {
   position: relative;
-  border-radius: 20px;
+  border-radius: 25px;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 255, 157, 0.2);
 }
@@ -113,7 +113,7 @@
 }
 
 .vision-content {
-  display: grid;
+  display: relative;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
   align-items: center;
