@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useNavigate,
-  useLocation,
 } from "react-router-dom";
-import IntroSequence from "./components/IntroSequence";
 import LandingPage from "./components/LandingPage";
 import AboutPage from "./pages/AboutPage";
 import MentorPage from "./pages/MentorPage";
@@ -17,28 +14,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
 
 function AppContent() {
-  const [showIntro, setShowIntro] = useState(false);
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    // Check if this is the first visit (intro not shown in this session)
-    const introShown = sessionStorage.getItem("introShown");
-
-    // Show intro only on root path and if not shown before
-    if (location.pathname === "/" && !introShown) {
-      setShowIntro(true);
-      sessionStorage.setItem("introShown", "true");
-    }
-  }, [location.pathname]);
-
-  const handleIntroComplete = () => {
-    setShowIntro(false);
-  };
-
   return (
     <div className="App">
-      {showIntro && <IntroSequence onComplete={handleIntroComplete} />}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<AboutPage />} />
