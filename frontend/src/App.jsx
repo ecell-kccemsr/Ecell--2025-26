@@ -8,18 +8,11 @@ import {
 } from "react-router-dom";
 import IntroSequence from "./components/IntroSequence";
 import LandingPage from "./components/LandingPage";
-import EventsPage from "./components/EventsPage";
-import ContactPage from "./components/ContactPage";
-import LoginPage from "./components/LoginPage";
-import ResetPasswordPage from "./components/ResetPasswordPage";
-import EmailVerificationPage from "./components/EmailVerificationPage";
 import AboutPage from "./pages/AboutPage";
 import MentorPage from "./pages/MentorPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import WallOfFame from "./pages/WallOfFame";
 import CoreTeam from "./pages/CoreTeam";
-
-import AdminDashboard from "./components/AdminDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
 
@@ -49,26 +42,12 @@ function AppContent() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/events" element={<EventsPage />} />
         <Route path="/mentor" element={<MentorPage />} />
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/wall-of-fame" element={<WallOfFame />} />
 
         {/* Core Team Route */}
         <Route path="/team" element={<CoreTeam />} />
-
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/reset-password" element={<ResetPasswordPage />} />
-        <Route path="/verify-email" element={<EmailVerificationPage />} />
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute requireAdmin={true}>
-              <AdminDashboard />
-            </ProtectedRoute>
-          }
-        />
       </Routes>
     </div>
   );
