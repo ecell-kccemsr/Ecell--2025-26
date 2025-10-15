@@ -32,7 +32,7 @@ const WhyNot = () => {
             marginBottom: "1rem",
           }}
         >
-          WHY JOIN <span className="highlight">ECELL</span>
+          WHY JOIN <span className="highlight">ECELL</span>?
         </motion.h1>
       </div>
     </section>

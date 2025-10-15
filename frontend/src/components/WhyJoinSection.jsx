@@ -38,10 +38,7 @@ const WhyJoinSection = () => {
 
   return (
     <section className="why-join-section" ref={containerRef}>
-      
       <div className="horizontal-scroll-wrapper">
-       
-
         <div className="horizontal-scroll-container">
           <motion.div
             className="horizontal-scroll-content"
@@ -50,14 +47,14 @@ const WhyJoinSection = () => {
             }}
           >
             {sections.map((section, index) => (
-              <div 
-                key={section.id} 
+              <div
+                key={section.id}
                 className="scroll-section"
                 style={{
                   backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${section.image})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat'
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
                 }}
               >
                 <div className="section-label">SECTOR {section.id}</div>

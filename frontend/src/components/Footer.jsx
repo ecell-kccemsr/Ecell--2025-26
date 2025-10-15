@@ -134,7 +134,7 @@ const Footer = () => {
           <div className="footer-divider"></div>
           <div className="footer-bottom-content justify center">
             <p className="copyright">
-              © 2025 E-Cell. All rights reserved. | Built with ❤️ by Raaj Patkar
+              © 2025 E-Cell. All rights reserved. | Built with ❤️ by <a href="https://github.com/iraajp" target="_blank" rel="noopener noreferrer">Raaj Patkar</a>, <a href="https://github.com/krishnamundhara" target="_blank" rel="noopener noreferrer">Krishna Mundhara</a>
             </p>
           </div>
         </div>
