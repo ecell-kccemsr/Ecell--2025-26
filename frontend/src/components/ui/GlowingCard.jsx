@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
-import './GlowingCard.css';
+import React, { useEffect, useRef } from "react";
+import "./GlowingCard.css";
 
-const GlowingCard = ({ children, className = '' }) => {
+const GlowingCard = ({ children, className = "" }) => {
   const cardRef = useRef(null);
 
   useEffect(() => {
@@ -13,14 +13,14 @@ const GlowingCard = ({ children, className = '' }) => {
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
-      card.style.setProperty('--mouse-x', `${x}px`);
-      card.style.setProperty('--mouse-y', `${y}px`);
+      card.style.setProperty("--mouse-x", `${x}px`);
+      card.style.setProperty("--mouse-y", `${y}px`);
     };
 
-    card.addEventListener('mousemove', handleMouseMove);
+    card.addEventListener("mousemove", handleMouseMove);
 
     return () => {
-      card.removeEventListener('mousemove', handleMouseMove);
+      card.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 

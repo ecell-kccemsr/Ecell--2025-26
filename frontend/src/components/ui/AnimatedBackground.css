@@ -9,7 +9,8 @@
   position: absolute;
   width: 250vw;
   height: 1.5px;
-  background: linear-gradient(90deg, 
+  background: linear-gradient(
+    90deg,
     transparent,
     rgba(0, 255, 127, 0.2),
     rgba(0, 255, 127, 0.4),

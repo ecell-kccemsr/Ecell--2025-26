@@ -15,8 +15,8 @@ const Header = () => {
       setIsMobile(window.innerWidth <= 768);
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   // Close mobile menu when clicking outside
@@ -70,12 +70,12 @@ const Header = () => {
         zIndex: 1000,
         backdropFilter: "blur(10px)",
         backgroundColor: "rgba(10, 10, 10, 0.85)",
-        borderBottom: "1px solid rgba(255, 255, 255, 0.1)"
+        borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
       }}
     >
-      <nav 
-        className="navbar centered-navbar" 
-        style={{ 
+      <nav
+        className="navbar centered-navbar"
+        style={{
           padding: "0.5rem 1rem",
           position: "relative",
           display: "flex",
@@ -83,7 +83,7 @@ const Header = () => {
           alignItems: "center",
           maxWidth: "1200px",
           margin: "0 auto",
-          width: "100%"
+          width: "100%",
         }}
       >
         {/* Left Navigation Links */}
@@ -96,11 +96,21 @@ const Header = () => {
               exit={{ opacity: 0, x: 50 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
             >
-              <Link to="/" className="highlighted-link">Home</Link>
-              <Link to="/about" className="nav-link">About</Link>
-              <Link to="https://events.kcecell.org/" className="nav-link">Events</Link>
-              <Link to="/projects" className="nav-link">Projects</Link>
-              <Link to="/wall-of-fame" className="nav-link">Wall of Fame</Link>
+              <Link to="/" className="highlighted-link">
+                Home
+              </Link>
+              <Link to="/about" className="nav-link">
+                About
+              </Link>
+              <Link to="https://events.kcecell.org/" className="nav-link">
+                Events
+              </Link>
+              <Link to="/projects" className="nav-link">
+                Projects
+              </Link>
+              <Link to="/wall-of-fame" className="nav-link">
+                Wall of Fame
+              </Link>
             </motion.div>
           )}
         </AnimatePresence>
@@ -113,7 +123,9 @@ const Header = () => {
           whileTap={{ scale: 0.95 }}
           style={{ cursor: "pointer" }}
         >
-          <Logo style={{ width: "64px", height: "64px", background: "transparent" }} />
+          <Logo
+            style={{ width: "64px", height: "64px", background: "transparent" }}
+          />
           <span className="brand-text"></span>
         </motion.div>
 
@@ -127,9 +139,15 @@ const Header = () => {
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
             >
-              <Link to="/mentor" className="nav-link">Our Mentors</Link>
-              <Link to="/team" className="nav-link">Team</Link>
-              <Link to="mailto:kccell@kccemsr.edu.in" className="nav-link">Contact Us</Link>
+              <Link to="/mentor" className="nav-link">
+                Our Mentors
+              </Link>
+              <Link to="/team" className="nav-link">
+                Team
+              </Link>
+              <Link to="mailto:kccell@kccemsr.edu.in" className="nav-link">
+                Contact Us
+              </Link>
             </motion.div>
           )}
         </AnimatePresence>
@@ -155,10 +173,12 @@ const Header = () => {
             width: "40px",
             height: "40px",
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
-          <motion.div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+          <motion.div
+            style={{ display: "flex", flexDirection: "column", gap: "6px" }}
+          >
             {[1, 2, 3].map((_, i) => (
               <motion.span
                 key={i}
@@ -170,11 +190,12 @@ const Header = () => {
                   transition: "all 0.3s ease",
                   transformOrigin: "center",
                   opacity: i === 1 && isMobileMenuOpen ? 0 : 1,
-                  transform: isMobileMenuOpen && i === 0 
-                    ? "rotate(45deg) translate(5px, 5px)"
-                    : isMobileMenuOpen && i === 2
-                    ? "rotate(-45deg) translate(5px, -5px)"
-                    : "none"
+                  transform:
+                    isMobileMenuOpen && i === 0
+                      ? "rotate(45deg) translate(5px, 5px)"
+                      : isMobileMenuOpen && i === 2
+                      ? "rotate(-45deg) translate(5px, -5px)"
+                      : "none",
                 }}
               />
             ))}
@@ -206,12 +227,15 @@ const Header = () => {
               overflowY: "auto",
             }}
           >
-            <div className="mobile-menu-content" style={{
-              padding: "2rem",
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-            }}>
+            <div
+              className="mobile-menu-content"
+              style={{
+                padding: "2rem",
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
               <motion.div
                 className="mobile-menu-header"
                 initial={{ opacity: 0, y: -20 }}
@@ -224,11 +248,14 @@ const Header = () => {
                   marginBottom: "3rem",
                 }}
               >
-                <div className="mobile-brand" style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "1rem",
-                }}>
+                <div
+                  className="mobile-brand"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "1rem",
+                  }}
+                >
                   <img
                     src="/img2.png"
                     alt="E-Cell logo"
@@ -239,22 +266,28 @@ const Header = () => {
                       borderRadius: "10px",
                     }}
                   />
-                  <span className="mobile-brand-text" style={{
-                    fontSize: "1.5rem",
-                    fontWeight: "bold",
-                    color: "#00ff9d",
-                  }}>
+                  <span
+                    className="mobile-brand-text"
+                    style={{
+                      fontSize: "1.5rem",
+                      fontWeight: "bold",
+                      color: "#00ff9d",
+                    }}
+                  >
                     We Build !!
                   </span>
                 </div>
               </motion.div>
 
-              <div className="mobile-menu-links" style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "1.5rem",
-                flex: 1,
-              }}>
+              <div
+                className="mobile-menu-links"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "1.5rem",
+                  flex: 1,
+                }}
+              >
                 {[
                   { to: "/", label: "Home" },
                   { to: "/about", label: "About" },
@@ -306,17 +339,21 @@ const Header = () => {
                   borderTop: "1px solid rgba(255, 255, 255, 0.1)",
                 }}
               >
-                <p style={{
-                  fontSize: "1.2rem",
-                  color: "rgba(255, 255, 255, 0.7)",
-                  marginBottom: "1rem",
-                }}>
+                <p
+                  style={{
+                    fontSize: "1.2rem",
+                    color: "rgba(255, 255, 255, 0.7)",
+                    marginBottom: "1rem",
+                  }}
+                >
                   Empowering Entrepreneurs
                 </p>
-                <p style={{
-                  fontSize: "0.9rem",
-                  color: "rgba(255, 255, 255, 0.5)",
-                }}>
+                <p
+                  style={{
+                    fontSize: "0.9rem",
+                    color: "rgba(255, 255, 255, 0.5)",
+                  }}
+                >
                   © 2025 E-Cell KCCEMSR
                 </p>
               </motion.div>

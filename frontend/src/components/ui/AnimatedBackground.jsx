@@ -1,5 +1,5 @@
-import React from 'react';
-import './AnimatedBackground.css';
+import React from "react";
+import "./AnimatedBackground.css";
 
 const AnimatedBackground = () => {
   // Create 50 lines with different delays and positions
@@ -8,18 +8,14 @@ const AnimatedBackground = () => {
     style: {
       top: `${index * 8}%`,
       left: `${index * 3 - 50}%`,
-      animationDelay: `${index * 1}s`
-    }
+      animationDelay: `${index * 1}s`,
+    },
   }));
 
   return (
     <div className="animated-background">
-      {lines.map(line => (
-        <div
-          key={line.id}
-          className="line"
-          style={line.style}
-        />
+      {lines.map((line) => (
+        <div key={line.id} className="line" style={line.style} />
       ))}
     </div>
   );

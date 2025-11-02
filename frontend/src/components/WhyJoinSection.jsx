@@ -22,7 +22,7 @@ const WhyJoinSection = () => {
       stats: [
         { label: "Ideas Generated", value: "500+" },
         { label: "Success Rate", value: "85%" },
-        { label: "Team Growth", value: "200%" }
+        { label: "Team Growth", value: "200%" },
       ],
     },
     {
@@ -64,8 +64,6 @@ const WhyJoinSection = () => {
                   backgroundRepeat: "no-repeat",
                 }}
               >
-                
-
                 <div className="section-content">
                   <div className="content-left">
                     <motion.h3

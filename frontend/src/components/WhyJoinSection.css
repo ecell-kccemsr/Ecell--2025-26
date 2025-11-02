@@ -61,7 +61,11 @@
   justify-content: center;
   position: relative;
   padding: 0 8%;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 20, 10, 0.98) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(0, 20, 10, 0.98) 100%
+  );
 }
 
 .section-label {
@@ -149,9 +153,9 @@
 .stat-value {
   font-size: 2rem;
   font-weight: 900; /* Inter Black */
-  color: #00FF7F;
+  color: #00ff7f;
   margin-bottom: 0.5rem;
-  background: linear-gradient(90deg, #00FF7F, #00ff9d);
+  background: linear-gradient(90deg, #00ff7f, #00ff9d);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
