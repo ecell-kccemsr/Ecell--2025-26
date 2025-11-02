@@ -1,6 +1,8 @@
-import React, { useRef, useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useRef, useEffect } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import "./WhyJoinSection.css";
+import GlowingCard from "./ui/GlowingCard";
+import AnimatedBackground from "./ui/AnimatedBackground";
 
 const WhyJoinSection = () => {
   const containerRef = useRef(null);
@@ -12,15 +14,20 @@ const WhyJoinSection = () => {
   const sections = [
     {
       id: 1,
-      title: "WE IDEATE",
+      title: "We ideate",
       description:
         "We brainstorm for new ideas and chalk up a path to implement them successfully.",
       image: "/img78.png",
       strategy: "Brainstorm: Cloud Sprint",
+      stats: [
+        { label: "Ideas Generated", value: "500+" },
+        { label: "Success Rate", value: "85%" },
+        { label: "Team Growth", value: "200%" }
+      ],
     },
     {
       id: 2,
-      title: "WE INNOVATE",
+      title: "We innovate",
       description:
         "We transform ideas into reality through cutting-edge solutions and creative problem-solving.",
       image: "/img79.png",
@@ -28,7 +35,7 @@ const WhyJoinSection = () => {
     },
     {
       id: 3,
-      title: "WE COLLABORATE",
+      title: "We collaborate",
       description:
         "We help to hone intelligent minds and develop a dynamic environment through dialogue.",
       image: "/img80.png",
@@ -57,7 +64,7 @@ const WhyJoinSection = () => {
                   backgroundRepeat: "no-repeat",
                 }}
               >
-                <div className="section-label">SECTOR {section.id}</div>
+                
 
                 <div className="section-content">
                   <div className="content-left">

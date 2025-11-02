@@ -61,7 +61,7 @@
   justify-content: center;
   position: relative;
   padding: 0 8%;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 20, 10, 0.98) 100%);
 }
 
 .section-label {
@@ -93,12 +93,12 @@
 
 .section-title {
   font-size: 4.5rem;
-  font-weight: 800;
+  font-weight: 900; /* Inter Black */
   color: #fff;
   line-height: 1.1;
   margin-bottom: 1rem;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: -0.02em;
 }
 
 .title-underline {
@@ -112,7 +112,7 @@
   font-size: 1.3rem;
   line-height: 1.8;
   color: rgba(255, 255, 255, 0.85);
-  font-weight: 300;
+  font-weight: 900; /* Inter Black */
 }
 
 .content-right {
@@ -124,17 +124,44 @@
 }
 
 .strategy-board {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 215, 0, 0.1) 0%,
-    rgba(255, 59, 92, 0.05) 100%
-  );
-  border: 2px solid;
-  border-image: linear-gradient(135deg, #ffd700, #ff3b5c) 1;
-  padding: 1.5rem 2rem;
-  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 255, 127, 0.2);
+  padding: 2rem;
+  border-radius: 20px;
   min-width: 400px;
   backdrop-filter: blur(10px);
+  box-shadow: 0 0 30px rgba(0, 255, 127, 0.1);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 255, 127, 0.1);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 900; /* Inter Black */
+  color: #00FF7F;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, #00FF7F, #00ff9d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .board-header {
@@ -157,7 +184,7 @@
 .board-content {
   color: #fff;
   font-size: 1.1rem;
-  font-weight: 400;
+  font-weight: 900; /* Inter Black */
   padding: 0.5rem 0;
   border-top: 1px solid rgba(255, 215, 0, 0.3);
 }

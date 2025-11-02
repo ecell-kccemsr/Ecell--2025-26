@@ -1,0 +1,30 @@
+.glowing-card {
+  position: relative;
+  background: rgba(0, 255, 127, 0.05);
+  border-radius: 20px;
+  padding: 2rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 255, 127, 0.1);
+}
+
+.glowing-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    800px circle at var(--mouse-x) var(--mouse-y),
+    rgba(0, 255, 127, 0.1),
+    transparent 40%
+  );
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glowing-card:hover::before {
+  opacity: 1;
+}

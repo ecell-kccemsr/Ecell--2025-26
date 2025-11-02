@@ -95,8 +95,30 @@ const Header = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8 }}
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1000,
+        backdropFilter: "blur(10px)",
+        backgroundColor: "rgba(10, 10, 10, 0.85)",
+        borderBottom: "1px solid rgba(255, 255, 255, 0.1)"
+      }}
     >
-      <nav className="navbar centered-navbar">
+      <nav 
+        className="navbar centered-navbar" 
+        style={{ 
+          padding: "0.5rem 1rem",
+          position: "relative",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          maxWidth: "1200px",
+          margin: "0 auto",
+          width: "100%"
+        }}
+      >
         {/* Left Navigation Links */}
         <AnimatePresence>
           {isMenuExpanded && (
@@ -170,47 +192,64 @@ const Header = () => {
         </AnimatePresence>
 
         {/* Mobile Menu Toggle Button */}
-        <motion.div
+        {isMobile && (
+          <motion.button
           className={`mobile-menu-toggle ${isMobileMenuOpen ? "active" : ""}`}
           onClick={toggleMobileMenu}
           whileTap={{ scale: 0.95 }}
+          style={{
+            background: "transparent",
+            border: "none",
+            cursor: "pointer",
+            padding: "8px",
+            zIndex: 1002,
+            position: "absolute",
+            right: "1rem",
+            top: "50%",
+            transform: "translateY(-50%)",
+            display: "flex",
+            flexDirection: "column",
+            gap: "4px",
+            width: "40px",
+            height: "40px",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
         >
-          <span></span>
-          <span></span>
-          <span></span>
-        </motion.div>
+          <motion.div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+            {[1, 2, 3].map((_, i) => (
+              <motion.span
+                key={i}
+                style={{
+                  width: "24px",
+                  height: "2px",
+                  background: isMobileMenuOpen ? "#00ff9d" : "#fff",
+                  display: "block",
+                  transition: "all 0.3s ease",
+                  transformOrigin: "center",
+                  opacity: i === 1 && isMobileMenuOpen ? 0 : 1,
+                  transform: isMobileMenuOpen && i === 0 
+                    ? "rotate(45deg) translate(5px, 5px)"
+                    : isMobileMenuOpen && i === 2
+                    ? "rotate(-45deg) translate(5px, -5px)"
+                    : "none"
+                }}
+              />
+            ))}
+          </motion.div>
+        </motion.button>
+        )}
       </nav>
 
       {/* Mobile Dropdown Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <>
-            {/* Backdrop */}
-
-            {/* Mobile Menu */}
-            <motion.div
-              className="mobile-menu-dropdown"
-              variants={{
-                closed: {
-                  opacity: 0,
-                  x: "100%",
-                  transition: {
-                    duration: 0.3,
-                    ease: "easeInOut",
-                  },
-                },
-                open: {
-                  opacity: 1,
-                  x: "0%",
-                  transition: {
-                    duration: 0.3,
-                    ease: "easeInOut",
-                  },
-                },
-              }}
-              initial="closed"
-              animate="open"
-              exit="closed"
+          <motion.div
+            className="mobile-menu-dropdown"
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
               style={{
                 position: "fixed",
                 top: 0,
@@ -219,9 +258,10 @@ const Header = () => {
                 bottom: 0,
                 width: "100vw",
                 height: "100vh",
-                background: "rgba(0, 0, 0, 0.95)",
-                backdropFilter: "blur(10px)",
-                zIndex: 1000,
+                background: "rgba(0, 0, 0, 0.98)",
+                backdropFilter: "blur(20px)",
+                WebkitBackdropFilter: "blur(20px)",
+                zIndex: 1001,
                 overflowY: "auto",
               }}
             >
@@ -371,7 +411,6 @@ const Header = () => {
                 </motion.div>
               </div>
             </motion.div>
-          </>
         )}
       </AnimatePresence>
     </motion.header>
