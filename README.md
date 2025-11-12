@@ -1,4 +1,4 @@
-# E-Cell KCCEMSR Website 2025-26
+# E-Cell KCCEMSR Website 2025-27
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)
