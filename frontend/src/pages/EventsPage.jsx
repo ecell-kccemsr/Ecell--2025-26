@@ -11,7 +11,7 @@ const EventsPage = () => {
       <div className="events-page-container">
         <div className="events-page-content">
           <div className="work-under-progress">
-            <div className="progress-icon">🚀</div>
+            <div className="progress-icon">🙆🏻‍♂️</div>
             <h1>Work Under Progress</h1>
             <p className="subtitle">Events Page Coming Soon</p>
             <p className="description">
