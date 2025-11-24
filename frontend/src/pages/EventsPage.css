@@ -17,6 +17,7 @@
   text-align: center;
   max-width: 600px;
   animation: fadeIn 0.8s ease-in-out;
+  margin-top: 5.5rem; /* Ensures rocket is below navbar */
 }
 
 @keyframes fadeIn {
@@ -32,6 +33,7 @@
 
 .progress-icon {
   font-size: 5rem;
+  margin-top: 3.5rem; /* Push rocket below navbar */
   margin-bottom: 1.5rem;
   display: inline-block;
   animation: bounce 1.5s ease-in-out infinite;
@@ -42,7 +44,7 @@
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-30px);
+    transform: translateY(-15px); /* Reduce upward movement */
   }
 }
 
