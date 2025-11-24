@@ -169,14 +169,9 @@ const Header = () => {
               About
             </Link>
 
-            <a
-              href="https://events.kcecell.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="nav-link"
-            >
+            <Link to="/events" className="nav-link">
               Events
-            </a>
+            </Link>
 
             <Link to="/projects" className="nav-link">
               Projects
