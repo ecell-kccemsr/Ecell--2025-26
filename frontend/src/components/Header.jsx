@@ -6,8 +6,6 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [isTeamsDropdownOpen, setIsTeamsDropdownOpen] = useState(false);
-  const [isMenuExpanded, setIsMenuExpanded] = useState(false);
 
   // Check if device is mobile
   useEffect(() => {
@@ -54,10 +52,6 @@ const Header = () => {
     setIsMobileMenuOpen(false);
   };
 
-  const toggleMenu = () => {
-    setIsMenuExpanded(!isMenuExpanded);
-  };
-
   const mobileMenuVariants = {
     closed: {
       opacity: 0,
@@ -101,119 +95,156 @@ const Header = () => {
         left: 0,
         right: 0,
         zIndex: 1000,
-        backdropFilter: "blur(10px)",
-        backgroundColor: "rgba(10, 10, 10, 0.85)",
-        borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+        backdropFilter: "blur(15px)",
+        WebkitBackdropFilter: "blur(15px)",
+        backgroundColor: "rgba(10, 10, 10, 0.7)",
+        borderBottom: "1px solid rgba(0, 255, 157, 0.15)",
+        boxShadow: "0 4px 20px rgba(0, 255, 157, 0.05)",
       }}
     >
       <nav
         className="navbar centered-navbar"
         style={{
-          padding: "0.5rem 1rem",
+          padding: isMobile ? "0.75rem 1rem" : "0.8rem 2rem",
           position: "relative",
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: isMobile ? "space-between" : "flex-start",
           alignItems: "center",
-          maxWidth: "1200px",
+          maxWidth: "100%",
           margin: "0 auto",
           width: "100%",
+          height: "auto",
+          minHeight: isMobile ? "60px" : "70px",
+          gap: "2rem",
         }}
       >
-        {/* Left Navigation Links */}
-        <AnimatePresence>
-          {isMenuExpanded && (
-            <motion.div
-              className="nav-links left-nav"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 50 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-            >
-              <Link to="/" className="highlighted-link">
-                Home
-              </Link>
-
-              <Link to="/about" className="nav-link">
-                About
-              </Link>
-
-              <Link to="https://events.kcecell.org/" className="nav-link">
-                Events
-              </Link>
-
-              <Link to="/projects" className="nav-link">
-                Projects
-              </Link>
-
-              <Link to="/wall-of-fame" className="nav-link">
-                Wall of Fame
-              </Link>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Center Logo */}
-        <motion.div
-          className="brand center-logo"
-          onClick={toggleMenu}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          style={{ cursor: "pointer" }}
+        {/* Logo Block */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flex: "0 0 auto",
+          }}
         >
-          <Logo
-            style={{ width: "64px", height: "64px", background: "transparent" }}
-          />
-          <span className="brand-text"></span>
-        </motion.div>
+          <motion.div
+            className="brand center-logo"
+            whileHover={{ scale: 1.12 }}
+            whileTap={{ scale: 0.95 }}
+            style={{
+              cursor: "pointer",
+            }}
+          >
+            <Logo
+              style={{
+                width: isMobile ? "48px" : "64px",
+                height: isMobile ? "48px" : "64px",
+                background: "transparent",
+                borderRadius: "12px",
+              }}
+            />
+            <span className="brand-text"></span>
+          </motion.div>
+        </div>
 
-        {/* Right Navigation Links */}
-        <AnimatePresence>
-          {isMenuExpanded && (
-            <motion.div
-              className="nav-links right-nav"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
+        {/* Left Navigation Block */}
+        {!isMobile && (
+          <div
+            className="nav-links left-nav"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.3rem",
+              position: "relative",
+              left: "0",
+              flex: "1 1 auto",
+              justifyContent: "left",
+            }}
+          >
+            <Link to="/" className="nav-link highlighted-link">
+              Home
+            </Link>
+
+            <Link to="/about" className="nav-link">
+              About
+            </Link>
+
+            <a
+              href="https://events.kcecell.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nav-link"
             >
-              <Link to="/mentor" className="nav-link">
-                Our Mentors
-              </Link>
+              Events
+            </a>
 
-              <Link to="/team" className="nav-link">
-                Team
-              </Link>
+            <Link to="/projects" className="nav-link">
+              Projects
+            </Link>
 
-              <Link to="mailto:kccell@kccemsr.edu.in" className="nav-link">
-                Contact Us
-              </Link>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            <Link to="/wall-of-fame" className="nav-link">
+              Wall of Fame
+            </Link>
+          </div>
+        )}
+
+        {/* Right Navigation Block */}
+        {!isMobile && (
+          <div
+            className="nav-links right-nav"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.3rem",
+              position: "relative",
+              right: "0",
+              flex: "0 0 auto",
+              marginLeft: "auto",
+            }}
+          >
+            <Link to="/mentor" className="nav-link">
+              Our Mentors
+            </Link>
+
+            <Link to="/team" className="nav-link">
+              Team
+            </Link>
+
+            <a
+              href="mailto:kccell@kccemsr.edu.in"
+              className="nav-link"
+            >
+              Contact Us
+            </a>
+          </div>
+        )}
 
         {/* Mobile Menu Toggle Button */}
         {isMobile && (
           <motion.button
             className={`mobile-menu-toggle ${isMobileMenuOpen ? "active" : ""}`}
             onClick={toggleMobileMenu}
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.9 }}
             style={{
               background: "transparent",
               border: "none",
               cursor: "pointer",
-              padding: "8px",
+              padding: "12px",
               zIndex: 1002,
               position: "absolute",
-              right: "1rem",
+              right: "0.75rem",
               top: "50%",
               transform: "translateY(-50%)",
               display: "flex",
               flexDirection: "column",
-              gap: "4px",
-              width: "40px",
-              height: "40px",
+              gap: "5px",
+              width: "50px",
+              height: "50px",
+              minHeight: "48px",
+              minWidth: "48px",
               justifyContent: "center",
               alignItems: "center",
+              touchAction: "manipulation",
             }}
           >
             <motion.div
