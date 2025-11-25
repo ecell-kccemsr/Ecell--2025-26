@@ -67,11 +67,11 @@ const Stairs = ({ children }) => {
         style={{ display: 'none' }}
       >
         <div className="stairs-inner">
-          <div className="stair h-full w-1/5 bg-black" />
-          <div className="stair h-full w-1/5 bg-black" />
-          <div className="stair h-full w-1/5 bg-black" />
-          <div className="stair h-full w-1/5 bg-black" />
-          <div className="stair h-full w-1/5 bg-black" />
+          <div className="stair h-full w-1/5 bg-white" />
+          <div className="stair h-full w-1/5 bg-white" />
+          <div className="stair h-full w-1/5 bg-white" />
+          <div className="stair h-full w-1/5 bg-white" />
+          <div className="stair h-full w-1/5 bg-white" />
         </div>
       </div>
 

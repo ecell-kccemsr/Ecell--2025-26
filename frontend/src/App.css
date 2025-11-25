@@ -10,6 +10,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -672,6 +673,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  overflow: hidden;
 }
 
 .hero-section::before {
@@ -759,6 +761,8 @@ body {
   top: -20px;
   right: -20px;
   animation-delay: -2s;
+  max-width: 200vw;
+  overflow: hidden;
 }
 
 .element-2 {
@@ -3836,7 +3840,7 @@ body {
 
 .stair {
   flex: 1 1 20%;
-  background: #000; /* strict black for each stair */
+  background: #00C9A8; /* strict black for each stair */
   height: 100%;
   margin: 0;
   padding: 0;

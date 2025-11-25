@@ -1,41 +1,93 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "./EventsPage.css";
 
 const EventsPage = () => {
+  const [hoveredCard, setHoveredCard] = useState(null);
+
+  const events = [
+    {
+      id: 1,
+      title: "Singularity Hackathon",
+      description: "An Intra-College Hackathon. Push your limits, collaborate, and create innovative solutions.",
+      date: "[Insert Date]",
+      theme: "[Insert Theme]",
+      image: "/events/hackathon.jpg",
+      logo: "/logo-compass.svg",
+    },
+  ];
+
   return (
     <>
       <Header />
       <div className="events-page-container">
-        <div className="events-page-content">
-          <div className="work-under-progress">
-            <div className="progress-icon">🙆🏻‍♂️</div>
-            <h1>Work Under Progress</h1>
-            <p className="subtitle">Events Page Coming Soon</p>
-            <p className="description">
-              We're building an amazing events experience for you. Our team is
-              working hard to bring you the best events management platform.
-            </p>
-            <div className="features-list">
-              <div className="feature">
-                <span className="feature-icon">📅</span>
-                <span>Event Calendar</span>
+        <div className="events-header">
+          <h1 className="events-title">Events Coming Soon</h1>
+        </div>
+
+        <div className="events-grid">
+          {events.map((event) => (
+            <div
+              key={event.id}
+              className="event-card"
+              onMouseEnter={() => setHoveredCard(event.id)}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
+              {/* Matrix Animation Background (visible on hover) */}
+              {hoveredCard === event.id && (
+                <div className="matrix-container">
+                  <div className="matrix-pattern">
+                    {Array.from({ length: 40 }).map((_, i) => (
+                      <div key={i} className="matrix-column"></div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Background Image */}
+              <div
+                className="event-card-background"
+                style={{
+                  backgroundImage: `url('${event.image}')`,
+                  opacity: hoveredCard === event.id ? 1 : 0.3,
+                }}
+              />
+
+              {/* Card Border */}
+              <div className="event-card-border" />
+
+              {/* Logo (appears on hover) */}
+              <div className={`event-logo ${hoveredCard === event.id ? "visible" : ""}`}>
+                <div className="logo-icon">
+                  <img src={event.logo} alt="Event Logo" />
+                </div>
               </div>
-              <div className="feature">
-                <span className="feature-icon">🎟️</span>
-                <span>Event Registration</span>
-              </div>
-              <div className="feature">
-                <span className="feature-icon">🎊</span>
-                <span>Event Details</span>
+
+              {/* Content */}
+              <div className="event-content">
+                <h2 className="event-title-card">{event.title}</h2>
+                <p className="event-description">{event.description}</p>
+                <div className="event-meta">
+                  <div className="meta-item">
+                    <span className="meta-label">Date:</span>
+                    <span className="meta-value">{event.date}</span>
+                  </div>
+                  <div className="meta-item">
+                    <span className="meta-label">Theme:</span>
+                    <span className="meta-value">{event.theme}</span>
+                  </div>
+                </div>
               </div>
             </div>
-            <Link to="/" className="back-button">
-              ← Go Back Home
-            </Link>
-          </div>
+          ))}
+        </div>
+
+        <div className="events-footer">
+          <Link to="/" className="back-button">
+            Go Back Home
+          </Link>
         </div>
       </div>
       <Footer />
