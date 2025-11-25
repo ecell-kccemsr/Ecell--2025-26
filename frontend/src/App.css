@@ -3816,3 +3816,41 @@ body {
     align-self: flex-end;
   }
 }
+
+/* Stairs page transition overlay styles */
+.stairs-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none; /* ensure it doesn't block clicks when hidden */
+  display: none; /* toggled by JS */
+  /* background: #000; ensure the whole overlay is strictly black during transition */
+}
+
+.stairs-inner {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  gap: 0; /* remove any accidental gaps between stairs */
+}
+
+.stair {
+  flex: 1 1 20%;
+  background: #000; /* strict black for each stair */
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  will-change: transform, height;
+}
+
+/* Slightly thinner stairs on smaller screens for better visual */
+@media (max-width: 480px) {
+  .stair {
+    flex-basis: 20%;
+  }
+}
+
+.page-with-transition {
+  backface-visibility: hidden;
+}

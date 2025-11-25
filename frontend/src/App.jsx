@@ -13,6 +13,7 @@ import CoreTeam from "./pages/CoreTeam";
 import EventsPage from "./pages/EventsPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
+import Stairs from "./components/Stairs";
 
 function AppContent() {
   return (
@@ -35,7 +36,9 @@ function AppContent() {
 function App() {
   return (
     <Router>
-      <AppContent />
+      <Stairs>
+        <AppContent />
+      </Stairs>
     </Router>
   );
 }
