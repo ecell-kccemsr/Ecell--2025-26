@@ -140,7 +140,7 @@ const GoalsSection = () => {
                 rotateY: 5,
                 boxShadow: "0 25px 50px rgba(0, 0, 0, 0.3)",
               }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.1 }}
             >
               <div className="goal-header">
                 <div className="goal-icon">
