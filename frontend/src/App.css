@@ -1284,6 +1284,11 @@ body {
   align-items: center;
 }
 
+.vision-image {
+  width: 100%;
+  height: auto;
+}
+
 .vision-text h3 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
@@ -2011,6 +2016,10 @@ body {
     grid-template-columns: 1fr;
   }
 
+  .vision-content {
+    grid-template-columns: 1fr;
+  }
+
   .summary-stats {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2058,7 +2067,43 @@ body {
 
   .goal-card,
   .achievement-card {
-    margin: 0 10px;
+    margin: 0;
+  }
+
+  .goals-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 10px;
+  }
+
+  .goal-card {
+    padding: 1.5rem;
+  }
+
+  .goal-title {
+    font-size: 1.25rem;
+  }
+
+  .goal-description {
+    font-size: 0.9rem;
+  }
+
+  .goals-vision {
+    margin: 2rem 0;
+  }
+
+  .vision-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .vision-text h3 {
+    font-size: 1.5rem;
+  }
+
+  .vision-image {
+    margin-top: 1rem;
+    width: 100%;
   }
 
   .footer-content {
