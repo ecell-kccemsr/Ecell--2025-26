@@ -16,9 +16,26 @@ html {
 body {
   height: 100%;
   width: 100%;
+  overflow-x: hidden;
   overflow-y: scroll;
   scrollbar-width: auto;
   scrollbar-color: var(--accent-primary) var(--card-bg);
+}
+
+/* ================================
+   LANDING PAGE STYLES
+   ================================ */
+
+.App {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.landing-page {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
 }
 
 /* Webkit scrollbar styling */
