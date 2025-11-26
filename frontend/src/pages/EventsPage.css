@@ -3,7 +3,7 @@
   background: var(--primary-bg);
   display: flex;
   flex-direction: column;
-  padding: 120px 20px 80px;
+  padding: 135px 20px 80px;
   gap: 4rem;
 }
 
@@ -224,7 +224,7 @@
 /* Logo Container (appears on hover) */
 .event-logo {
   position: absolute;
-  top: 50%;
+  top: 28%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 4;
@@ -237,11 +237,11 @@
 }
 
 .logo-icon {
-  width: 150px;
-  height: 150px;
-  background: rgba(0, 255, 157, 0.1);
-  border: 3px solid var(--accent-primary);
-  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  /* background: rgba(0, 255, 157, 0.1); */
+  /* border: 3px solid var(--accent-primary); */
+  /* border-radius: 50%; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -249,10 +249,9 @@
 }
 
 .logo-icon img {
-  width: 100%;
-  height: 100%;
+  width: 200%;
+  height: 200%;
   object-fit: contain;
-  padding: 20px;
 }
 
 /* Content */
@@ -365,7 +364,7 @@
 
 @media (max-width: 480px) {
   .events-page-container {
-    padding: 80px 10px 40px;
+    padding: 120px 10px 40px;
   }
 
   .events-title {

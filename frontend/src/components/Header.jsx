@@ -127,24 +127,26 @@ const Header = () => {
             flex: "0 0 auto",
           }}
         >
-          <motion.div
-            className="brand center-logo"
-            whileHover={{ scale: 1.12 }}
-            whileTap={{ scale: 0.95 }}
-            style={{
-              cursor: "pointer",
-            }}
-          >
-            <Logo
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <motion.div
+              className="brand center-logo"
+              whileHover={{ scale: 1.12 }}
+              whileTap={{ scale: 0.95 }}
               style={{
-                width: isMobile ? "48px" : "64px",
-                height: isMobile ? "48px" : "64px",
-                background: "transparent",
-                borderRadius: "12px",
+                cursor: "pointer",
               }}
-            />
-            <span className="brand-text"></span>
-          </motion.div>
+            >
+              <Logo
+                style={{
+                  width: isMobile ? "48px" : "64px",
+                  height: isMobile ? "48px" : "64px",
+                  background: "transparent",
+                  borderRadius: "12px",
+                }}
+              />
+              <span className="brand-text"></span>
+            </motion.div>
+          </Link>
         </div>
 
         {/* Left Navigation Block */}
@@ -243,14 +245,14 @@ const Header = () => {
             }}
           >
             <motion.div
-              style={{ display: "flex", flexDirection: "column", gap: "6px" }}
+              style={{ display: "flex", flexDirection: "column", gap: "0px" }}
             >
               {[1, 2, 3].map((_, i) => (
                 <motion.span
                   key={i}
                   style={{
-                    width: "24px",
-                    height: "2px",
+                    width: "35px",
+                    height: "3px",
                     background: isMobileMenuOpen ? "#00ff9d" : "#fff",
                     display: "block",
                     transition: "all 0.3s ease",
@@ -258,7 +260,7 @@ const Header = () => {
                     opacity: i === 1 && isMobileMenuOpen ? 0 : 1,
                     transform:
                       isMobileMenuOpen && i === 0
-                        ? "rotate(45deg) translate(5px, 5px)"
+                        ? "rotate(45deg) translate(7px, 7px)"
                         : isMobileMenuOpen && i === 2
                         ? "rotate(-45deg) translate(5px, -5px)"
                         : "none",

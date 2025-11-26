@@ -12,10 +12,10 @@ const EventsPage = () => {
       id: 1,
       title: "Singularity Hackathon",
       description: "An Intra-College Hackathon. Push your limits, collaborate, and create innovative solutions.",
-      date: "[Insert Date]",
-      theme: "[Insert Theme]",
+      date: "Announced Soon",
+      theme: "Interstellar",
       image: "/events/hackathon.jpg",
-      logo: "/logo-compass.svg",
+      logo: "/public/singularity_hack_logo.png",
     },
   ];
 
