@@ -28,13 +28,13 @@ const LandingPage = () => {
 
   return (
     <div className="landing-page">
-      <div className="parallax-bg" ref={parallaxRef}></div>
+      <Header />
+      <div className="parallax-bg" ref={parallaxRef}>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <Header />
         
         <HeroSection />
         <WhyNot />
@@ -44,6 +44,8 @@ const LandingPage = () => {
         <Footer />
       </motion.div>
     </div>
+      </div>
+     
   );
 };
 
