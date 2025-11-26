@@ -8,6 +8,7 @@ const Stairs = ({ children }) => {
 
   const stairParentRef = useRef(null)
   const pageRef = useRef(null)
+  const stairColors = ['#00C9A8', '#222222']
 
   useGSAP(() => {
     const tl = gsap.timeline()
@@ -67,11 +68,13 @@ const Stairs = ({ children }) => {
         style={{ display: 'none' }}
       >
         <div className="stairs-inner">
-          <div className="stair h-full w-1/5 bg-white" />
-          <div className="stair h-full w-1/5 bg-white" />
-          <div className="stair h-full w-1/5 bg-white" />
-          <div className="stair h-full w-1/5 bg-white" />
-          <div className="stair h-full w-1/5 bg-white" />
+          {Array.from({ length: 5 }).map((_, idx) => (
+            <div
+              key={idx}
+              className="stair h-full w-1/5"
+              style={{ backgroundColor: stairColors[idx % stairColors.length] }}
+            />
+          ))}
         </div>
       </div>
 
