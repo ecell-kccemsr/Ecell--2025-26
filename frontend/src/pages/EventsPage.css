@@ -90,14 +90,14 @@
 }
 
 .matrix-column::before {
-  content: "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  content: "010101010101010101010101010101010101010101010101010101010101010101010";
   position: absolute;
   top: 0;
   left: 0;
   background: linear-gradient(
     to bottom,
     #ffffff 0%,
-    #ffffff 5%,
+    #ffffff 5%, 
     #00ff41 10%,
     #00ff41 20%,
     #00dd33 30%,
@@ -161,23 +161,23 @@
 .matrix-column:nth-child(40) { left: 975px; animation-delay: -2.6s; animation-duration: 3.4s; }
 
 .matrix-column:nth-child(odd)::before {
-  content: "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン123456789";
+  content: "01010101010101010101010101010101010101010101010101010101010101010101010";
 }
 
 .matrix-column:nth-child(even)::before {
-  content: "ガギグゲゴザジズゼゾダヂヅデドバビブベボパピプペポヴァィゥェォャュョッABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  content: "0101010101010101010101010101010101010101010101010101010101010101010101";
 }
 
 .matrix-column:nth-child(3n)::before {
-  content: "アカサタナハマヤラワイキシチニヒミリウクスツヌフムユルエケセテネヘメレオコソトノホモヨロヲン0987654321";
+  content: "01010101010101010101010101010101010101010101010101010101010101010101010101010";
 }
 
 .matrix-column:nth-child(4n)::before {
-  content: "ンヲロヨモホノトソコオレメヘネテセケエルユムフヌツスクウリミヒニチシキイワラヤマハナタサカア";
+  content: "1010101010101010101010101010101010101010101010101010101010101010101010101010101";
 }
 
 .matrix-column:nth-child(5n)::before {
-  content: "ガザダバパギジヂビピグズヅブプゲゼデベペゴゾドボポヴァィゥェォャュョッ!@#$%^&*()_+-=[]{}|;:,.<>?";
+  content: "01010101010010101010010101010101010101010101010101010101010101010101010101010101010";
 }
 
 @keyframes fall {
