@@ -15,7 +15,7 @@ const EventsPage = () => {
         "An Intra-College Hackathon. Push your limits, collaborate, and create innovative solutions.",
       date: "Announced Soon",
       theme: "Interstellar",
-      image: "/singularity_hack_logo.png",
+      image: "/events/hackathon.pg",
       logo: "/singularity_hack_logo.png",
     },
   ];
