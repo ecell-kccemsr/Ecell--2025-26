@@ -11,7 +11,8 @@ const EventsPage = () => {
     {
       id: 1,
       title: "Singularity Hackathon",
-      description: "An Intra-College Hackathon. Push your limits, collaborate, and create innovative solutions.",
+      description:
+        "An Intra-College Hackathon. Push your limits, collaborate, and create innovative solutions.",
       date: "Announced Soon",
       theme: "Interstellar",
       image: "/singularity_hack_logo.png",
@@ -35,7 +36,6 @@ const EventsPage = () => {
               onMouseEnter={() => setHoveredCard(event.id)}
               onMouseLeave={() => setHoveredCard(null)}
             >
-              {/* Matrix Animation Background (visible on hover) */}
               {hoveredCard === event.id && (
                 <div className="matrix-container">
                   <div className="matrix-pattern">
@@ -46,7 +46,6 @@ const EventsPage = () => {
                 </div>
               )}
 
-              {/* Background Image */}
               <div
                 className="event-card-background"
                 style={{
@@ -55,17 +54,18 @@ const EventsPage = () => {
                 }}
               />
 
-              {/* Card Border */}
               <div className="event-card-border" />
 
-              {/* Logo (appears on hover) */}
-              <div className={`event-logo ${hoveredCard === event.id ? "visible" : ""}`}>
+              <div
+                className={`event-logo ${
+                  hoveredCard === event.id ? "visible" : ""
+                }`}
+              >
                 <div className="logo-icon">
                   <img src={event.logo} alt="Event Logo" />
                 </div>
               </div>
 
-              {/* Content */}
               <div className="event-content">
                 <h2 className="event-title-card">{event.title}</h2>
                 <p className="event-description">{event.description}</p>
