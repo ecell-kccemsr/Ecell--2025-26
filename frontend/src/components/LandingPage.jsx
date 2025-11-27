@@ -10,6 +10,8 @@ import GoalsSection from "./GoalsSection.jsx";
 import Footer from "./Footer";
 import WhyNot from "./whynot.jsx";
 
+import { createPortal } from "react-dom";
+
 const LandingPage = () => {
   const parallaxRef = useRef(null);
 
@@ -28,14 +30,17 @@ const LandingPage = () => {
 
   return (
     <div className="landing-page">
-      <div className="parallax-bg" ref={parallaxRef}></div>
+      {createPortal(
+        <div className="parallax-bg" ref={parallaxRef}></div>,
+        document.body
+      )}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
         <Header />
-        
+
         <HeroSection />
         <WhyNot />
         <WhyJoinSection />
