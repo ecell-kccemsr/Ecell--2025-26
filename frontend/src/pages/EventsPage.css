@@ -48,7 +48,7 @@
   transform: translateY(-10px);
 }
 
-/* Matrix Animation Background (visible on hover) */
+/* Matrix Animation Background */
 .matrix-container {
   position: absolute;
   top: 0;
@@ -75,12 +75,14 @@
   width: 100%;
   height: 100%;
   flex-shrink: 0;
+  display: flex;              /* NEW: spread columns across full width */
+  overflow: hidden;
 }
 
 .matrix-column {
-  position: absolute;
+  position: relative;         /* CHANGED: was absolute */
   top: -100%;
-  width: 20px;
+  flex: 1;                    /* NEW: each column takes equal width */
   height: 100%;
   font-size: 16px;
   line-height: 18px;
@@ -93,7 +95,8 @@
   content: "010101010101010101010101010101010101010101010101010101010101010101010";
   position: absolute;
   top: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   background: linear-gradient(
     to bottom,
     #ffffff 0%,
@@ -119,46 +122,47 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.matrix-column:nth-child(1) { left: 0px; animation-delay: -2.5s; animation-duration: 3s; }
-.matrix-column:nth-child(2) { left: 25px; animation-delay: -3.2s; animation-duration: 4s; }
-.matrix-column:nth-child(3) { left: 50px; animation-delay: -1.8s; animation-duration: 2.5s; }
-.matrix-column:nth-child(4) { left: 75px; animation-delay: -2.9s; animation-duration: 3.5s; }
-.matrix-column:nth-child(5) { left: 100px; animation-delay: -1.5s; animation-duration: 3s; }
-.matrix-column:nth-child(6) { left: 125px; animation-delay: -3.8s; animation-duration: 4.5s; }
-.matrix-column:nth-child(7) { left: 150px; animation-delay: -2.1s; animation-duration: 2.8s; }
-.matrix-column:nth-child(8) { left: 175px; animation-delay: -2.7s; animation-duration: 3.2s; }
-.matrix-column:nth-child(9) { left: 200px; animation-delay: -3.4s; animation-duration: 3.8s; }
-.matrix-column:nth-child(10) { left: 225px; animation-delay: -1.9s; animation-duration: 2.7s; }
-.matrix-column:nth-child(11) { left: 250px; animation-delay: -3.6s; animation-duration: 4.2s; }
-.matrix-column:nth-child(12) { left: 275px; animation-delay: -2.3s; animation-duration: 3.1s; }
-.matrix-column:nth-child(13) { left: 300px; animation-delay: -3.1s; animation-duration: 3.6s; }
-.matrix-column:nth-child(14) { left: 325px; animation-delay: -2.6s; animation-duration: 2.9s; }
-.matrix-column:nth-child(15) { left: 350px; animation-delay: -3.7s; animation-duration: 4.1s; }
-.matrix-column:nth-child(16) { left: 375px; animation-delay: -2.8s; animation-duration: 3.3s; }
-.matrix-column:nth-child(17) { left: 400px; animation-delay: -3.3s; animation-duration: 3.7s; }
-.matrix-column:nth-child(18) { left: 425px; animation-delay: -2.2s; animation-duration: 2.6s; }
-.matrix-column:nth-child(19) { left: 450px; animation-delay: -3.9s; animation-duration: 4.3s; }
-.matrix-column:nth-child(20) { left: 475px; animation-delay: -2.4s; animation-duration: 3.4s; }
-.matrix-column:nth-child(21) { left: 500px; animation-delay: -1.7s; animation-duration: 2.4s; }
-.matrix-column:nth-child(22) { left: 525px; animation-delay: -3.5s; animation-duration: 3.9s; }
-.matrix-column:nth-child(23) { left: 550px; animation-delay: -2s; animation-duration: 3s; }
-.matrix-column:nth-child(24) { left: 575px; animation-delay: -4s; animation-duration: 4.4s; }
-.matrix-column:nth-child(25) { left: 600px; animation-delay: -1.6s; animation-duration: 2.3s; }
-.matrix-column:nth-child(26) { left: 625px; animation-delay: -3s; animation-duration: 3.5s; }
-.matrix-column:nth-child(27) { left: 650px; animation-delay: -3.8s; animation-duration: 4s; }
-.matrix-column:nth-child(28) { left: 675px; animation-delay: -2.5s; animation-duration: 2.8s; }
-.matrix-column:nth-child(29) { left: 700px; animation-delay: -3.2s; animation-duration: 3.6s; }
-.matrix-column:nth-child(30) { left: 725px; animation-delay: -2.7s; animation-duration: 3.2s; }
-.matrix-column:nth-child(31) { left: 750px; animation-delay: -1.8s; animation-duration: 2.7s; }
-.matrix-column:nth-child(32) { left: 775px; animation-delay: -3.6s; animation-duration: 4.1s; }
-.matrix-column:nth-child(33) { left: 800px; animation-delay: -2.1s; animation-duration: 3.1s; }
-.matrix-column:nth-child(34) { left: 825px; animation-delay: -3.4s; animation-duration: 3.7s; }
-.matrix-column:nth-child(35) { left: 850px; animation-delay: -2.8s; animation-duration: 2.9s; }
-.matrix-column:nth-child(36) { left: 875px; animation-delay: -3.7s; animation-duration: 4.2s; }
-.matrix-column:nth-child(37) { left: 900px; animation-delay: -2.3s; animation-duration: 3.3s; }
-.matrix-column:nth-child(38) { left: 925px; animation-delay: -1.9s; animation-duration: 2.5s; }
-.matrix-column:nth-child(39) { left: 950px; animation-delay: -3.5s; animation-duration: 3.8s; }
-.matrix-column:nth-child(40) { left: 975px; animation-delay: -2.6s; animation-duration: 3.4s; }
+/* only animation timing now – NO left: ... */
+.matrix-column:nth-child(1) { animation-delay: -2.5s; animation-duration: 3s; }
+.matrix-column:nth-child(2) { animation-delay: -3.2s; animation-duration: 4s; }
+.matrix-column:nth-child(3) { animation-delay: -1.8s; animation-duration: 2.5s; }
+.matrix-column:nth-child(4) { animation-delay: -2.9s; animation-duration: 3.5s; }
+.matrix-column:nth-child(5) { animation-delay: -1.5s; animation-duration: 3s; }
+.matrix-column:nth-child(6) { animation-delay: -3.8s; animation-duration: 4.5s; }
+.matrix-column:nth-child(7) { animation-delay: -2.1s; animation-duration: 2.8s; }
+.matrix-column:nth-child(8) { animation-delay: -2.7s; animation-duration: 3.2s; }
+.matrix-column:nth-child(9) { animation-delay: -3.4s; animation-duration: 3.8s; }
+.matrix-column:nth-child(10) { animation-delay: -1.9s; animation-duration: 2.7s; }
+.matrix-column:nth-child(11) { animation-delay: -3.6s; animation-duration: 4.2s; }
+.matrix-column:nth-child(12) { animation-delay: -2.3s; animation-duration: 3.1s; }
+.matrix-column:nth-child(13) { animation-delay: -3.1s; animation-duration: 3.6s; }
+.matrix-column:nth-child(14) { animation-delay: -2.6s; animation-duration: 2.9s; }
+.matrix-column:nth-child(15) { animation-delay: -3.7s; animation-duration: 4.1s; }
+.matrix-column:nth-child(16) { animation-delay: -2.8s; animation-duration: 3.3s; }
+.matrix-column:nth-child(17) { animation-delay: -3.3s; animation-duration: 3.7s; }
+.matrix-column:nth-child(18) { animation-delay: -2.2s; animation-duration: 2.6s; }
+.matrix-column:nth-child(19) { animation-delay: -3.9s; animation-duration: 4.3s; }
+.matrix-column:nth-child(20) { animation-delay: -2.4s; animation-duration: 3.4s; }
+.matrix-column:nth-child(21) { animation-delay: -1.7s; animation-duration: 2.4s; }
+.matrix-column:nth-child(22) { animation-delay: -3.5s; animation-duration: 3.9s; }
+.matrix-column:nth-child(23) { animation-delay: -2s; animation-duration: 3s; }
+.matrix-column:nth-child(24) { animation-delay: -4s; animation-duration: 4.4s; }
+.matrix-column:nth-child(25) { animation-delay: -1.6s; animation-duration: 2.3s; }
+.matrix-column:nth-child(26) { animation-delay: -3s; animation-duration: 3.5s; }
+.matrix-column:nth-child(27) { animation-delay: -3.8s; animation-duration: 4s; }
+.matrix-column:nth-child(28) { animation-delay: -2.5s; animation-duration: 2.8s; }
+.matrix-column:nth-child(29) { animation-delay: -3.2s; animation-duration: 3.6s; }
+.matrix-column:nth-child(30) { animation-delay: -2.7s; animation-duration: 3.2s; }
+.matrix-column:nth-child(31) { animation-delay: -1.8s; animation-duration: 2.7s; }
+.matrix-column:nth-child(32) { animation-delay: -3.6s; animation-duration: 4.1s; }
+.matrix-column:nth-child(33) { animation-delay: -2.1s; animation-duration: 3.1s; }
+.matrix-column:nth-child(34) { animation-delay: -3.4s; animation-duration: 3.7s; }
+.matrix-column:nth-child(35) { animation-delay: -2.8s; animation-duration: 2.9s; }
+.matrix-column:nth-child(36) { animation-delay: -3.7s; animation-duration: 4.2s; }
+.matrix-column:nth-child(37) { animation-delay: -2.3s; animation-duration: 3.3s; }
+.matrix-column:nth-child(38) { animation-delay: -1.9s; animation-duration: 2.5s; }
+.matrix-column:nth-child(39) { animation-delay: -3.5s; animation-duration: 3.8s; }
+.matrix-column:nth-child(40) { animation-delay: -2.6s; animation-duration: 3.4s; }
 
 .matrix-column:nth-child(odd)::before {
   content: "01010101010101010101010101010101010101010101010101010101010101010101010";
@@ -239,13 +243,10 @@
 .logo-icon {
   width: 200px;
   height: 200px;
-  /* background: rgba(0, 255, 157, 0.1); */
-  /* border: 3px solid var(--accent-primary); */
-  /* border-radius: 50%; */
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(0%);
 }
 
 .logo-icon img {

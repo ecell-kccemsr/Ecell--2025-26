@@ -70,8 +70,11 @@ const Stairs = ({ children }) => {
           <div className="stair h-full w-1/5 bg-white" />
           <div className="stair h-full w-1/5 bg-white" />
           <div className="stair h-full w-1/5 bg-white" />
+          <div className="stair h-full w-1/5 bg-white" /> 
           <div className="stair h-full w-1/5 bg-white" />
-          <div className="stair h-full w-1/5 bg-white" />
+
+          
+          
         </div>
       </div>
 

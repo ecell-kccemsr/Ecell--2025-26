@@ -182,7 +182,7 @@ body {
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border-color);
   z-index: 1000;
-  padding: 1rem 0;
+  padding: 0rem 0;
 }
 
 .navbar {
