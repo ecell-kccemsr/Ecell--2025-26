@@ -15,7 +15,7 @@ const EventsPage = () => {
       date: "Announced Soon",
       theme: "Interstellar",
       image: "/events/hackathon.jpg",
-      logo: "/public/singularity_hack_logo.png",
+      logo: "frontend/public/singularity_hack_logo.png",
     },
   ];
 
