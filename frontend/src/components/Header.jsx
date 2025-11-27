@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Logo from "./Logo.jsx";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -163,25 +163,25 @@ const Header = () => {
               justifyContent: "left",
             }}
           >
-            <Link to="/" className="nav-link highlighted-link">
+            <NavLink to="/" end className={({ isActive }) => `nav-link ${isActive ? "highlighted-link" : ""}`}>
               Home
-            </Link>
+            </NavLink>
 
-            <Link to="/about" className="nav-link">
+            <NavLink to="/about" className={({ isActive }) => `nav-link ${isActive ? "highlighted-link" : ""}`}>
               About
-            </Link>
+            </NavLink>
 
-            <Link to="/events" className="nav-link">
+            <NavLink to="/events" className={({ isActive }) => `nav-link ${isActive ? "highlighted-link" : ""}`}>
               Events
-            </Link>
+            </NavLink>
 
-            <Link to="/projects" className="nav-link">
+            <NavLink to="/projects" className={({ isActive }) => `nav-link ${isActive ? "highlighted-link" : ""}`}>
               Projects
-            </Link>
+            </NavLink>
 
-            <Link to="/wall-of-fame" className="nav-link">
+            <NavLink to="/wall-of-fame" className={({ isActive }) => `nav-link ${isActive ? "highlighted-link" : ""}`}>
               Wall of Fame
-            </Link>
+            </NavLink>
           </div>
         )}
 
@@ -199,13 +199,13 @@ const Header = () => {
               marginLeft: "auto",
             }}
           >
-            <Link to="/mentor" className="nav-link">
+            <NavLink to="/mentor" className={({ isActive }) => `nav-link ${isActive ? "highlighted-link" : ""}`}>
               Our Mentors
-            </Link>
+            </NavLink>
 
-            <Link to="/team" className="nav-link">
+            <NavLink to="/team" className={({ isActive }) => `nav-link ${isActive ? "highlighted-link" : ""}`}>
               Team
-            </Link>
+            </NavLink>
 
             <a
               href="mailto:kccell@kccemsr.edu.in"
@@ -358,7 +358,7 @@ const Header = () => {
                 }}
               >
                 {[
-                  { to: "/", label: "Home" },
+                  { to: "/", label: "Home", end: true },
                   { to: "/about", label: "About" },
                   { to: "/events", label: "Events" },
                   { to: "/projects", label: "Projects" },
@@ -372,9 +372,10 @@ const Header = () => {
                     custom={index}
                     className="mobile-menu-item"
                   >
-                    <Link
+                    <NavLink
                       to={link.to}
-                      className={`mobile-nav-link ${link.className || ""}`}
+                      end={!!link.end}
+                      className={({ isActive }) => `mobile-nav-link ${link.className || ""} ${isActive ? "highlighted-link" : ""}`}
                       onClick={closeMobileMenu}
                       style={{
                         fontSize: "1.5rem",
@@ -397,8 +398,8 @@ const Header = () => {
                         e.target.style.transform = "translateX(0)";
                       }}
                     >
-                      {link.label}
-                    </Link>
+                        {link.label}
+                      </NavLink>
                   </motion.div>
                 ))}
 

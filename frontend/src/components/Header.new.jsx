@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Logo from "./Logo.jsx";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -96,21 +96,21 @@ const Header = () => {
               exit={{ opacity: 0, x: 50 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
             >
-              <Link to="/" className="highlighted-link">
+              <NavLink to="/" end className={({ isActive }) => `nav-link ${isActive ? "highlighted-link" : ""}`}>
                 Home
-              </Link>
-              <Link to="/about" className="nav-link">
+              </NavLink>
+              <NavLink to="/about" className={({ isActive }) => `nav-link ${isActive ? "highlighted-link" : ""}`}>
                 About
-              </Link>
-              <Link to="https://events.kcecell.org/" className="nav-link">
+              </NavLink>
+              <a href="https://events.kcecell.org/" className="nav-link" target="_blank" rel="noreferrer noopener">
                 Events
-              </Link>
-              <Link to="/projects" className="nav-link">
+              </a>
+              <NavLink to="/projects" className={({ isActive }) => `nav-link ${isActive ? "highlighted-link" : ""}`}>
                 Projects
-              </Link>
-              <Link to="/wall-of-fame" className="nav-link">
+              </NavLink>
+              <NavLink to="/wall-of-fame" className={({ isActive }) => `nav-link ${isActive ? "highlighted-link" : ""}`}>
                 Wall of Fame
-              </Link>
+              </NavLink>
             </motion.div>
           )}
         </AnimatePresence>
@@ -139,12 +139,12 @@ const Header = () => {
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
             >
-              <Link to="/mentor" className="nav-link">
+              <NavLink to="/mentor" className={({ isActive }) => `nav-link ${isActive ? "highlighted-link" : ""}`}>
                 Our Mentors
-              </Link>
-              <Link to="/team" className="nav-link">
+              </NavLink>
+              <NavLink to="/team" className={({ isActive }) => `nav-link ${isActive ? "highlighted-link" : ""}`}>
                 Team
-              </Link>
+              </NavLink>
               <Link to="mailto:kccell@kccemsr.edu.in" className="nav-link">
                 Contact Us
               </Link>
@@ -289,7 +289,7 @@ const Header = () => {
                 }}
               >
                 {[
-                  { to: "/", label: "Home" },
+                  { to: "/", label: "Home", end: true },
                   { to: "/about", label: "About" },
                   { to: "/events", label: "Events" },
                   { to: "/projects", label: "Projects" },
@@ -304,9 +304,10 @@ const Header = () => {
                     transition={{ delay: index * 0.1 }}
                     className="mobile-menu-item"
                   >
-                    <Link
+                    <NavLink
                       to={link.to}
-                      className={`mobile-nav-link ${link.className || ""}`}
+                      end={!!link.end}
+                      className={({ isActive }) => `mobile-nav-link ${link.className || ""} ${isActive ? "highlighted-link" : ""}`}
                       onClick={closeMobileMenu}
                       style={{
                         fontSize: "1.5rem",
@@ -322,7 +323,7 @@ const Header = () => {
                       }}
                     >
                       {link.label}
-                    </Link>
+                    </NavLink>
                   </motion.div>
                 ))}
               </div>

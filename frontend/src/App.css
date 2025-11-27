@@ -567,6 +567,12 @@ body {
   transform: translateX(5px);
 }
 
+.mobile-nav-link.highlighted-link {
+  background: rgba(0, 255, 157, 0.06);
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
 .mobile-submenu {
   margin: 0.5rem 0;
 }
