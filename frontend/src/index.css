@@ -29,12 +29,19 @@ html {
 
 body {
   margin: 0;
+  padding: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background: #0a0a0a;
+  background-color: #0b0b0b;
+  color: #e6e6e6;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'><circle cx='18' cy='18' r='6' fill='white'/></svg>") 18 18,
+    auto;
 }
 
 #root {
@@ -131,5 +138,7 @@ button:focus-visible {
   outline: 2px solid #00ff9d;
   outline-offset: 2px;
 }
+
+
 
 
