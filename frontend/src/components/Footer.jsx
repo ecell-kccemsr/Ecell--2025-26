@@ -134,7 +134,7 @@ const Footer = () => {
           <div className="footer-divider"></div>
           <div className="footer-bottom-content justify center">
             <p className="copyright">
-              © 2025 E-Cell. All rights reserved. | Built with ❤️ by <a href="https://github.com/iraajp" target="_blank" rel="noopener noreferrer">Raaj Patkar</a>, <a href="https://github.com/krishnamundhara" target="_blank" rel="noopener noreferrer">Krishna Mundhara</a>,<a href="https://github.com/ishwar-prog" target="_blank" rel="noopener noreferrer">Ishwar Suthar</a>,<a href="https://github.com/ishwar-prog" target="_blank" rel="noopener noreferrer">Om Tawade</a>
+              © 2025 E-Cell. All rights reserved. | Built with ❤️ by <a href="https://github.com/iraajp" target="_blank" rel="noopener noreferrer">Raaj Patkar</a>, <a href="https://github.com/krishnamundhara" target="_blank" rel="noopener noreferrer">Krishna Mundhara</a>, <a href="https://github.com/ishwar-prog" target="_blank" rel="noopener noreferrer">Ishwar Suthar</a>, <a href="https://github.com/omtawde09" target="_blank" rel="noopener noreferrer">Om Tawde</a>
             </p>
           </div>
         </div>
